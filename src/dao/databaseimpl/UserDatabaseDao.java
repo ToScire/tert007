@@ -32,13 +32,16 @@ public class UserDatabaseDao extends Connector implements UserDao {
 
     @Override
     public List<User> getUsersCollection() throws DaoException {
+
+        if (connection == null || statement == null) {
+            throw new DaoException("Database connection error");
+        }
+
         List<User> users = new ArrayList<User>();
 
-        Statement statement = null;
         ResultSet resultSet = null;
 
         try {
-            statement = connection.createStatement();
             resultSet = statement.executeQuery("SELECT * FROM 'user'");
 
             while (resultSet.next()) {
@@ -51,7 +54,12 @@ public class UserDatabaseDao extends Connector implements UserDao {
             throw new DaoException(e);
         }
         finally {
-            closeResultSet(resultSet);
+            try {
+                closeResultSet(resultSet);
+            } catch (SQLException e){
+                throw new DaoException(e);
+            }
         }
+
     }
 }

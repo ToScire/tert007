@@ -5,6 +5,7 @@ import dao.FilmDao;
 import entity.film.Film;
 import entity.film.FilmGenre;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,7 +17,6 @@ import java.util.List;
  */
 public class FilmDatabaseDao extends Connector implements FilmDao {
 
-    //Коммент
     private static FilmDatabaseDao instance = new FilmDatabaseDao();
 
     private FilmDatabaseDao() {
@@ -34,18 +34,18 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
 
     @Override
     public List<Film> getFilmsCollections() throws DaoException {
-        List<Film> films = new ArrayList<Film>();
 
-        Statement statement = null;
-        ResultSet resultSet = null;
-
+        /*
         try {
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT * FROM film");
+            Connection connection = Connector.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM film");
+
+            List<Film> films = new ArrayList<Film>();
 
             while (resultSet.next()) {
-
                 Film film = new Film();
+
                 film.setId(resultSet.getInt("id"));
                 film.setTitle(resultSet.getString("title"));
                 film.setDescription(resultSet.getString("description"));
@@ -57,12 +57,11 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
             }
 
             return films;
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             throw new DaoException(e);
         }
-        finally {
-            closeResultSet(resultSet);
-        }
+        */
+        return null;
     }
+
 }

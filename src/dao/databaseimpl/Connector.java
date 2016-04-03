@@ -10,12 +10,28 @@ import java.sql.*;
  * Created by Alexander on 20.02.2016.
  */
 public class Connector {
+    private static final String className = "com.mysql.jdbc.Driver";
     private static final String url = "jdbc:mysql://localhost:3306/cinema";
     private static final String login = "root";
     private static final String password = "root";
-    protected Statement statement = null;
+
+    public static Connection getConnection() throws DaoException {
+        try {
+            Class.forName(className);
+
+            Driver driver = new FabricMySQLDriver();
+            DriverManager.registerDriver(driver);
+
+            return  DriverManager.getConnection(url, login, password);
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+
 
     protected static Connection connection = null;
+    protected static Statement statement = null;
 
     protected Connector() {
         try {
@@ -30,38 +46,28 @@ public class Connector {
             }
         }
         catch (ClassNotFoundException | SQLException e) {
-            //throw new DaoException(e);
+            connection = null;
+            statement = null;
         }
     }
 
-    protected void closeConnection(){
-        if (connection != null) {
-            try {
-                connection.close();
-                connection = null;
-            } catch (SQLException e) {
-                //throw new DaoException(ex);
-            }
+    protected void closeConnection() throws SQLException {
+         if (connection != null) {
+            connection.close();
+            connection = null;
         }
     }
 
-    protected void closeStatement(Statement statement) {
-        try {
+    protected void closeStatement(Statement statement) throws SQLException {
             if (statement != null) {
                 statement.close();
             }
-        } catch (SQLException e) {
-            //throw new DaoException(ex);
+    }
+
+    protected void closeResultSet(ResultSet resultSet) throws SQLException {
+        if (resultSet != null) {
+            resultSet.close();
         }
     }
 
-    protected void closeResultSet(ResultSet resultSet){
-        try {
-            if (resultSet != null) {
-                resultSet.close();
-            }
-        } catch (SQLException e) {
-            //throw new DaoException(ex);
-        }
-    }
 }
