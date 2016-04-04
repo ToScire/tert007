@@ -11,12 +11,14 @@ import java.sql.Statement;
  */
 public class DataBaseController {
     private Statement statement;
+    private String tableName;
 
-    public DataBaseController(Statement statement){
+    public DataBaseController(Statement statement,String tableName){
         this.statement = statement;
+        this.tableName = tableName;
     }
 
-    public ResultSet select(String tableName,String[] columns,String where) throws DaoException{
+    public ResultSet select(String[] columns,String where) throws DaoException{
         String query = "SELECT ";
         for (int i=0; i < columns.length - 1; i++){
             query += columns[i] + ",";
@@ -32,7 +34,7 @@ public class DataBaseController {
         }
     }
 
-    public  boolean insert(String tableName, String[] columns, String[] values)throws DaoException{
+    public  boolean insert(String[] columns, String[] values)throws DaoException{
         String query = "INSERT INTO " + tableName + " (";
         for (int i = 0; i < columns.length - 1; i++){
             query += columns[i] + ",";
@@ -50,7 +52,7 @@ public class DataBaseController {
     }
 
 
-    public  boolean update(String tableName, String[] columns, String[] newValues, String where)throws DaoException{
+    public  boolean update(String[] columns, String[] newValues, String where)throws DaoException{
         String query = "UPDATE " + tableName + " SET ";
         for (int i = 0; i < columns.length - 1; i++){
             query += columns[i] + "='" + newValues[i] + "',";
@@ -64,7 +66,7 @@ public class DataBaseController {
         }
     }
 
-    public  boolean remove(String tableName, String where)throws DaoException{
+    public  boolean remove(String where)throws DaoException{
         String query = "DELETE FROM " + tableName;
         query += " WHERE " + where;
         try {

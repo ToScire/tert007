@@ -16,6 +16,7 @@ public class Connector {
     private static final String password = "root";
     protected static Connection connection = null;
     protected static Statement statement = null;
+    protected DataBaseController dbController;
 
     public static Connection getConnection() throws DaoException {
         try {
