@@ -14,6 +14,24 @@ import java.util.List;
  * Created by Alexander on 23.02.2016.
  */
 public class UserDatabaseDao extends Connector implements UserDao {
+    public static final String tableName = "user";
+    public static final String columnId = "id_user";
+    public static final String columnType = "user_type_id";
+    public static final String columnLogin = "login";
+    public static final String columnPassword = "password";
+    public static final String columnEmail = "email";
+    public static final String columnBonus = "bonus_count";
+
+    public static String[] getColumnNames(){
+        String[] result = new String[6];
+        result[0] = UserDatabaseDao.columnId;
+        result[1] = UserDatabaseDao.columnType;
+        result[2] = UserDatabaseDao.columnLogin;
+        result[3] = UserDatabaseDao.columnPassword;
+        result[4] = UserDatabaseDao.columnEmail;
+        result[5] = UserDatabaseDao.columnBonus;
+        return  result;
+    }
 
     private static UserDatabaseDao instance = new UserDatabaseDao();
 
@@ -25,41 +43,82 @@ public class UserDatabaseDao extends Connector implements UserDao {
         return instance;
     }
 
+
     @Override
     public User findUserById(int id) throws DaoException {
-        return null;
+        ResultSet resultSet = null;
+        try {
+            resultSet = dbController.select(UserDatabaseDao.tableName,UserDatabaseDao.getColumnNames(),id + "=" + id);
+            return  setToUser(resultSet);
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 
     @Override
     public List<User> getUsersCollection() throws DaoException {
-
-        if (connection == null || statement == null) {
-            throw new DaoException("Database connection error");
-        }
-
-        List<User> users = new ArrayList<User>();
-
         ResultSet resultSet = null;
-
         try {
-            resultSet = statement.executeQuery("SELECT * FROM 'user'");
-
-            while (resultSet.next()) {
-                users.add(new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getInt(5)));
-            }
-
-            return users;
-        }
-        catch (SQLException e){
+            resultSet = dbController.select(UserDatabaseDao.tableName,UserDatabaseDao.getColumnNames(),null);
+            return usersToCollection(resultSet);
+        } catch (SQLException e) {
             throw new DaoException(e);
         }
-        finally {
-            try {
-                closeResultSet(resultSet);
-            } catch (SQLException e){
-                throw new DaoException(e);
-            }
-        }
+    }
 
+    @Override
+    public boolean addUser(User user) throws DaoException {
+        try {
+            return dbController.insert(UserDatabaseDao.tableName,UserDatabaseDao.getColumnNames(),user.getValues());
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public boolean updateUser(int id, User newUser) throws DaoException {
+        try {
+            return dbController.update(UserDatabaseDao.tableName,UserDatabaseDao.getColumnNames(),newUser.getValues(),id +
+            "=" + id);
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public boolean removeUser(int id) throws DaoException {
+        try {
+            return dbController.remove(UserDatabaseDao.tableName,UserDatabaseDao.columnId + "=" + id);
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+
+    private List<User> usersToCollection(ResultSet userSet) throws  DaoException{
+        List<User> result = new ArrayList<User>();
+        try {
+            while (userSet.next()) {
+                result.add(this.setToUser(userSet));
+            }
+            return result;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    private User setToUser(ResultSet user) throws  DaoException{
+        User result = new User();
+        try {
+            result.setId(user.getInt(UserDatabaseDao.columnId));
+            result.setUserType(user.getInt(UserDatabaseDao.columnType));
+            result.setLogin(user.getString(UserDatabaseDao.columnLogin));
+            result.setPassword(user.getString(UserDatabaseDao.columnPassword));
+            result.setEmail(user.getString(UserDatabaseDao.columnEmail));
+            result.setBonusCount(user.getInt(FilmDatabaseDao.columnDate));
+            return result;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 }

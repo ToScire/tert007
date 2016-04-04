@@ -13,7 +13,7 @@ public class Film {
     private String description;
     private Date date;
 
-    public Film(){
+    public Film() {
     }
 
     public Film(int id, String title, FilmGenre genre, String director, String description, Date date) {
@@ -25,12 +25,12 @@ public class Film {
         this.date = date;
     }
 
-    public String[] getValues(){
+    public String[] getValues() {
         String[] result = new String[6];
-        result[0]= String.valueOf(id);
-        result[1]= title;
-        result[2]= description;
-        result[3]= director;
+        result[0] = String.valueOf(id);
+        result[1] = title;
+        result[2] = description;
+        result[3] = director;
         result[4] = genre.toString();
         result[5] = date.toString();
         return result;

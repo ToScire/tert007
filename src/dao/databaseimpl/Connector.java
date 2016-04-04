@@ -39,6 +39,7 @@ public class Connector {
 
                 connection = DriverManager.getConnection(url, login, password);
                 statement = connection.createStatement();
+                dbController = new DataBaseController(statement);
             }
         }
         catch (ClassNotFoundException | SQLException e) {

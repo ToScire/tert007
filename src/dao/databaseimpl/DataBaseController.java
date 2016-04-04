@@ -11,14 +11,12 @@ import java.sql.Statement;
  */
 public class DataBaseController {
     private Statement statement;
-    private String tableName;
 
-    public DataBaseController(Statement statement,String tableName){
+    public DataBaseController(Statement statement){
         this.statement = statement;
-        this.tableName = tableName;
     }
 
-    public ResultSet select(String[] columns,String where) throws DaoException{
+    public ResultSet select(String tableName,String[] columns,String where) throws SQLException{
         String query = "SELECT ";
         for (int i=0; i < columns.length - 1; i++){
             query += columns[i] + ",";
@@ -27,14 +25,10 @@ public class DataBaseController {
         if(where != null){
             query += " WHERE " + where;
         }
-        try {
-            return statement.executeQuery(query);
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
+        return statement.executeQuery(query);
     }
 
-    public  boolean insert(String[] columns, String[] values)throws DaoException{
+    public  boolean insert(String tableName,String[] columns, String[] values)throws SQLException{
         String query = "INSERT INTO " + tableName + " (";
         for (int i = 0; i < columns.length - 1; i++){
             query += columns[i] + ",";
@@ -44,35 +38,24 @@ public class DataBaseController {
             query += "'" + values[i] + "',";
         }
         query += "'" +  values[values.length - 1] + "'";
-        try {
-            return statement.execute(query);
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
+        return statement.execute(query);
     }
 
 
-    public  boolean update(String[] columns, String[] newValues, String where)throws DaoException{
+    public  boolean update(String tableName, String[] columns, String[] newValues, String where)throws SQLException{
         String query = "UPDATE " + tableName + " SET ";
         for (int i = 0; i < columns.length - 1; i++){
             query += columns[i] + "='" + newValues[i] + "',";
         }
         query += columns[columns.length - 1] + "='" + newValues[columns.length - 1] + "'";
         query += " WHERE " + where;
-        try {
-            return statement.execute(query);
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
+        return statement.execute(query);
     }
 
-    public  boolean remove(String where)throws DaoException{
+    public  boolean remove(String tableName, String where)throws SQLException{
         String query = "DELETE FROM " + tableName;
         query += " WHERE " + where;
-        try {
-            return statement.execute(query);
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
+        return statement.execute(query);
+
     }
 }

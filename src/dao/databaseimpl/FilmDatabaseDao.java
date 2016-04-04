@@ -44,22 +44,14 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
     }
 
     @Override
-    public Film findFilmByTitle(String title) throws DaoException {
+    public Film findFilmByTitle(String title) throws DaoException{
         ResultSet resultSet = null;
         try {
-            resultSet = statement.executeQuery(AllFromFilmsQuery +
-                    " WHERE " + FilmDatabaseDao.columnTitle + "='" + title + "'" );
-            return this.setToFilm(resultSet);
-        }
-        catch (SQLException e){
+            resultSet = dbController.select(FilmDatabaseDao.tableName, FilmDatabaseDao.getColumnNames(),FilmDatabaseDao.columnTitle + "='"
+                    + title + "'");
+            return setToFilm(resultSet);
+        } catch (SQLException e) {
             throw new DaoException(e);
-        }
-        finally {
-            try {
-                closeResultSet(resultSet);
-            } catch (SQLException e) {
-                throw new DaoException(e);
-            }
         }
     }
 
@@ -67,19 +59,11 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
     public Film findFilmById(int id) throws DaoException {
         ResultSet resultSet = null;
         try {
-            resultSet = statement.executeQuery(AllFromFilmsQuery +
-                    " WHERE " + FilmDatabaseDao.columnId + "='" + id + "'" );
-            return this.setToFilm(resultSet);
-        }
-        catch (SQLException e){
+            resultSet = dbController.select(FilmDatabaseDao.tableName,FilmDatabaseDao.getColumnNames(),FilmDatabaseDao.columnId + "='"
+            + id + "'");
+            return setToFilm(resultSet);
+        } catch (SQLException e) {
             throw new DaoException(e);
-        }
-        finally {
-            try {
-                closeResultSet(resultSet);
-            } catch (SQLException e) {
-                throw new DaoException(e);
-            }
         }
     }
 
@@ -87,77 +71,48 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
     public List<Film> findFilmsByDate(Date date) throws DaoException {
         ResultSet resultSet = null;
         try {
-            resultSet = statement.executeQuery(AllFromFilmsQuery +
-                    " WHERE " + FilmDatabaseDao.columnDate + "='" + date + "'" );
-            return this.filmsToCollection(resultSet);
-        }
-        catch (SQLException e){
+            resultSet = dbController.select(FilmDatabaseDao.tableName,FilmDatabaseDao.getColumnNames(),FilmDatabaseDao.columnDate + "='" +
+            date + "'");
+            return filmsToCollection(resultSet);
+        } catch (SQLException e) {
             throw new DaoException(e);
-        }
-        finally {
-            try {
-                closeResultSet(resultSet);
-            } catch (SQLException e) {
-                throw new DaoException(e);
-            }
         }
     }
 
     @Override
     public List<Film> getFilmsCollections() throws DaoException {
-        List<Film> films = new ArrayList<Film>();
         ResultSet resultSet = null;
         try {
-            resultSet = statement.executeQuery(AllFromFilmsQuery);
-            return this.filmsToCollection(resultSet);
-        }
-        catch (SQLException e){
+            resultSet = dbController.select(tableName,FilmDatabaseDao.getColumnNames(),null);
+            return filmsToCollection(resultSet);
+        } catch (SQLException e) {
             throw new DaoException(e);
-        }
-        finally {
-            try {
-                closeResultSet(resultSet);
-            } catch (SQLException e) {
-                throw new DaoException(e);
-            }
         }
     }
 
     @Override
     public boolean insertNewFilm(Film film) throws DaoException {
-        try{
-            String query = "INSERT INTO "+ FilmDatabaseDao.tableName + "(" + FilmDatabaseDao.getColumnNames() + ") VALUES (" + film.getValues() + ")";
-            return statement.execute(query);
-        }
-        catch (SQLException e){
+        try {
+            return dbController.insert(tableName,FilmDatabaseDao.getColumnNames(),film.getValues());
+        } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
 
     @Override
-    public boolean deleteFilmById(int id) throws DaoException {
-        try{
-            String query = "DELETE FROM " + FilmDatabaseDao.tableName + " WHERE " + FilmDatabaseDao.columnId + "=" + id;
-            return statement.execute(query);
-        }
-        catch (SQLException e){
-            throw  new DaoException(e);
+    public boolean removeFilmById(int id) throws DaoException {
+        try {
+            return dbController.remove(tableName,FilmDatabaseDao.columnId + "=" + id);
+        } catch (SQLException e) {
+            throw new DaoException(e);
         }
     }
 
     @Override
     public boolean updateFilm(int id, Film newFilm) throws DaoException {
-        try{
-            String updString = "";
-            updString += FilmDatabaseDao.columnId + "='" + newFilm.getId() + "',";
-            updString += FilmDatabaseDao.columnTitle + "='" + newFilm.getTitle() + "',";
-            updString += FilmDatabaseDao.columnDescription + "='" + newFilm.getDescription() + "',";
-            updString += FilmDatabaseDao.columnDirector + "='" + newFilm.getDirector() + "',";
-            updString += FilmDatabaseDao.columnGenre + "='" + newFilm.getGenre() + "',";
-            updString += FilmDatabaseDao.columnDate + "='" + newFilm.getDate() + "'";
-            String query = "UPDATE " + FilmDatabaseDao.tableName + " SET " + updString + " WHERE " + FilmDatabaseDao.columnId + "=" + id;
-            return statement.execute(query);
-        } catch (SQLException e){
+        try {
+            return dbController.update(tableName,FilmDatabaseDao.getColumnNames(),newFilm.getValues(),FilmDatabaseDao.columnId + "=" + id);
+        } catch (SQLException e) {
             throw new DaoException(e);
         }
     }

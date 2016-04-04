@@ -5,6 +5,7 @@ package entity.user;
  */
 public class User {
     private int id;
+    private int user_type_id;
     private String login;
     private String password;
     private String email;
@@ -25,6 +26,21 @@ public class User {
         this.password = password;
         this.email = email;
         this.bonusCount = bonusCount;
+    }
+
+    public String[] getValues(){
+        String[] result = new String[6];
+        result[0]= String.valueOf(id);
+        result[1]=String.valueOf(user_type_id);
+        result[2]=login;
+        result[3]=password;
+        result[4]=email;
+        result[5]=String.valueOf(bonusCount);
+        return result;
+    }
+
+    public void setUserType(int type){
+        this.user_type_id = type;
     }
 
     public void setPassword(String password) {
