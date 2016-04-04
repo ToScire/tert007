@@ -14,24 +14,19 @@ public class Connector {
     private static final String url = "jdbc:mysql://localhost:3306/cinema";
     private static final String login = "root";
     private static final String password = "root";
+    protected static Connection connection = null;
+    protected static Statement statement = null;
 
     public static Connection getConnection() throws DaoException {
         try {
             Class.forName(className);
-
             Driver driver = new FabricMySQLDriver();
             DriverManager.registerDriver(driver);
-
             return  DriverManager.getConnection(url, login, password);
         } catch (ClassNotFoundException | SQLException e) {
             throw new DaoException(e);
         }
     }
-
-
-
-    protected static Connection connection = null;
-    protected static Statement statement = null;
 
     protected Connector() {
         try {
@@ -69,5 +64,6 @@ public class Connector {
             resultSet.close();
         }
     }
+
 
 }
