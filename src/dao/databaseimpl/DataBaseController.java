@@ -32,6 +32,24 @@ public class DataBaseController {
         }
     }
 
+    public  boolean insert(String tableName, String[] columns, String[] values)throws DaoException{
+        String query = "INSERT INTO " + tableName + " (";
+        for (int i = 0; i < columns.length - 1; i++){
+            query += columns[i] + ",";
+        }
+        query += columns[columns.length - 1] + ") VALUES (";
+        for (int i = 0; i < values.length - 1; i++) {
+            query += "'" + values[i] + "',";
+        }
+        query += "'" +  values[values.length - 1] + "'";
+        try {
+            return statement.execute(query);
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+
     public  boolean update(String tableName, String[] columns, String[] newValues, String where)throws DaoException{
         String query = "UPDATE " + tableName + " SET ";
         for (int i = 0; i < columns.length - 1; i++){
@@ -46,7 +64,7 @@ public class DataBaseController {
         }
     }
 
-    public  boolean delete(String tableName, String where)throws DaoException{
+    public  boolean remove(String tableName, String where)throws DaoException{
         String query = "DELETE FROM " + tableName;
         query += " WHERE " + where;
         try {

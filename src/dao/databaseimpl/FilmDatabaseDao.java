@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class FilmDatabaseDao extends Connector implements FilmDao {
     private final String AllFromFilmsQuery = "SELECT * FROM " + FilmDatabaseDao.tableName;
-    public static final String tableName = "films";
+    public static final String tableName = "film";
     public static final String columnId = "id";
     public static final String columnTitle = "title";
     public static final String columnDescription = "description";
@@ -32,10 +32,15 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
         return instance;
     }
 
-    public static String getColumnNames(){
-        return FilmDatabaseDao.columnId + "," +FilmDatabaseDao.columnTitle + ","
-                + FilmDatabaseDao.columnDescription + "," + FilmDatabaseDao.columnDirector + "," + FilmDatabaseDao.columnGenre
-                + "," + FilmDatabaseDao.columnDate;
+    public static String[] getColumnNames(){
+        String[] result = new String[6];
+        result[0] = FilmDatabaseDao.columnId;
+        result[1] = FilmDatabaseDao.columnTitle;
+        result[2] = FilmDatabaseDao.columnDescription;
+        result[3] = FilmDatabaseDao.columnDirector;
+        result[4] = FilmDatabaseDao.columnGenre;
+        result[5] = FilmDatabaseDao.columnDate;
+        return  result;
     }
 
     @Override

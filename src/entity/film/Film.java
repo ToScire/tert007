@@ -25,8 +25,15 @@ public class Film {
         this.date = date;
     }
 
-    public String getValues(){
-        return "'" + id + "','" + title + "','" + genre + "','" + director + "','" + description + "','" + date + "'" ;
+    public String[] getValues(){
+        String[] result = new String[6];
+        result[0]= String.valueOf(id);
+        result[1]= title;
+        result[2]= description;
+        result[3]= director;
+        result[4] = genre.toString();
+        result[5] = date.toString();
+        return result;
     }
 
     public String getTitle() {
