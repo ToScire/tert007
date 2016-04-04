@@ -34,7 +34,7 @@ public class Controller extends HttpServlet {
 
         try {
             page = command.execute(request);
-        } catch (Exception ex) {
+        } catch (CommandException ex) {
             // Заглушка
         }
 

@@ -20,17 +20,6 @@ public class Connector {
 
     protected DataBaseController dbController;
 
-    public static Connection getConnection() throws DaoException {
-        try {
-            Class.forName(className);
-            Driver driver = new FabricMySQLDriver();
-            DriverManager.registerDriver(driver);
-            return  DriverManager.getConnection(url, login, password);
-        } catch (ClassNotFoundException | SQLException e) {
-            throw new DaoException(e);
-        }
-    }
-
     protected Connector() {
         try {
             if (connection == null){

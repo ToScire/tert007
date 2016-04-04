@@ -56,6 +56,5 @@ public class DataBaseController {
         String query = "DELETE FROM " + tableName;
         query += " WHERE " + where;
         return statement.execute(query);
-
     }
 }
