@@ -17,259 +17,322 @@
       <table id="8" parent="1" name="ticket"/>
       <table id="9" parent="1" name="user"/>
       <table id="10" parent="1" name="user_type"/>
-      <column id="11" parent="2" name="id_payticket">
+      <table id="11" parent="1" name="paysystem"/>
+      <table id="12" parent="1" name="payticket_status"/>
+      <column id="13" parent="2" name="id_payticket">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="12" parent="2" name="id_ticket">
+      <column id="14" parent="2" name="id_ticket">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="13" parent="2" name="id_user">
+      <column id="15" parent="2" name="id_user">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="14" parent="2" name="status">
+      <column id="16" parent="2" name="status_id">
         <mandatory>1</mandatory>
-        <data-type>tinyint(1)</data-type>
+        <data-type>int(11)</data-type>
       </column>
-      <column id="15" parent="2" name="system">
-        <mandatory>1</mandatory>
-        <data-type>varchar(45)</data-type>
+      <column id="17" parent="2" name="paysystem_id">
+        <data-type>int(11)</data-type>
       </column>
-      <index id="16" parent="2" name="id_ticket_idx">
+      <index id="18" parent="2" name="id_ticket_idx">
         <columns>id_ticket</columns>
         <desc-columns></desc-columns>
       </index>
-      <index id="17" parent="2" name="id_user_idx">
+      <index id="19" parent="2" name="id_user_idx">
         <columns>id_user</columns>
         <desc-columns></desc-columns>
       </index>
-      <key id="18" parent="2" name="PRIMARY">
+      <index id="20" parent="2" name="payticket_paysystem_id_fk">
+        <columns>paysystem_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="21" parent="2" name="payticket_status_id_fk">
+        <columns>status_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="22" parent="2" name="PRIMARY">
         <columns>id_payticket</columns>
         <primary>1</primary>
       </key>
-      <foreign-key id="19" parent="2" name="id_ticket">
+      <foreign-key id="23" parent="2" name="payticket_paysystem_id_fk">
+        <columns>paysystem_id</columns>
+        <ref-key>~.paysystem.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="24" parent="2" name="payticket_status_id_fk">
+        <columns>status_id</columns>
+        <ref-key>~.payticket_status.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="25" parent="2" name="ticket_id_fk">
         <columns>id_ticket</columns>
         <ref-key>~.ticket.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="20" parent="2" name="id_user">
+      <foreign-key id="26" parent="2" name="user_id_fk">
         <columns>id_user</columns>
         <ref-key>~.user.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="21" parent="3" name="id">
+      <column id="27" parent="3" name="id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="22" parent="3" name="value">
+      <column id="28" parent="3" name="value">
         <mandatory>1</mandatory>
         <data-type>varchar(45)</data-type>
       </column>
-      <key id="23" parent="3" name="PRIMARY">
+      <key id="29" parent="3" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <column id="24" parent="4" name="id">
+      <column id="30" parent="4" name="id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="25" parent="4" name="title">
+      <column id="31" parent="4" name="title">
         <mandatory>1</mandatory>
         <data-type>varchar(45)</data-type>
       </column>
-      <column id="26" parent="4" name="genre">
+      <column id="32" parent="4" name="genre">
         <mandatory>1</mandatory>
         <data-type>varchar(45)</data-type>
       </column>
-      <column id="27" parent="4" name="director">
+      <column id="33" parent="4" name="director">
         <mandatory>1</mandatory>
         <data-type>varchar(45)</data-type>
       </column>
-      <column id="28" parent="4" name="date">
+      <column id="34" parent="4" name="date">
         <mandatory>1</mandatory>
         <data-type>date</data-type>
       </column>
-      <column id="29" parent="4" name="description">
+      <column id="35" parent="4" name="description">
         <mandatory>1</mandatory>
         <data-type>mediumtext</data-type>
       </column>
-      <column id="30" parent="4" name="age_limitation_id">
+      <column id="36" parent="4" name="age_limitation_id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <index id="31" parent="4" name="age_limitation_id_fk_idx">
+      <index id="37" parent="4" name="age_limitation_id_fk_idx">
         <columns>age_limitation_id</columns>
         <desc-columns></desc-columns>
       </index>
-      <key id="32" parent="4" name="PRIMARY">
+      <key id="38" parent="4" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <foreign-key id="33" parent="4" name="age_limitation_id_fk">
+      <foreign-key id="39" parent="4" name="age_limitation_id_fk">
         <columns>age_limitation_id</columns>
         <ref-key>~.age_limitation.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="34" parent="5" name="id">
+      <column id="40" parent="5" name="id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="35" parent="5" name="film_format">
+      <column id="41" parent="5" name="film_format">
         <mandatory>1</mandatory>
         <data-type>varchar(45)</data-type>
       </column>
-      <key id="36" parent="5" name="PRIMARY">
+      <key id="42" parent="5" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <column id="37" parent="6" name="id">
+      <column id="43" parent="6" name="id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="38" parent="6" name="film_format_id">
+      <column id="44" parent="6" name="film_format_id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="39" parent="6" name="capicity">
+      <column id="45" parent="6" name="capicity">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <index id="40" parent="6" name="film_format_id_fk_idx">
+      <index id="46" parent="6" name="film_format_id_fk_idx">
         <columns>film_format_id</columns>
         <desc-columns></desc-columns>
       </index>
-      <key id="41" parent="6" name="PRIMARY">
+      <key id="47" parent="6" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <foreign-key id="42" parent="6" name="film_format_id_fk">
+      <foreign-key id="48" parent="6" name="film_format_id_fk">
         <columns>film_format_id</columns>
         <ref-key>~.film_format.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="43" parent="7" name="id">
+      <column id="49" parent="7" name="id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="44" parent="7" name="id_hall">
+      <column id="50" parent="7" name="id_hall">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="45" parent="7" name="id_film">
+      <column id="51" parent="7" name="id_film">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="46" parent="7" name="date">
+      <column id="52" parent="7" name="date">
         <mandatory>1</mandatory>
         <data-type>date</data-type>
       </column>
-      <column id="47" parent="7" name="time">
+      <column id="53" parent="7" name="time">
         <mandatory>1</mandatory>
         <data-type>time(2)</data-type>
       </column>
-      <index id="48" parent="7" name="id_film_idx">
+      <index id="54" parent="7" name="id_film_idx">
         <columns>id_film</columns>
         <desc-columns></desc-columns>
       </index>
-      <index id="49" parent="7" name="id_hall_idx">
+      <index id="55" parent="7" name="id_hall_idx">
         <columns>id_hall</columns>
         <desc-columns></desc-columns>
       </index>
-      <key id="50" parent="7" name="PRIMARY">
+      <key id="56" parent="7" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <column id="51" parent="8" name="id_ticket">
+      <column id="57" parent="8" name="id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="52" parent="8" name="price">
+      <column id="58" parent="8" name="price">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="53" parent="8" name="id_session">
+      <column id="59" parent="8" name="id_session">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="54" parent="8" name="bonus_code">
+      <column id="60" parent="8" name="bonus_code">
         <mandatory>1</mandatory>
         <data-type>varchar(45)</data-type>
       </column>
-      <column id="55" parent="8" name="id_payticket">
+      <column id="61" parent="8" name="id_payticket">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <index id="56" parent="8" name="id_payticket_idx">
+      <index id="62" parent="8" name="id_payticket_idx">
         <columns>id_payticket</columns>
         <desc-columns></desc-columns>
       </index>
-      <index id="57" parent="8" name="id_session_idx">
+      <index id="63" parent="8" name="id_session_idx">
         <columns>id_session</columns>
         <desc-columns></desc-columns>
       </index>
-      <key id="58" parent="8" name="PRIMARY">
-        <columns>id_ticket</columns>
+      <key id="64" parent="8" name="PRIMARY">
+        <columns>id</columns>
         <primary>1</primary>
       </key>
-      <foreign-key id="59" parent="8" name="id_payticket">
+      <foreign-key id="65" parent="8" name="id_payticket">
         <columns>id_payticket</columns>
         <ref-key>~.payticket.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="60" parent="9" name="id_user">
+      <column id="66" parent="9" name="id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="61" parent="9" name="login">
+      <column id="67" parent="9" name="login">
         <mandatory>1</mandatory>
         <data-type>varchar(45)</data-type>
       </column>
-      <column id="62" parent="9" name="password">
+      <column id="68" parent="9" name="password">
         <mandatory>1</mandatory>
         <data-type>varchar(45)</data-type>
       </column>
-      <column id="63" parent="9" name="email">
+      <column id="69" parent="9" name="email">
         <mandatory>1</mandatory>
         <data-type>varchar(45)</data-type>
       </column>
-      <column id="64" parent="9" name="bonus_count">
+      <column id="70" parent="9" name="bonus_count">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="65" parent="9" name="user_type_id">
+      <column id="71" parent="9" name="user_type_id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <index id="66" parent="9" name="user_type_id_fk_idx">
+      <index id="72" parent="9" name="user_type_id_fk_idx">
         <columns>user_type_id</columns>
         <desc-columns></desc-columns>
       </index>
-      <key id="67" parent="9" name="PRIMARY">
-        <columns>id_user</columns>
+      <key id="73" parent="9" name="PRIMARY">
+        <columns>id</columns>
         <primary>1</primary>
       </key>
-      <foreign-key id="68" parent="9" name="user_type_id_fk">
+      <foreign-key id="74" parent="9" name="user_type_id_fk">
         <columns>user_type_id</columns>
         <ref-key>~.user_type.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="69" parent="10" name="id">
+      <column id="75" parent="10" name="id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="70" parent="10" name="type">
+      <column id="76" parent="10" name="type">
         <mandatory>1</mandatory>
         <data-type>varchar(45)</data-type>
       </column>
-      <key id="71" parent="10" name="PRIMARY">
+      <key id="77" parent="10" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="78" parent="11" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="79" parent="11" name="system_title">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <index id="80" parent="11" name="paysystem_system_title_uindex">
+        <columns>system_title</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="81" parent="11" name="paysystem_system_title_uindex">
+        <columns>system_title</columns>
+        <underlying-index>paysystem_system_title_uindex</underlying-index>
+      </key>
+      <key id="82" parent="11" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="83" parent="12" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="84" parent="12" name="status">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <index id="85" parent="12" name="payticket_status_status_uindex">
+        <columns>status</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="86" parent="12" name="payticket_status_status_uindex">
+        <columns>status</columns>
+        <underlying-index>payticket_status_status_uindex</underlying-index>
+      </key>
+      <key id="87" parent="12" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
