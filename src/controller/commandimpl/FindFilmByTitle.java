@@ -20,7 +20,7 @@ public class FindFilmByTitle implements Command {
         String title = request.getParameter("title");
 
         try {
-            List<Film> films = daoFactory.getFilmDao().findFilmByTitle(title);
+            List<Film> films = daoFactory.getFilmDao().findFilmsByTitle(title);
             request.setAttribute("films", films);
             return "/result.jsp";
         } catch (DaoException e){

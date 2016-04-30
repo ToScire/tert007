@@ -10,9 +10,9 @@ import java.util.List;
  */
 public interface FilmDao{
     Film findFilmById(int id) throws DaoException;
-    List<Film> findFilmByTitle(String title) throws DaoException;
+    List<Film> findFilmsByTitle(String title) throws DaoException;
     List<Film> findFilmsByDate(Date date) throws DaoException;
-    List<Film> getFilmsCollections() throws DaoException;
+    List<Film> getFilmsCollection() throws DaoException;
 
 
     boolean addNewFilm(Film film) throws DaoException;

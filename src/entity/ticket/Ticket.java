@@ -15,6 +15,7 @@ public class Ticket {
     private int price;
     private Date date;
     private Date time;
+    private int place;
 
     public Ticket(){
 
