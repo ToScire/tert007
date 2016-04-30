@@ -17,7 +17,7 @@ public class GetFilmsCollection implements Command {
     public String execute(HttpServletRequest request) throws CommandException {
         DaoFactory daoFactory = DaoFactory.getDaoFactory();
         try {
-            List<Film> films = daoFactory.getFilmDao().getFilmsCollections();
+            List<Film> films = daoFactory.getFilmDao().getFilmsCollection();
             request.setAttribute("films", films);
             return "/result.jsp";
         } catch (DaoException e){

@@ -15,14 +15,24 @@ public class Ticket {
     private int price;
     private Date date;
     private Date time;
+
+    public int getPlace() {
+        return place;
+    }
+
+    public void setPlace(int place) {
+        this.place = place;
+    }
+
     private int place;
 
     public Ticket(){
 
     }
 
-    public Ticket(int id, Film film, Hall hall, int price, Date date, Date time) {
+    public Ticket(int id, int place, Film film, Hall hall, int price, Date date, Date time) {
         this.id = id;
+        this.place = place;
         this.film = film;
         this.hall = hall;
         this.price = price;

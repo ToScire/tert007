@@ -2,6 +2,8 @@ package dao.factoryimpl;
 
 import dao.*;
 import dao.databaseimpl.FilmDatabaseDao;
+import dao.databaseimpl.SeanceDatabaseDao;
+import dao.databaseimpl.TicketDatabaseDao;
 import dao.databaseimpl.UserDatabaseDao;
 
 /**
@@ -27,4 +29,14 @@ public class DatabaseDaoFactory extends DaoFactory {
         return FilmDatabaseDao.getInstance();
     }
 
+
+    @Override
+    public SeanceDao getSeanceDao() throws DaoException {
+        return SeanceDatabaseDao.getInstance();
+    }
+
+    @Override
+    public TicketDao getTicketDao() throws DaoException {
+        return TicketDatabaseDao.getInstance();
+    }
 }
