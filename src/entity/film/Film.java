@@ -8,7 +8,7 @@ import java.sql.Date;
 public class Film {
     private int id;
     private String title;
-    private FilmGenre genre;
+    private String genre;
     private String director;
     private String description;
 
@@ -27,7 +27,7 @@ public class Film {
     public Film() {
     }
 
-    public Film(int id, String title, FilmGenre genre, String director, String description, Date date) {
+    public Film(int id, String title, String genre, String director, String description, Date date) {
         this.id = id;
         this.title = title;
         this.genre = genre;
@@ -41,7 +41,7 @@ public class Film {
         result[0] = String.valueOf(id);
         result[1] = String.valueOf(ageLimitationId);
         result[2] = title;
-        result[3] = genre.toString();
+        result[3] = genre;
         result[4] = director;
         result[5] = date.toString();
         result[6] = description;
@@ -56,11 +56,11 @@ public class Film {
         this.title = title;
     }
 
-    public FilmGenre getGenre() {
+    public String getGenre() {
         return genre;
     }
 
-    public void setGenre(FilmGenre genre) {
+    public void setGenre(String genre) {
         this.genre = genre;
     }
 

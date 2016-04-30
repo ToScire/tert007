@@ -22,8 +22,12 @@
             <th>director</th>
         </tr>
 
+
+
         <c:forEach var="film" items="${films}">
             <tr>
+                <td>${film.getTitle()}</td>
+                <td>${film.getDescription()}</td>
                 <td>${film.getGenre()}</td>
             </tr>
         </c:forEach>

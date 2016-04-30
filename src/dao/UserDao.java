@@ -11,6 +11,6 @@ public interface UserDao{
     User findUserById(int id) throws DaoException;
     List<User> getUsersCollection() throws DaoException;
     boolean addUser(User user) throws DaoException;
-    boolean updateUser(int id,User newUser) throws DaoException;
+    boolean updateUser(int id, User newUser) throws DaoException;
     boolean removeUser(int id) throws DaoException;
 }

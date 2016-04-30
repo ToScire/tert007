@@ -4,7 +4,7 @@ import controller.Command;
 import controller.CommandException;
 import dao.DaoFactory;
 import entity.film.Film;
-import entity.film.FilmGenre;
+
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
@@ -17,6 +17,7 @@ public class AddNewFilm implements Command {
     public String execute(HttpServletRequest request) throws CommandException {
         DaoFactory daoFactory = DaoFactory.getDaoFactory();
         try {
+            /*
             Film test = new Film();
             test.setGenre(FilmGenre.COMEDY);
             test.setTitle("VADIM");
@@ -27,7 +28,7 @@ public class AddNewFilm implements Command {
             test.setId(1);
 
             daoFactory.getFilmDao().addNewFilm(test);
-
+*/
             return "/result.jsp";
         } catch (Exception ex){
             return null;

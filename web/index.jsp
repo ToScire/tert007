@@ -12,8 +12,17 @@
   </head>
   <body>
 
-  <form action="Controller" method="Get">
-    <input type="submit" name="command" value="get_films_collection">
+  <form action="Controller" method="POST">
+    <input type="hidden" name="command" value="find_film_by_title"/>
+    <input type="text" name="title" value="Film Title"/>
+    <input type="submit" name="button" value="Find"/>
+  </form>
+
+
+  <form action="Controller" method="GET">
+    <input type="hidden" name="command" value="find_film_by_id"/>
+    <input type="number" name="film_id" value="1"/>
+    <input type="submit" name="button" value="Find"/>
   </form>
 
   </body>

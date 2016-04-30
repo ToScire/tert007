@@ -14,9 +14,12 @@ import java.util.List;
 public class FindFilmById implements Command {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
+
+        int filmId = Integer.valueOf(request.getParameter("film_id"));
+
         DaoFactory daoFactory = DaoFactory.getDaoFactory();
         try {
-            Film film = daoFactory.getFilmDao().findFilmById(1);
+            Film film = daoFactory.getFilmDao().findFilmById(filmId);
             request.setAttribute("film", film);
             return "/result.jsp";
         } catch (Exception ex){

@@ -5,7 +5,7 @@ package controller;
  */
 public enum CommandName {
 
-
+    FIND_FILM_BY_ID,
     FIND_FILM_BY_TITLE,
     GET_FILMS_COLLECTION,
 

@@ -1,6 +1,8 @@
 package controller.commandimpl;
 
 import controller.Command;
+import controller.CommandException;
+import dao.DaoException;
 import dao.DaoFactory;
 import entity.film.Film;
 
@@ -12,16 +14,14 @@ import java.util.List;
  */
 public class GetFilmsCollection implements Command {
     @Override
-    public String execute(HttpServletRequest request) {
+    public String execute(HttpServletRequest request) throws CommandException {
         DaoFactory daoFactory = DaoFactory.getDaoFactory();
         try {
             List<Film> films = daoFactory.getFilmDao().getFilmsCollections();
             request.setAttribute("films", films);
             return "/result.jsp";
-        } catch (Exception ex){
-            return null;
+        } catch (DaoException e){
+            throw new CommandException(e);
         }
-
-
     }
 }
