@@ -15,22 +15,23 @@ public class Connector {
     private static final String password = "root";
 
     protected static Connection connection = null;
-    protected static Statement statement = null;
 
-    protected static DatabaseController databaseController;
+    protected Statement statement = null;
+    protected DatabaseController databaseController;
 
     protected Connector() {
         try {
             if (connection == null){
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName(className);
 
                 Driver driver = new FabricMySQLDriver();
                 DriverManager.registerDriver(driver);
 
                 connection = DriverManager.getConnection(url, login, password);
-                statement = connection.createStatement();
-                databaseController = new DatabaseController(statement);
             }
+
+            statement = connection.createStatement();
+            databaseController = new DatabaseController(statement);
         }
         catch (ClassNotFoundException | SQLException e) {
             connection = null;
