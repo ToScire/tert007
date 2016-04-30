@@ -11,6 +11,17 @@ public class Film {
     private FilmGenre genre;
     private String director;
     private String description;
+
+    public int getAgeLimitationId() {
+        return ageLimitationId;
+    }
+
+    public void setAgeLimitationId(int ageLimitationId) {
+        this.ageLimitationId = ageLimitationId;
+    }
+
+    private int ageLimitationId;
+
     private Date date;
 
     public Film() {
@@ -26,13 +37,14 @@ public class Film {
     }
 
     public String[] getValues() {
-        String[] result = new String[6];
+        String[] result = new String[7];
         result[0] = String.valueOf(id);
-        result[1] = title;
-        result[2] = description;
-        result[3] = director;
-        result[4] = genre.toString();
+        result[1] = String.valueOf(ageLimitationId);
+        result[2] = title;
+        result[3] = genre.toString();
+        result[4] = director;
         result[5] = date.toString();
+        result[6] = description;
         return result;
     }
 

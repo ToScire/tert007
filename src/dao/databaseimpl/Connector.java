@@ -2,7 +2,6 @@ package dao.databaseimpl;
 
 
 import com.mysql.fabric.jdbc.FabricMySQLDriver;
-import dao.DaoException;
 
 import java.sql.*;
 
@@ -18,7 +17,7 @@ public class Connector {
     protected static Connection connection = null;
     protected static Statement statement = null;
 
-    protected DataBaseController dbController;
+    protected static DatabaseController databaseController;
 
     protected Connector() {
         try {
@@ -30,7 +29,7 @@ public class Connector {
 
                 connection = DriverManager.getConnection(url, login, password);
                 statement = connection.createStatement();
-                dbController = new DataBaseController(statement);
+                databaseController = new DatabaseController(statement);
             }
         }
         catch (ClassNotFoundException | SQLException e) {

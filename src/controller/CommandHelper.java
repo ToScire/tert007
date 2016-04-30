@@ -1,5 +1,6 @@
 package controller;
 
+import controller.commandimpl.AddNewFilm;
 import controller.commandimpl.GetFilmsCollection;
 import controller.commandimpl.GetUsersCollection;
 
@@ -15,6 +16,7 @@ public class CommandHelper {
     public CommandHelper(){
         commands.put(CommandName.GET_FILMS_COLLECTION, new GetFilmsCollection());
         commands.put(CommandName.GET_USERS_COLLECTION, new GetUsersCollection());
+        commands.put(CommandName.ADD_NEW_FILM, new AddNewFilm());
     }
 
     public Command getCommand(CommandName commandName){

@@ -10,6 +10,8 @@ public enum CommandName {
     GET_FILMS_COLLECTION,
 
 
+    ADD_NEW_FILM,
+
     LOGIN_USER,
     GET_USERS_COLLECTION
 }

@@ -13,7 +13,9 @@ public interface FilmDao{
     Film findFilmById(int id) throws DaoException;
     List<Film> findFilmsByDate(Date date) throws DaoException;
     List<Film> getFilmsCollections() throws DaoException;
-    boolean insertNewFilm(Film film) throws DaoException;
+
+
+    boolean addNewFilm(Film film) throws DaoException;
     boolean removeFilmById(int id) throws DaoException;
     boolean updateFilm(int id,Film newFilm) throws DaoException;
 }

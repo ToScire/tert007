@@ -15,7 +15,7 @@
 </head>
 <body>
     <table>
-        <caption>Films</caption>
+        <caption>Users</caption>
         <tr>
             <th>id</th>
             <th>title</th>
@@ -24,9 +24,7 @@
 
         <c:forEach var="film" items="${films}">
             <tr>
-                <td>${film.getId()}</td>
-                <td>${film.getTitle()}</td>
-                <td>${film.getDirector()}</td>
+                <td>${film.getGenre()}</td>
             </tr>
         </c:forEach>
 
