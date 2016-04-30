@@ -47,8 +47,12 @@ public class UserDatabaseDao extends Connector implements UserDao {
     public User findUserById(int id) throws DaoException {
         ResultSet resultSet = null;
         try {
-            resultSet = databaseController.select(UserDatabaseDao.tableName,UserDatabaseDao.getColumnNames(),id + "=" + id);
-            return  setToUser(resultSet);
+
+            resultSet = databaseController.select(UserDatabaseDao.tableName, UserDatabaseDao.getColumnNames(), UserDatabaseDao.columnId + "=" + id);
+            if(resultSet.next()) {
+                return setToUser(resultSet);
+            }
+            else return null;
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -77,12 +81,13 @@ public class UserDatabaseDao extends Connector implements UserDao {
     @Override
     public boolean updateUser(int id, User newUser) throws DaoException {
         try {
-            return databaseController.update(UserDatabaseDao.tableName,UserDatabaseDao.getColumnNames(),newUser.getValues(),id +
+            return databaseController.update(UserDatabaseDao.tableName,UserDatabaseDao.getColumnNames(),newUser.getValues(),UserDatabaseDao.columnId +
             "=" + id);
         } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
+
 
     @Override
     public boolean removeUser(int id) throws DaoException {

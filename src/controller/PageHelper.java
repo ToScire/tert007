@@ -15,6 +15,11 @@ public class PageHelper {
 
     public PageHelper(){
         pages.put(PageName.MAIN_PAGE, "/index.jsp");
+        pages.put(PageName.USERS_PAGE, "/users.jsp");
+        pages.put(PageName.USER_BY_ID_PAGE, "/user_by_id.jsp");
+        pages.put(PageName.SUCCESS_REG_PAGE, "/success_reg.jsp");
+        pages.put(PageName.ERROR_REG_PAGE, "/error_reg.jsp");
+        pages.put(PageName.SUCCESS_UPDATE_PAGE, "/success_update.jsp");
     }
 
     public String getPage(PageName pageName){

@@ -50,7 +50,8 @@ public class DatabaseController {
         query += "'" +  values[values.length - 1] + "'";
         query += ")";
 
-        return statement.execute(query);
+        statement.executeUpdate(query);
+        return true;
     }
 
 
