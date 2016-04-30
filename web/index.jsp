@@ -13,33 +13,49 @@
   </head>
   <body>
 
-  <form action="Controller" method="POST">
-    <input type="hidden" name="command" value="find_film_by_title"/>
-    <input type="text" name="title" value="Film Title"/>
-    <input type="submit" name="button" value="Find"/>
+<div class="operation">
+   <h3>Операции с фильмами</h3>
+
+  <form action="Controller" method="GET">
+    <input type="hidden" name="command" value="get_films_collection"/>
+    <input type="submit" name="button" value="Вывести все фильмы"/>
   </form>
 
+  <form action="Controller" method="POST">
+    <input type="hidden" name="command" value="find_film_by_title"/>
+    <input type="text" name="title" />
+    <input type="submit" name="button" value="Найти фильмы по заголовку"/>
+  </form>
 
   <form action="Controller" method="GET">
     <input type="hidden" name="command" value="find_film_by_id"/>
     <input type="number" name="film_id" value="1"/>
-    <input type="submit" name="button" value="Find"/>
+    <input type="submit" name="button" value="Найти фильм по id"/>
   </form>
 
   <form action="Controller" method="GET">
-    <input type="hidden" name="command" value="get_users_collection"/>
-    <input type="submit" name="button" value="Найти всех пользователей"/>
+    <input type="hidden" name="command" value="find_film_by_date"/>
+    <input type="date" name="date"/>
+    <input type="submit" name="button" value="Найти фильм по dате"/>
   </form>
-<div class="user_operation">
 
+</div>
+
+<div class="operation">
   <h3>Операции с пользователем</h3>
+
+  <form action="Controller" method="GET">
+    <input type="hidden" name="command" value="get_users_collection"/>
+    <input type="submit" name="button" value="Вывести всех пользователей"/>
+  </form>
+
   <form action="Controller" method="GET">
     <input type="hidden" name="command" value="get_user_by_id"/>
     <input type="number" name="user_id" value="1"/>
     <input type="submit" name="button" value="Найти пользователя"/>
   </form>
 
-  <form action="Controller" method="GET">
+  <form action="Controller" method="POST">
     <input type="hidden" name="command" value="remove_user"/>
     <input type="number" name="user_id" value="1"/>
     <input type="submit" name="button" value="Удалить пользователя"/>
