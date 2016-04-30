@@ -17,6 +17,10 @@ public class CommandHelper {
         commands.put(CommandName.GET_FILMS_COLLECTION, new GetFilmsCollection());
         commands.put(CommandName.GET_USERS_COLLECTION, new GetUsersCollection());
         commands.put(CommandName.ADD_NEW_FILM, new AddNewFilm());
+        commands.put(CommandName.GET_USER_BY_ID, new GetUserById());
+        commands.put(CommandName.REG_USER,new RegUser());
+        commands.put(CommandName.UPDATE_USER, new UpdateUser());
+        commands.put(CommandName.REMOVE_USER, new RemoveUser());
     }
 
     public Command getCommand(CommandName commandName){
