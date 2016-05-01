@@ -23,6 +23,7 @@ public class CommandHelper {
         commands.put(CommandName.REMOVE_USER, new RemoveUser());
         commands.put(CommandName.UPDATE_FILM, new UpdateFilm());
         commands.put(CommandName.FIND_FILM_BY_DATE, new FindFilmsByDate());
+        commands.put(CommandName.REMOVE_FILM, new RemoveFilm());
     }
 
     public Command getCommand(CommandName commandName){

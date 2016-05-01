@@ -11,6 +11,7 @@ public enum CommandName {
     GET_FILMS_COLLECTION,
     ADD_NEW_FILM,
     UPDATE_FILM,
+    REMOVE_FILM,
 
     GET_USERS_COLLECTION,
     GET_USER_BY_ID,

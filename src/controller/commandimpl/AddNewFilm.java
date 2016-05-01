@@ -2,6 +2,8 @@ package controller.commandimpl;
 
 import controller.Command;
 import controller.CommandException;
+import controller.PageHelper;
+import controller.PageName;
 import dao.DaoFactory;
 import entity.film.Film;
 
@@ -17,19 +19,24 @@ public class AddNewFilm implements Command {
     public String execute(HttpServletRequest request) throws CommandException {
         DaoFactory daoFactory = DaoFactory.getDaoFactory();
         try {
-            /*
-            Film test = new Film();
-            test.setGenre(FilmGenre.COMEDY);
-            test.setTitle("VADIM");
-            test.setDirector("NEHAI");
-            test.setDescription("FILM O BD");
-            test.setDate(new Date(1461786130));
-            test.setAgeLimitationId(1);
-            test.setId(1);
+            String title = request.getParameter("title");
+            String description = request.getParameter("description");
+            int genre = Integer.parseInt(request.getParameter("genre"));
+            String date = request.getParameter("date");
+            String director = request.getParameter("director");
+            int ageLimitation = Integer.parseInt(request.getParameter("age_limitation"));
 
-            daoFactory.getFilmDao().addNewFilm(test);
-*/
-            return "/result.jsp";
+            Film film = new Film();
+            film.setTitle(title);
+            film.setDescription(description);
+            film.setGenre(genre);
+            film.setDate(Date.valueOf(date));
+            film.setDirector(director);
+            film.setAgeLimitationId(ageLimitation);
+
+            daoFactory.getFilmDao().addNewFilm(film);
+            PageHelper pageHelper = new PageHelper();
+            return pageHelper.getPage(PageName.SUCCESS_UPDATE_PAGE);
         } catch (Exception ex){
             return null;
         }
