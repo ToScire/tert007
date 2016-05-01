@@ -41,4 +41,9 @@ public class DatabaseDaoFactory extends DaoFactory {
     public UserTypeDao getUserTypeDao() throws DaoException {
         return UserTypeDatabaseDao.getInstance();
     }
+
+    @Override
+    public FilmGenreDao getFilmGenreDao() throws DaoException {
+        return null;
+    }
 }

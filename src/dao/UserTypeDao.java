@@ -1,6 +1,5 @@
 package dao;
 
-import entity.user.User;
 import entity.user.UserType;
 
 import java.util.List;
@@ -10,5 +9,6 @@ import java.util.List;
  */
 public interface UserTypeDao {
     UserType findUserTypeById(int id) throws DaoException;
+    int findIdByUserTypeValue(UserType userType) throws DaoException;
     List<UserType> getUserTypesCollection() throws DaoException;
 }

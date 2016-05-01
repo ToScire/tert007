@@ -5,7 +5,7 @@ package entity.user;
  */
 public class User {
     private int id;
-    private int user_type_id;
+    private UserType userType;
     private String login;
     private String password;
     private String email;
@@ -20,7 +20,7 @@ public class User {
         this.email = email;
     }
 
-    public User(int id, String login, String password, String email, int bonusCount) {
+    public User(int id, UserType userType, String login, String password, String email, int bonusCount) {
         this.id = id;
         this.login = login;
         this.password = password;
@@ -31,7 +31,7 @@ public class User {
     public String[] getValues(){
         String[] result = new String[6];
         result[0]= String.valueOf(id);
-        result[1]=String.valueOf(user_type_id);
+        result[1]=String.valueOf(userType);
         result[2]=login;
         result[3]=password;
         result[4]=email;
@@ -39,9 +39,14 @@ public class User {
         return result;
     }
 
-    public void setUserType(int type){
-        this.user_type_id = type;
+    public UserType getUserType() {
+        return userType;
     }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
+
 
     public void setPassword(String password) {
         this.password = password;

@@ -13,7 +13,6 @@ import java.util.List;
  * Created by Alexander on 01.05.2016.
  */
 public class UserTypeDatabaseDao extends Connector implements UserTypeDao {
-
     private static final String tableName = "user_type";
 
     private static final String columnId = "id";
@@ -48,6 +47,18 @@ public class UserTypeDatabaseDao extends Connector implements UserTypeDao {
     }
 
     @Override
+    public int findIdByUserTypeValue(UserType userType) throws DaoException {
+        ResultSet resultSet = null;
+        try {
+            resultSet = databaseController.select(tableName, columnId, columnType + "='" + userType + "'");
+            resultSet.next();
+            return resultSet.getInt(columnId);
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
     public List<UserType> getUserTypesCollection() throws DaoException {
         ResultSet resultSet = null;
         try {
@@ -61,7 +72,7 @@ public class UserTypeDatabaseDao extends Connector implements UserTypeDao {
 
 
     private List<UserType> createUserTypesCollectionFromResultSet(ResultSet resultSet) throws DaoException {
-        List<UserType> result = new ArrayList<UserType>();
+        List<UserType> result = new ArrayList<>();
         try {
             while (resultSet.next()) {
                 result.add(createUserTypeFromResultSet(resultSet));
@@ -79,5 +90,6 @@ public class UserTypeDatabaseDao extends Connector implements UserTypeDao {
             throw new DaoException(e);
         }
     }
+
 }
 

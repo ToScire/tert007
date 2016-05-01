@@ -3,6 +3,7 @@ package dao.databaseimpl;
 import dao.DaoException;
 import entity.user.User;
 import dao.UserDao;
+import entity.user.UserType;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -115,7 +116,11 @@ public class UserDatabaseDao extends Connector implements UserDao {
         User user = new User();
         try {
             user.setId(resultSet.getInt(columnId));
-            user.setUserType(resultSet.getInt(columnType));
+
+            int userTypeId = resultSet.getInt(columnType);
+            UserType userType = UserTypeDatabaseDao.getInstance().findUserTypeById(userTypeId);
+
+            user.setUserType(userType);
             user.setLogin(resultSet.getString(columnLogin));
             user.setPassword(resultSet.getString(columnPassword));
             user.setEmail(resultSet.getString(columnEmail));
