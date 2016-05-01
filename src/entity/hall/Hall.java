@@ -5,15 +5,13 @@ package entity.hall;
  */
 public class Hall {
     private int id;
-    private FilmFormat filmFormat;
     private int capacity;
 
     public Hall(){
     }
 
-    public Hall(int id, FilmFormat filmFormat, int capacity) {
+    public Hall(int id, int capacity) {
         this.id = id;
-        this.filmFormat = filmFormat;
         this.capacity = capacity;
     }
 
@@ -23,22 +21,6 @@ public class Hall {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public FilmFormat getFilmFormat() {
-        return filmFormat;
-    }
-
-    public String getFilmFormatByString() {
-        return filmFormat.getValue();
-    }
-
-    public void setFilmFormat(FilmFormat filmFormat) {
-        this.filmFormat = filmFormat;
-    }
-
-    public void setFilmFormat(String filmFormat){
-        this.filmFormat = FilmFormat.valueOf(filmFormat);
     }
 
     public int getCapacity() {

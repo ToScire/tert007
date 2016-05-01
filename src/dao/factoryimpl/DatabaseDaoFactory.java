@@ -12,7 +12,7 @@ public class DatabaseDaoFactory extends DaoFactory {
     private DatabaseDaoFactory() {
     }
 
-    public final static DatabaseDaoFactory getInstance() {
+    public static DatabaseDaoFactory getInstance() {
         return instance;
     }
 
@@ -44,6 +44,11 @@ public class DatabaseDaoFactory extends DaoFactory {
 
     @Override
     public FilmGenreDao getFilmGenreDao() throws DaoException {
-        return null;
+        return FilmGenreDatabaseDao.getInstance();
+    }
+
+    @Override
+    public HallDao getHallDao() throws DaoException {
+        return HallDatabaseDao.getInstance();
     }
 }

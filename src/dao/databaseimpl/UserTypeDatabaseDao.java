@@ -52,6 +52,7 @@ public class UserTypeDatabaseDao extends Connector implements UserTypeDao {
         try {
             resultSet = databaseController.select(tableName, columnId, columnType + "='" + userType + "'");
             resultSet.next();
+
             return resultSet.getInt(columnId);
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -69,7 +70,6 @@ public class UserTypeDatabaseDao extends Connector implements UserTypeDao {
             throw new DaoException(e);
         }
     }
-
 
     private List<UserType> createUserTypesCollectionFromResultSet(ResultSet resultSet) throws DaoException {
         List<UserType> result = new ArrayList<>();
@@ -90,6 +90,5 @@ public class UserTypeDatabaseDao extends Connector implements UserTypeDao {
             throw new DaoException(e);
         }
     }
-
 }
 
