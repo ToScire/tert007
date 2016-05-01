@@ -5,7 +5,9 @@ import controller.CommandException;
 import controller.PageHelper;
 import controller.PageName;
 import dao.DaoFactory;
+import dao.databaseimpl.UserDatabaseDao;
 import entity.user.User;
+import entity.user.UserType;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,7 +31,8 @@ public class UpdateUser implements Command {
             user.setPassword(password);
             user.setEmail(email);
             user.setBonusCount(bonus_count);
-            user.setUserType(user_type);
+
+            user.setUserType(daoFactory.getUserTypeDao().findUserTypeById(user_type));
             user.setId(id);
             PageHelper pageHelper = new PageHelper();
 

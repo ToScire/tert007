@@ -30,5 +30,6 @@
     </c:forEach>
 
 </table>
+<a href="index.jsp">На главную</a>
 </body>
 </html>

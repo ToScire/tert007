@@ -1,6 +1,7 @@
 package dao.databaseimpl;
 
 import dao.DaoException;
+import dao.DaoFactory;
 import entity.user.User;
 import dao.UserDao;
 import entity.user.UserType;
@@ -32,6 +33,22 @@ public class UserDatabaseDao extends Connector implements UserDao {
         columnEmail,
         columnBonus
     };
+
+    private static String[] getValues(User user) throws DaoException{
+
+       int userTypeId = DaoFactory.getDaoFactory().getUserTypeDao().findIdByUserTypeValue(user.getUserType());
+
+       String[] result = new String[]{
+                String.valueOf(user.getId()),
+                String.valueOf(userTypeId),
+                user.getLogin(),
+                user.getPassword(),
+                user.getEmail(),
+                String.valueOf(user.getBonusCount())
+        };
+
+        return result;
+    }
 
     private static UserDatabaseDao instance = new UserDatabaseDao();
 
@@ -73,7 +90,7 @@ public class UserDatabaseDao extends Connector implements UserDao {
     @Override
     public boolean addUser(User user) throws DaoException {
         try {
-            return databaseController.insert(UserDatabaseDao.tableName, columnNames,user.getValues());
+            return databaseController.insert(UserDatabaseDao.tableName, columnNames,getValues(user));
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -82,7 +99,7 @@ public class UserDatabaseDao extends Connector implements UserDao {
     @Override
     public boolean updateUser(int id, User newUser) throws DaoException {
         try {
-            return databaseController.update(UserDatabaseDao.tableName, columnNames,newUser.getValues(), columnId +
+            return databaseController.update(UserDatabaseDao.tableName, columnNames, getValues(newUser), columnId +
             "=" + id);
         } catch (SQLException e) {
             throw new DaoException(e);

@@ -6,6 +6,7 @@ import controller.PageHelper;
 import controller.PageName;
 import dao.DaoFactory;
 import entity.film.Film;
+import entity.film.FilmGenre;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,11 +26,13 @@ public class AddNewFilm implements Command {
             String date = request.getParameter("date");
             String director = request.getParameter("director");
             int ageLimitation = Integer.parseInt(request.getParameter("age_limitation"));
+            FilmGenre filmGenre = daoFactory.getFilmGenreDao().findFilmGenreById(genre);
+
 
             Film film = new Film();
             film.setTitle(title);
             film.setDescription(description);
-            film.setGenre(genre);
+            film.setGenre(filmGenre);
             film.setDate(Date.valueOf(date));
             film.setDirector(director);
             film.setAgeLimitationId(ageLimitation);

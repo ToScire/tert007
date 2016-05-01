@@ -59,8 +59,13 @@
         </textarea></td>
       </tr>
       <tr>
-        <td>Введите id жанра фильма:</td>
-        <td><input type="number" name="genre"></td>
+        <td>Введите жанр фильма:</td>
+        <td>
+            <select name="genre">
+                <option value="1">Драмма</option>
+                <option value="2">Коммедия</option>
+            </select>
+        </td>
       </tr>
       <tr>
         <td>Выберите возрастные ограничения:</td>
@@ -120,6 +125,15 @@
       <tr>
         <td> Введите email: </td>
         <td><input type="text" name="email"></td>
+      </tr>
+      <tr>
+        <td>Введите тип пользователя</td>
+        <td>
+            <select name="user_type">
+                <option value="1">USER</option>
+                <option value="2">ADMIN</option>
+            </select>
+        </td>
       </tr>
       <tr>
         <td><input type="submit" name="button" value="Зарегестрироваться"/></td>
