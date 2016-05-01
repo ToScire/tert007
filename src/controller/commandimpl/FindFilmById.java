@@ -2,6 +2,8 @@ package controller.commandimpl;
 
 import controller.Command;
 import controller.CommandException;
+import controller.PageHelper;
+import controller.PageName;
 import dao.DaoFactory;
 import entity.film.Film;
 
@@ -21,7 +23,8 @@ public class FindFilmById implements Command {
         try {
             Film film = daoFactory.getFilmDao().findFilmById(filmId);
             request.setAttribute("film", film);
-            return "/result.jsp";
+            PageHelper pageHelper = new PageHelper();
+            return pageHelper.getPage(PageName.FILM_BY_ID_PAGE);
         } catch (Exception ex){
             return null;
         }

@@ -21,6 +21,8 @@ public class CommandHelper {
         commands.put(CommandName.REG_USER,new RegUser());
         commands.put(CommandName.UPDATE_USER, new UpdateUser());
         commands.put(CommandName.REMOVE_USER, new RemoveUser());
+        commands.put(CommandName.UPDATE_FILM, new UpdateFilm());
+        commands.put(CommandName.FIND_FILM_BY_DATE, new FindFilmsByDate());
     }
 
     public Command getCommand(CommandName commandName){

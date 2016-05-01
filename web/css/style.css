@@ -4,10 +4,10 @@
     border: 1px solid #f1f1f1;
 }
 
-.user_operation h3, .user_operation h4{
+.operation h3, .operation h4{
     text-align: center;
 }
 
-.user_operation form{
+.operation form{
     padding-left: 20px;
 }

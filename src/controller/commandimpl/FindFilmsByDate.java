@@ -13,7 +13,6 @@ public class FindFilmsByDate implements Command {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         DaoFactory daoFactory = DaoFactory.getDaoFactory();
-
         return null;
     }
 }

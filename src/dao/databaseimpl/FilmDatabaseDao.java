@@ -164,7 +164,7 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
             filmGenreResultSet = databaseControllerForGenreTable.select(film_genre_table, film_genre_value, film_genre_id + "='" +  genreId +"'");
 
             if (filmGenreResultSet.next()) {
-                String filmGenre = filmGenreResultSet.getString(film_genre_value);
+                int filmGenre = genreId;
                 film.setGenre(filmGenre);
             }
 
