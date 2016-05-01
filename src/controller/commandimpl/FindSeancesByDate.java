@@ -29,8 +29,8 @@ public class FindSeancesByDate implements Command {
             request.setAttribute("seances", seances);
 
             PageHelper pageHelper = new PageHelper();
-            return null;
-            //return pageHelper.getPage(PageName.SEANSE_BY_DATE_PAGE);
+
+            return pageHelper.getPage(PageName.SEANCE_BY_DATE_PAGE);
         } catch (DaoException e){
             throw new CommandException(e);
         }
