@@ -29,13 +29,13 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
     private static final String film_genre_value = "film_genre_value";
 
     private static final String[] columnsName = {
-            FilmDatabaseDao.columnId,
-            FilmDatabaseDao.columnLimitationId,
-            FilmDatabaseDao.columnTitle,
-            FilmDatabaseDao.columnGenreId,
-            FilmDatabaseDao.columnDirector,
-            FilmDatabaseDao.columnDate,
-            FilmDatabaseDao.columnDescription
+            columnId,
+            columnLimitationId,
+            columnTitle,
+            columnGenreId,
+            columnDirector,
+            columnDate,
+            columnDescription
     };
 
     private static FilmDatabaseDao instance = new FilmDatabaseDao();

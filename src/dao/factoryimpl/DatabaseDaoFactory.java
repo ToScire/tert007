@@ -1,10 +1,7 @@
 package dao.factoryimpl;
 
 import dao.*;
-import dao.databaseimpl.FilmDatabaseDao;
-import dao.databaseimpl.SeanceDatabaseDao;
-import dao.databaseimpl.TicketDatabaseDao;
-import dao.databaseimpl.UserDatabaseDao;
+import dao.databaseimpl.*;
 
 /**
  * Created by Alexander on 16.02.2016.
@@ -38,5 +35,10 @@ public class DatabaseDaoFactory extends DaoFactory {
     @Override
     public TicketDao getTicketDao() throws DaoException {
         return TicketDatabaseDao.getInstance();
+    }
+
+    @Override
+    public UserTypeDao getUserTypeDao() throws DaoException {
+        return UserTypeDatabaseDao.getInstance();
     }
 }

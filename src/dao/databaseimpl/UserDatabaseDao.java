@@ -13,24 +13,24 @@ import java.util.List;
  * Created by Alexander on 23.02.2016.
  */
 public class UserDatabaseDao extends Connector implements UserDao {
-    public static final String tableName = "user";
-    public static final String columnId = "id";
-    public static final String columnType = "user_type_id";
-    public static final String columnLogin = "login";
-    public static final String columnPassword = "password";
-    public static final String columnEmail = "email";
-    public static final String columnBonus = "bonus_count";
 
-    public static String[] getColumnNames(){
-        String[] result = new String[6];
-        result[0] = UserDatabaseDao.columnId;
-        result[1] = UserDatabaseDao.columnType;
-        result[2] = UserDatabaseDao.columnLogin;
-        result[3] = UserDatabaseDao.columnPassword;
-        result[4] = UserDatabaseDao.columnEmail;
-        result[5] = UserDatabaseDao.columnBonus;
-        return  result;
-    }
+    private static final String tableName = "user";
+
+    private static final String columnId = "id";
+    private static final String columnType = "user_type_id";
+    private static final String columnLogin = "login";
+    private static final String columnPassword = "password";
+    private static final String columnEmail = "email";
+    private static final String columnBonus = "bonus_count";
+
+    private static String[] columnNames = {
+        columnId,
+        columnType,
+        columnLogin,
+        columnPassword,
+        columnEmail,
+        columnBonus
+    };
 
     private static UserDatabaseDao instance = new UserDatabaseDao();
 
@@ -48,9 +48,9 @@ public class UserDatabaseDao extends Connector implements UserDao {
         ResultSet resultSet = null;
         try {
 
-            resultSet = databaseController.select(UserDatabaseDao.tableName, UserDatabaseDao.getColumnNames(), UserDatabaseDao.columnId + "=" + id);
+            resultSet = databaseController.select(UserDatabaseDao.tableName, columnNames, UserDatabaseDao.columnId + "=" + id);
             if(resultSet.next()) {
-                return setToUser(resultSet);
+                return createUserFromResultSet(resultSet);
             }
             else return null;
         } catch (SQLException e) {
@@ -62,8 +62,8 @@ public class UserDatabaseDao extends Connector implements UserDao {
     public List<User> getUsersCollection() throws DaoException {
         ResultSet resultSet = null;
         try {
-            resultSet = databaseController.select(UserDatabaseDao.tableName,UserDatabaseDao.getColumnNames(),null);
-            return usersToCollection(resultSet);
+            resultSet = databaseController.select(UserDatabaseDao.tableName, columnNames,null);
+            return createUsersCollectionFromResultSet(resultSet);
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -72,7 +72,7 @@ public class UserDatabaseDao extends Connector implements UserDao {
     @Override
     public boolean addUser(User user) throws DaoException {
         try {
-            return databaseController.insert(UserDatabaseDao.tableName,UserDatabaseDao.getColumnNames(),user.getValues());
+            return databaseController.insert(UserDatabaseDao.tableName, columnNames,user.getValues());
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -81,7 +81,7 @@ public class UserDatabaseDao extends Connector implements UserDao {
     @Override
     public boolean updateUser(int id, User newUser) throws DaoException {
         try {
-            return databaseController.update(UserDatabaseDao.tableName,UserDatabaseDao.getColumnNames(),newUser.getValues(),UserDatabaseDao.columnId +
+            return databaseController.update(UserDatabaseDao.tableName, columnNames,newUser.getValues(), columnId +
             "=" + id);
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -92,18 +92,18 @@ public class UserDatabaseDao extends Connector implements UserDao {
     @Override
     public boolean removeUser(int id) throws DaoException {
         try {
-            return databaseController.remove(UserDatabaseDao.tableName,UserDatabaseDao.columnId + "=" + id);
+            return databaseController.remove(UserDatabaseDao.tableName, columnId + "=" + id);
         } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
 
 
-    private List<User> usersToCollection(ResultSet userSet) throws  DaoException{
+    private List<User> createUsersCollectionFromResultSet(ResultSet resultSet) throws  DaoException{
         List<User> result = new ArrayList<User>();
         try {
-            while (userSet.next()) {
-                result.add(this.setToUser(userSet));
+            while (resultSet.next()) {
+                result.add(this.createUserFromResultSet(resultSet));
             }
             return result;
         } catch (SQLException e) {
@@ -111,16 +111,16 @@ public class UserDatabaseDao extends Connector implements UserDao {
         }
     }
 
-    private User setToUser(ResultSet user) throws  DaoException{
-        User result = new User();
+    private User createUserFromResultSet(ResultSet resultSet) throws  DaoException{
+        User user = new User();
         try {
-            result.setId(user.getInt(UserDatabaseDao.columnId));
-            result.setUserType(user.getInt(UserDatabaseDao.columnType));
-            result.setLogin(user.getString(UserDatabaseDao.columnLogin));
-            result.setPassword(user.getString(UserDatabaseDao.columnPassword));
-            result.setEmail(user.getString(UserDatabaseDao.columnEmail));
-            result.setBonusCount(user.getInt(UserDatabaseDao.columnBonus));
-            return result;
+            user.setId(resultSet.getInt(columnId));
+            user.setUserType(resultSet.getInt(columnType));
+            user.setLogin(resultSet.getString(columnLogin));
+            user.setPassword(resultSet.getString(columnPassword));
+            user.setEmail(resultSet.getString(columnEmail));
+            user.setBonusCount(resultSet.getInt(columnBonus));
+            return user;
         } catch (SQLException e) {
             throw new DaoException(e);
         }

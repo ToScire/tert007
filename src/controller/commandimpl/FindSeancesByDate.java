@@ -30,7 +30,7 @@ public class FindSeancesByDate implements Command {
 
             PageHelper pageHelper = new PageHelper();
 
-            return pageHelper.getPage(PageName.SEANSE_BY_DATE_PAGE);
+            return pageHelper.getPage(PageName.SEANCE_BY_DATE_PAGE);
         } catch (DaoException e){
             throw new CommandException(e);
         }

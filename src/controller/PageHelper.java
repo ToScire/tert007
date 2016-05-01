@@ -20,6 +20,7 @@ public class PageHelper {
         pages.put(PageName.SUCCESS_REG_PAGE, "/success_reg.jsp");
         pages.put(PageName.ERROR_REG_PAGE, "/error_reg.jsp");
         pages.put(PageName.SUCCESS_UPDATE_PAGE, "/success_update.jsp");
+        pages.put(PageName.SEANCE_BY_DATE_PAGE, "/seances.jsp");
     }
 
     public String getPage(PageName pageName){

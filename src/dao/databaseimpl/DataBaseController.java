@@ -63,13 +63,15 @@ public class DatabaseController {
         query += columns[columns.length - 1] + "='" + newValues[columns.length - 1] + "'";
         query += " WHERE " + where;
 
-        return statement.execute(query);
+        statement.executeUpdate(query);
+        return true;
     }
 
     public  boolean remove(String tableName, String where) throws SQLException{
         String query = "DELETE FROM " + tableName;
         query += " WHERE " + where;
 
-        return statement.execute(query);
+        statement.executeUpdate(query);
+        return true;
     }
 }
