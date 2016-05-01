@@ -21,5 +21,6 @@
             <td>${seance.getTime()}</td>
         </tr>
     </c:forEach>
+    <a href="index.jsp">На главную</a>
 </body>
 </html>

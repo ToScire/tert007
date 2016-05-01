@@ -2,8 +2,9 @@ package dao.databaseimpl;
 
 import dao.DaoException;
 import dao.FilmDao;
+import dao.factoryimpl.DatabaseDaoFactory;
 import entity.film.Film;
-import entity.film.FilmGenreHelper;
+import entity.film.FilmGenre;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -37,6 +38,23 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
             columnDate,
             columnDescription
     };
+
+    private static final String[] getValues(Film film) throws DaoException{
+
+        int filmGenreId = DatabaseDaoFactory.getDaoFactory().getFilmGenreDao().findIdByFilmGenreValue(film.getGenre());
+
+        String[] result = {
+            String.valueOf(film.getId()),
+            String.valueOf(film.getAgeLimitationId()),
+            film.getTitle(),
+            String.valueOf(filmGenreId),
+            film.getDirector(),
+            film.getDate().toString(),
+            film.getDescription()
+        };
+
+        return result;
+    }
 
     private static FilmDatabaseDao instance = new FilmDatabaseDao();
 
@@ -105,7 +123,7 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
     @Override
     public boolean addNewFilm(Film film) throws DaoException {
         try {
-            return databaseController.insert(tableName, columnsName, film.getValues());
+            return databaseController.insert(tableName, columnsName, getValues(film));
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -123,7 +141,7 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
     @Override
     public boolean updateFilm(int id, Film newFilm) throws DaoException {
         try {
-            return databaseController.update(tableName, columnsName, newFilm.getValues(), columnId + "=" + id);
+            return databaseController.update(tableName, columnsName, getValues(newFilm), columnId + "=" + id);
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -158,15 +176,8 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
             film.setDate(resultSet.getDate(columnDate));
 
             int genreId = resultSet.getInt(columnGenreId);
-
-            filmGenreStatement = connection.createStatement();
-            databaseControllerForGenreTable = new DatabaseController(filmGenreStatement);
-            filmGenreResultSet = databaseControllerForGenreTable.select(film_genre_table, film_genre_value, film_genre_id + "='" +  genreId +"'");
-
-            if (filmGenreResultSet.next()) {
-                int filmGenre = genreId;
-                film.setGenre(filmGenre);
-            }
+            FilmGenre filmGenre = DatabaseDaoFactory.getDaoFactory().getFilmGenreDao().findFilmGenreById(genreId);
+            film.setGenre(filmGenre);
 
             return film;
         } catch (SQLException e) {

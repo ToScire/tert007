@@ -23,14 +23,15 @@ public class RegUser implements Command {
             String password = request.getParameter("password");
             String email = request.getParameter("email");
             int bonus_count = 0;
-            int user_type = 1;
+            int userTypeId = Integer.parseInt(request.getParameter("user_type"));
+            UserType userType = daoFactory.getUserTypeDao().findUserTypeById(userTypeId);
 
             User user = new User();
             user.setLogin(login);
             user.setPassword(password); // Доработать шифрование
             user.setEmail(email);
             user.setBonusCount(bonus_count);
-            user.setUserType(user_type);
+            user.setUserType(userType);
 
             PageHelper pageHelper = new PageHelper();
 

@@ -5,5 +5,5 @@ package entity.user;
  */
 public enum UserType {
     USER,
-    ADMIN
+    ADMIN;
 }

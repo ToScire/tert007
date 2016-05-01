@@ -23,7 +23,9 @@
         </tr>
         <tr>
             <td>Жанр:</td>
-            <td><input type="text" value="${film.getGenre()}" name="genre"></td>
+            <td>
+                <input type="text" name="genre" value="${film.getGenre()}">
+            </td>
         </tr>
         <tr>
             <td>Дата выпуска:</td>
@@ -42,5 +44,6 @@
     <input type="hidden" name="id" value="${film.getId()}">
     <input type="submit" name="button" value="Изменить фильм"/>
 </form>
+<a href="index.jsp">На главную</a>
 </body>
 </html>

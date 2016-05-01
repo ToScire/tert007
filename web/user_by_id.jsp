@@ -12,6 +12,7 @@
     <title>Пользователь по ID</title>
 </head>
 <body>
+${user.getUserType()}
 <form action="Controller" method="GET">
     <table>
     <tr>
@@ -35,5 +36,6 @@
     <input type="hidden" name="id" value="${user.getId()}">
     <input type="submit" name="button" value="Изменить пользователя"/>
     </form>
+<a href="index.jsp">На главную</a>
 </body>
 </html>

@@ -39,6 +39,55 @@
     <input type="submit" name="button" value="Найти фильм по dате"/>
   </form>
 
+  <form action="Controller" method="GET">
+    <input type="hidden" name="command" value="remove_film"/>
+    <input type="number" name="film_id" value="1"/>
+    <input type="submit" name="button" value="Удалить фильм"/>
+  </form>
+
+  <h4>Создание нового фильма</h4>
+  <form action="Controller" method="POST">
+    <input type="hidden" name="command" value="add_new_film">
+    <table>
+      <tr>
+        <td>Введите название:</td>
+        <td><input type="text" name="title"></td>
+      </tr>
+      <tr>
+        <td>Введите описание фильма:</td>
+        <td><textarea name="description" cols="20" rows="5">
+        </textarea></td>
+      </tr>
+      <tr>
+        <td>Введите жанр фильма:</td>
+        <td>
+            <select name="genre">
+                <option value="1">Драмма</option>
+                <option value="2">Коммедия</option>
+            </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Выберите возрастные ограничения:</td>
+        <td>
+        <input type="number" name="age_limitation">
+        </td>
+      </tr>
+      <tr>
+        <td>Введите режисера:</td>
+        <td><input type="text" name="director"></td>
+      </tr>
+      <tr>
+        <td>Введите дату создания:</td>
+        <td><input type="date" name="date"></td>
+      </tr>
+      <tr>
+        <td>
+          <input type="submit" name="add">
+        </td>
+      </tr>
+    </table>
+  </form>
 </div>
 
 <div class="operation">
@@ -60,6 +109,7 @@
     <input type="number" name="user_id" value="1"/>
     <input type="submit" name="button" value="Удалить пользователя"/>
   </form>
+
   <h4>Регистрация</h4>
   <form action="Controller" method="GET">
     <input type="hidden" name="command" value="reg_user"/>
@@ -75,6 +125,15 @@
       <tr>
         <td> Введите email: </td>
         <td><input type="text" name="email"></td>
+      </tr>
+      <tr>
+        <td>Введите тип пользователя</td>
+        <td>
+            <select name="user_type">
+                <option value="1">USER</option>
+                <option value="2">ADMIN</option>
+            </select>
+        </td>
       </tr>
       <tr>
         <td><input type="submit" name="button" value="Зарегестрироваться"/></td>

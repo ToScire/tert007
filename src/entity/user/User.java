@@ -28,17 +28,6 @@ public class User {
         this.bonusCount = bonusCount;
     }
 
-    public String[] getValues(){
-        String[] result = new String[6];
-        result[0]= String.valueOf(id);
-        result[1]=String.valueOf(userType);
-        result[2]=login;
-        result[3]=password;
-        result[4]=email;
-        result[5]=String.valueOf(bonusCount);
-        return result;
-    }
-
     public UserType getUserType() {
         return userType;
     }
