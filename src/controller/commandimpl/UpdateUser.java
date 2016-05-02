@@ -4,6 +4,7 @@ import controller.Command;
 import controller.CommandException;
 import controller.PageHelper;
 import controller.PageName;
+import dao.DaoException;
 import dao.DaoFactory;
 import dao.databaseimpl.UserDatabaseDao;
 import entity.user.User;
@@ -34,14 +35,12 @@ public class UpdateUser implements Command {
 
             user.setUserType(daoFactory.getUserTypeDao().findUserTypeById(user_type));
             user.setId(id);
-            PageHelper pageHelper = new PageHelper();
 
             daoFactory.getUserDao().updateUser(id,user);
             request.setAttribute("user",user);
-            return pageHelper.getPage(PageName.SUCCESS_UPDATE_PAGE);
-        }
-        catch (Exception ex){
-            return null;
+            return PageHelper.getPage(PageName.SUCCESS_UPDATE_PAGE);
+        } catch (DaoException e){
+            throw new CommandException(e);
         }
     }
 }

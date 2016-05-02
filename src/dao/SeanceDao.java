@@ -16,5 +16,5 @@ public interface SeanceDao {
 
     boolean addNewSeance(Seance seance) throws DaoException;
     boolean removeSeanceById(int id) throws DaoException;
-    boolean updateSeance(int id, Seance newSeance) throws DaoException;
+    boolean updateSeance(Seance newSeance) throws DaoException;
 }

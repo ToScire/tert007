@@ -11,29 +11,12 @@ public class Film {
     private FilmGenre genre;
     private String director;
     private String description;
-    private int ageLimitationId;
+    private AgeLimitation ageLimitation;
     private Date date;
-
-
 
     public Film() {
     }
 
-    public Film(int id, String title, FilmGenre genre, String director, String description, Date date) {
-        this.id = id;
-        this.title = title;
-        this.genre = genre;
-        this.director = director;
-        this.description = description;
-        this.date = date;
-    }
-
-    public int getAgeLimitationId() {
-        return ageLimitationId;
-    }
-    public void setAgeLimitationId(int ageLimitationId) {
-        this.ageLimitationId = ageLimitationId;
-    }
     public String getTitle() {
         return title;
     }
@@ -81,4 +64,13 @@ public class Film {
     public void setId(int id) {
         this.id = id;
     }
+
+    public AgeLimitation getAgeLimitation() {
+        return ageLimitation;
+    }
+
+    public void setAgeLimitation(AgeLimitation ageLimitation) {
+        this.ageLimitation = ageLimitation;
+    }
+
 }

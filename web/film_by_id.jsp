@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
     <title>${film.getTitle()}</title>
@@ -24,7 +27,20 @@
         <tr>
             <td>Жанр:</td>
             <td>
-                <input type="text" name="genre" value="${film.getGenre()}">
+                <select name="genre">
+                    <option
+                            <c:if test="${film.getGenre() == 'DRAMA'}">
+                                selected
+                            </c:if>
+                            value="DRAMA">DRAMA
+                    </option>
+                    <option
+                            <c:if test="${film.getGenre() == 'COMEDY'}">
+                                selected
+                            </c:if>
+                            value="COMEDY">COMEDY
+                    </option>
+                </select>
             </td>
         </tr>
         <tr>
@@ -37,7 +53,22 @@
         </tr>
         <tr>
             <td>Возрастные ограничения:</td>
-            <td><input type="number" value="${film.getAgeLimitationId()}" name="age_limitation"></td>
+            <td>
+                <select name="age_limitation">
+                    <option
+                            <c:if test="${film.getAgeLimitation() == 'PG13'}">
+                                selected
+                            </c:if>
+                            value="PG13">PG13
+                    </option>
+                    <option
+                            <c:if test="${film.getAgeLimitation() == 'PG18'}">
+                                selected
+                            </c:if>
+                            value="PG18">PG18
+                    </option>
+                </select>
+            </td>
         </tr>
     </table>
     <input type="hidden" name="command" value="update_film"/>

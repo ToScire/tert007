@@ -24,8 +24,8 @@ public class FindFilmByTitle implements Command {
         try {
             List<Film> films = daoFactory.getFilmDao().findFilmsByTitle(title);
             request.setAttribute("films", films);
-            PageHelper pageHelper = new PageHelper();
-            return pageHelper.getPage(PageName.FILMS_BY_TITLE_PAGE);
+
+            return PageHelper.getPage(PageName.FILMS_BY_TITLE_PAGE);
         } catch (DaoException e){
             throw new CommandException(e);
         }

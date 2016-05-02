@@ -32,7 +32,7 @@
             <td>${film.getGenre()}</td>
             <td>${film.getDate()}</td>
             <td>${film.getDirector()}</td>
-            <td>${film.getAgeLimitationId()}</td>
+            <td>${film.getAgeLimitation()}</td>
         </tr>
     </c:forEach>
 

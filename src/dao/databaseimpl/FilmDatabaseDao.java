@@ -3,6 +3,7 @@ package dao.databaseimpl;
 import dao.DaoException;
 import dao.FilmDao;
 import dao.factoryimpl.DatabaseDaoFactory;
+import entity.film.AgeLimitation;
 import entity.film.Film;
 import entity.film.FilmGenre;
 
@@ -25,10 +26,6 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
     private static final String columnGenreId = "film_genre_id";
     private static final String columnDate = "date";
 
-    private static final String film_genre_table = "film_genre";
-    private static final String film_genre_id = "id";
-    private static final String film_genre_value = "film_genre_value";
-
     private static final String[] columnsName = {
             columnId,
             columnLimitationId,
@@ -41,11 +38,12 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
 
     private static final String[] getValues(Film film) throws DaoException{
 
-        int filmGenreId = DatabaseDaoFactory.getDaoFactory().getFilmGenreDao().findIdByFilmGenreValue(film.getGenre());
+        int filmGenreId = FilmGenreDatabaseDao.getInstance().findIdByFilmGenreValue(film.getGenre());
+        int ageLimitationId = AgeLimitationDatabaseDao.getInstance().findIdByAgeLimitationValue(film.getAgeLimitation());
 
         String[] result = {
             String.valueOf(film.getId()),
-            String.valueOf(film.getAgeLimitationId()),
+            String.valueOf(ageLimitationId),
             film.getTitle(),
             String.valueOf(filmGenreId),
             film.getDirector(),
@@ -70,9 +68,7 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
     public List<Film> findFilmsByTitle(String title) throws DaoException{
         ResultSet resultSet = null;
         try {
-
-            resultSet = databaseController.select(FilmDatabaseDao.tableName, columnsName, columnTitle + "='"
-                    + title + "'");
+            resultSet = databaseController.select(FilmDatabaseDao.tableName, columnsName, columnTitle + "='" + title + "'");
 
             return createFilmsCollectionFromResultSet(resultSet);
         } catch (SQLException e) {
@@ -84,14 +80,10 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
     public Film findFilmById(int id) throws DaoException {
         ResultSet resultSet = null;
         try {
-            resultSet = databaseController.select(FilmDatabaseDao.tableName, columnsName, columnId + "='"
-                    + id + "'");
+            resultSet = databaseController.select(tableName, columnsName, columnId + "='" + id + "'");
 
-            if (resultSet.next()) {
-                return createFilmFromResultSet(resultSet);
-            }
-
-            return null;
+            resultSet.next();
+            return createFilmFromResultSet(resultSet);
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -101,8 +93,7 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
     public List<Film> findFilmsByDate(Date date) throws DaoException {
         ResultSet resultSet = null;
         try {
-            resultSet = databaseController.select(FilmDatabaseDao.tableName, columnsName, columnDate + "='" +
-                    date + "'");
+            resultSet = databaseController.select(tableName, columnsName, columnDate + "='" + date + "'");
             return createFilmsCollectionFromResultSet(resultSet);
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -139,9 +130,9 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
     }
 
     @Override
-    public boolean updateFilm(int id, Film newFilm) throws DaoException {
+    public boolean updateFilm(Film newFilm) throws DaoException {
         try {
-            return databaseController.update(tableName, columnsName, getValues(newFilm), columnId + "=" + id);
+            return databaseController.update(tableName, columnsName, getValues(newFilm), columnId + "=" + newFilm.getId());
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -163,34 +154,24 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
 
         Film film = new Film();
 
-        Statement filmGenreStatement = null;
-        ResultSet filmGenreResultSet = null;
-        DatabaseController databaseControllerForGenreTable = null;
-
         try {
             film.setId(resultSet.getInt(columnId));
-            film.setAgeLimitationId(resultSet.getInt(columnLimitationId));
             film.setTitle(resultSet.getString(columnTitle));
             film.setDescription(resultSet.getString(columnDescription));
             film.setDirector(resultSet.getString(columnDirector));
             film.setDate(resultSet.getDate(columnDate));
 
+            int ageLimitationId = resultSet.getInt(columnLimitationId);
+            AgeLimitation ageLimitation = AgeLimitationDatabaseDao.getInstance().findAgeLimitationById(ageLimitationId);
+            film.setAgeLimitation(ageLimitation);
+
             int genreId = resultSet.getInt(columnGenreId);
-            FilmGenre filmGenre = DatabaseDaoFactory.getDaoFactory().getFilmGenreDao().findFilmGenreById(genreId);
+            FilmGenre filmGenre = FilmGenreDatabaseDao.getInstance().findFilmGenreById(genreId);
             film.setGenre(filmGenre);
 
             return film;
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-
-            try {
-                closeResultSet(filmGenreResultSet);
-                closeStatement(filmGenreStatement);
-            } catch (SQLException e){
-                throw new DaoException(e);
-            }
-
         }
     }
 

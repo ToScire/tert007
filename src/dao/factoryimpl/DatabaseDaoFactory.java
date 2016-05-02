@@ -51,4 +51,9 @@ public class DatabaseDaoFactory extends DaoFactory {
     public HallDao getHallDao() throws DaoException {
         return HallDatabaseDao.getInstance();
     }
+
+    @Override
+    public AgeLimitationDao getAgeLimitationDao() throws DaoException {
+        return AgeLimitationDatabaseDao.getInstance();
+    }
 }

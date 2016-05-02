@@ -26,11 +26,13 @@ public class DatabaseController {
 
     public ResultSet select(String tableName, String[] columns, String where) throws SQLException{
         String query = "SELECT ";
+
         for (int i=0; i < columns.length - 1; i++){
             query += columns[i] + ",";
         }
         query += columns[columns.length - 1];
         query += " FROM " + tableName;
+
         if(where != null){
             query += " WHERE " + where;
         }

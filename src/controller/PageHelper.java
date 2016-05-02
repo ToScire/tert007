@@ -11,9 +11,10 @@ import java.util.Map;
  * Created by Alexander on 30.04.2016.
  */
 public class PageHelper {
-    private Map<PageName, String> pages = new HashMap<PageName, String>();
+    private static final Map<PageName, String> pages = new HashMap<PageName, String>();
 
-    public PageHelper(){
+    static
+    {
         pages.put(PageName.MAIN_PAGE, "/index.jsp");
         pages.put(PageName.USERS_PAGE, "/users.jsp");
         pages.put(PageName.USER_BY_ID_PAGE, "/user_by_id.jsp");
@@ -26,7 +27,7 @@ public class PageHelper {
         pages.put(PageName.FILMS_PAGE,"/films.jsp");
     }
 
-    public String getPage(PageName pageName){
+    public static String getPage(PageName pageName){
         return pages.get(pageName);
     }
 }

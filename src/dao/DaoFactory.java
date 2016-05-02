@@ -20,4 +20,5 @@ public abstract class DaoFactory {
 	public abstract UserTypeDao getUserTypeDao() throws DaoException;
 	public abstract FilmGenreDao getFilmGenreDao() throws DaoException;
 	public abstract HallDao getHallDao() throws DaoException;
+	public abstract AgeLimitationDao getAgeLimitationDao() throws DaoException;
 }

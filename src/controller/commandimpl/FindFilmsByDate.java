@@ -24,8 +24,8 @@ public class FindFilmsByDate implements Command {
         try {
             List<Film> films = daoFactory.getFilmDao().findFilmsByDate(Date.valueOf(date));
             request.setAttribute("films", films);
-            PageHelper pageHelper = new PageHelper();
-            return pageHelper.getPage(PageName.FILMS_BY_DATE_PAGE);
+
+            return PageHelper.getPage(PageName.FILMS_BY_DATE_PAGE);
         } catch (DaoException e){
             throw new CommandException(e);
         }

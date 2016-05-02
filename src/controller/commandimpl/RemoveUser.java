@@ -4,6 +4,7 @@ import controller.Command;
 import controller.CommandException;
 import controller.PageHelper;
 import controller.PageName;
+import dao.DaoException;
 import dao.DaoFactory;
 import entity.user.User;
 
@@ -19,11 +20,11 @@ public class RemoveUser implements Command {
         try {
             int id = Integer.valueOf(request.getParameter("user_id"));
             daoFactory.getUserDao().removeUser(id);
-            PageHelper pageHelper = new PageHelper();
-            String page = pageHelper.getPage(PageName.SUCCESS_UPDATE_PAGE);
+
+            String page = PageHelper.getPage(PageName.SUCCESS_UPDATE_PAGE);
             return page;
-        } catch (Exception ex){
-            return null;
+        } catch (DaoException e){
+            throw new CommandException(e);
         }
     }
 }

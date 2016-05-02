@@ -21,8 +21,8 @@ public class GetFilmsCollection implements Command {
         try {
             List<Film> films = daoFactory.getFilmDao().getFilmsCollection();
             request.setAttribute("films", films);
-            PageHelper pageHelper = new PageHelper();
-            return pageHelper.getPage(PageName.FILMS_PAGE);
+
+            return PageHelper.getPage(PageName.FILMS_PAGE);
         } catch (DaoException e){
             throw new CommandException(e);
         }

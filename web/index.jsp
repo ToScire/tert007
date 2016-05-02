@@ -62,15 +62,18 @@
         <td>Введите жанр фильма:</td>
         <td>
             <select name="genre">
-                <option value="1">Драмма</option>
-                <option value="2">Коммедия</option>
+                <option value="DRAMA">Драмма</option>
+                <option value="COMEDY">Коммедия</option>
             </select>
         </td>
       </tr>
       <tr>
         <td>Выберите возрастные ограничения:</td>
         <td>
-        <input type="number" name="age_limitation">
+          <select name="age_limitation">
+            <option value="PG13">PG13</option>
+            <option value="PG18">PG18</option>
+          </select>
         </td>
       </tr>
       <tr>
@@ -130,8 +133,8 @@
         <td>Введите тип пользователя</td>
         <td>
             <select name="user_type">
-                <option value="1">USER</option>
-                <option value="2">ADMIN</option>
+                <option value="USER">USER</option>
+                <option value="ADMIN">ADMIN</option>
             </select>
         </td>
       </tr>

@@ -41,17 +41,29 @@ public class SeanceDatabaseDao extends Connector implements SeanceDao {
 
     private static final SeanceDatabaseDao instance = new SeanceDatabaseDao();
 
-
     public static SeanceDatabaseDao getInstance() {
         return instance;
+    }
+
+    private static String[] getValues(Seance seance) {
+        String[] result = {
+                String.valueOf(seance.getId()),
+                String.valueOf(seance.getHall().getId()),
+                String.valueOf(seance.getFilm().getId()),
+                String.valueOf(seance.getDate()),
+                String.valueOf(seance.getTime()),
+        };
+
+        return result;
     }
 
     @Override
     public Seance findSeanceById(int id) throws DaoException {
         ResultSet resultSet = null;
         try {
-            resultSet = databaseController.select(tableName, columnsName, null);
+            resultSet = databaseController.select(tableName, columnsName, columnId + "='" + id + "'");
 
+            resultSet.next();
             return createSeanceFromResultSet(resultSet);
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -73,31 +85,41 @@ public class SeanceDatabaseDao extends Connector implements SeanceDao {
 
     @Override
     public List<Seance> getSeancesCollection(Date startDate, Date finishDate) throws DaoException {
-        return null;
+        ResultSet resultSet = null;
+        try {
+            resultSet = databaseController.select(tableName, columnsName, columnDate + " BETWEEN '"+ startDate + "' AND '" + finishDate +"'");
+
+            return createSeanceCollectionFromResultSet(resultSet);
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 
     @Override
     public boolean addNewSeance(Seance seance) throws DaoException {
-
-        /*try {
-            //return databaseController.insert(tableName, columnsName, seance.getValues());
-            return true;
-
+        try {
+            return databaseController.insert(tableName, columnsName, getValues(seance));
         } catch (SQLException e) {
             throw new DaoException(e);
         }
-        */
-        return true;
     }
 
     @Override
     public boolean removeSeanceById(int id) throws DaoException {
-        return false;
+        try {
+            return databaseController.remove(tableName, columnId + "=" + id);
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 
     @Override
-    public boolean updateSeance(int id, Seance seance) throws DaoException {
-        return false;
+    public boolean updateSeance(Seance newSeance) throws DaoException {
+        try {
+            return databaseController.update(tableName, columnsName, getValues(newSeance), columnId + "=" + newSeance.getId());
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 
     private List<Seance> createSeanceCollectionFromResultSet(ResultSet resultSet) throws DaoException {
@@ -115,46 +137,22 @@ public class SeanceDatabaseDao extends Connector implements SeanceDao {
     private Seance createSeanceFromResultSet(ResultSet resultSet) throws DaoException {
         Seance seance = new Seance();
 
-        //Statement filmGenreStatement = null;
-        //ResultSet filmGenreResultSet = null;
-        //DatabaseController databaseControllerForGenreTable = null;
-
-
         try {
             seance.setId(resultSet.getInt(columnId));
             seance.setDate(resultSet.getDate(columnDate));
             seance.setTime(resultSet.getDate(columnTime));
 
-
-            //Hall hall = new Hall();
+            int hallId = resultSet.getInt(columnHallId);
+            Hall hall = HallDatabaseDao.getInstance().findHallById(hallId);
+            seance.setHall(hall);
 
             int filmId = resultSet.getInt(columnFilmId);
-
             Film film = FilmDatabaseDao.getInstance().findFilmById(filmId);
             seance.setFilm(film);
 
-            /*
-            filmGenreStatement = connection.createStatement();
-            databaseControllerForGenreTable = new DatabaseController(filmGenreStatement);
-            filmGenreResultSet = databaseControllerForGenreTable.select(film_genre_table, film_genre_value, film_genre_id + "='" +  filmId +"'");
-
-            if (filmGenreResultSet.next()) {
-                String filmGenre = filmGenreResultSet.getString(film_genre_value);
-                film.setGenre(filmGenre);
-            }
-*/
             return seance;
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-/*
-            try {
-                closeResultSet(filmGenreResultSet);
-                closeStatement(filmGenreStatement);
-            } catch (SQLException e){
-                throw new DaoException(e);
-            }
-*/
         }
     }
 }

@@ -28,9 +28,8 @@ public class FindSeancesByDate implements Command {
             List<Seance> seances = daoFactory.getSeanceDao().findSeancesByDate(date);
             request.setAttribute("seances", seances);
 
-            PageHelper pageHelper = new PageHelper();
             return null;
-            //return pageHelper.getPage(PageName.SEANCE_BY_DATE_PAGE);
+            //return PageHelper.getPage(PageName.SEANCE_BY_DATE_PAGE);
         } catch (DaoException e){
             throw new CommandException(e);
         }

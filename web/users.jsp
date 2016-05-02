@@ -19,13 +19,16 @@
     <td>login</td>
     <td>Email</td>
     <td>Количество бонусов</td>
-</tr>
+    <td>Тип пользователя</td>
+
+    </tr>
     <c:forEach var="user" items="${users}">
     <tr>
         <td>${user.getId()}</td>
         <td>${user.getLogin()}</td>
         <td>${user.getEmail()}</td>
         <td>${user.getBonusCount()}</td>
+        <td>${user.getUserType()}</td>
     </tr>
     </c:forEach>
 

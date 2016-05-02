@@ -17,5 +17,5 @@ public interface FilmDao{
 
     boolean addNewFilm(Film film) throws DaoException;
     boolean removeFilmById(int id) throws DaoException;
-    boolean updateFilm(int id,Film newFilm) throws DaoException;
+    boolean updateFilm(Film newFilm) throws DaoException;
 }

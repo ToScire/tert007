@@ -1,8 +1,10 @@
 package controller.commandimpl;
 
 import controller.Command;
+import controller.CommandException;
 import controller.PageHelper;
 import controller.PageName;
+import dao.DaoException;
 import dao.DaoFactory;
 import entity.film.Film;
 import entity.user.User;
@@ -13,16 +15,16 @@ import java.util.List;
 public class GetUsersCollection implements Command {
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public String execute(HttpServletRequest request) throws CommandException {
         DaoFactory daoFactory = DaoFactory.getDaoFactory();
         try {
             List<User> users = daoFactory.getUserDao().getUsersCollection();
             request.setAttribute("users", users);
-            PageHelper pageHelper = new PageHelper();
-            String page = pageHelper.getPage(PageName.USERS_PAGE);
+
+            String page = PageHelper.getPage(PageName.USERS_PAGE);
             return page;
-        } catch (Exception ex){
-            return null;
+        } catch (DaoException e){
+            throw new CommandException(e);
         }
 
 

@@ -4,6 +4,7 @@ import controller.Command;
 import controller.CommandException;
 import controller.PageHelper;
 import controller.PageName;
+import dao.DaoException;
 import dao.DaoFactory;
 import entity.user.User;
 import entity.user.UserType;
@@ -33,14 +34,11 @@ public class RegUser implements Command {
             user.setBonusCount(bonus_count);
             user.setUserType(userType);
 
-            PageHelper pageHelper = new PageHelper();
-
             daoFactory.getUserDao().addUser(user);
             request.setAttribute("user",user);
-            return pageHelper.getPage(PageName.SUCCESS_REG_PAGE);
-        }
-        catch (Exception ex){
-            return null;
+            return PageHelper.getPage(PageName.SUCCESS_REG_PAGE);
+        } catch (DaoException e){
+            throw new CommandException(e);
         }
     }
 }
