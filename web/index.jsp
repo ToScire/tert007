@@ -145,5 +145,26 @@
   </form>
 </div>
 
+  <div class="operation">
+    <h3>Операции с сеансами</h3>
+    <form action="Controller" method="GET">
+      <input type="hidden" name="command" value="get_seances_collection"/>
+      <input type="date" name="startDate">
+      <input type="date" name="endDate">
+      <input type="submit" name="button" value="Вывести все сеансы"/>
+    </form>
+
+     <form action="Controller" method="GET">
+         <input type="hidden" name="command" value="get_seances_by_date">
+         <input type="date" name="date">
+         <input type="submit" name="button" value="Сеансы по дате">
+     </form>
+
+      <form action="Controller" method="GET">
+          <input type="hidden" name="command" value="get_seance_by_id">
+          <input type="number" name="id_seance">
+          <input type="submit" name="button" value="Сеанс по id">
+      </form>
+  </div>
   </body>
 </html>

@@ -24,6 +24,10 @@ public class CommandHelper {
         commands.put(CommandName.UPDATE_FILM, new UpdateFilm());
         commands.put(CommandName.FIND_FILM_BY_DATE, new FindFilmsByDate());
         commands.put(CommandName.REMOVE_FILM, new RemoveFilm());
+        commands.put(CommandName.GET_SEANCES_COLLECTION, new GetSeansesCollection());
+        commands.put(CommandName.GET_SEANCES_BY_DATE, new GetSeancesByDate());
+        commands.put(CommandName.GET_SEANCE_BY_ID, new GetSeanceById());
+        commands.put(CommandName.UPDATE_SEANCE, new UpdateSeance());
     }
 
     public Command getCommand(CommandName commandName){

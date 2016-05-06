@@ -25,6 +25,8 @@ public class PageHelper {
         pages.put(PageName.FILMS_BY_DATE_PAGE,"/films.jsp");
         pages.put(PageName.FILMS_BY_TITLE_PAGE,"/films.jsp");
         pages.put(PageName.FILMS_PAGE,"/films.jsp");
+        pages.put(PageName.SEANCES_PAGE,"/seances.jsp");
+        pages.put(PageName.SEANCE_BY_ID,"/seance_by_id.jsp");
     }
 
     public static String getPage(PageName pageName){

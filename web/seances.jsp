@@ -14,6 +14,14 @@
     <title>Seances</title>
 </head>
 <body>
+<table>
+    <caption>Users</caption>
+    <tr>
+        <td>Название фильма</td>
+        <td>Дата</td>
+        <td>Время</td>
+    </tr>
+
     <c:forEach var="seance" items="${seances}">
         <tr>
             <td>${seance.getFilm().getTitle()}</td>
@@ -21,6 +29,8 @@
             <td>${seance.getTime()}</td>
         </tr>
     </c:forEach>
+    </table>
+
     <a href="index.jsp">На главную</a>
 </body>
 </html>

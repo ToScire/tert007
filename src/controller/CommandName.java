@@ -17,5 +17,10 @@ public enum CommandName {
     GET_USER_BY_ID,
     REG_USER,
     UPDATE_USER,
-    REMOVE_USER
+    REMOVE_USER,
+
+    GET_SEANCES_COLLECTION,
+    GET_SEANCES_BY_DATE,
+    GET_SEANCE_BY_ID,
+    UPDATE_SEANCE
 }

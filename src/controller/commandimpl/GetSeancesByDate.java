@@ -6,32 +6,27 @@ import controller.PageHelper;
 import controller.PageName;
 import dao.DaoException;
 import dao.DaoFactory;
+import entity.hall.Hall;
 import entity.seance.Seance;
 
 import javax.servlet.http.HttpServletRequest;
-
 import java.sql.Date;
 import java.util.List;
 
 /**
- * Created by Alexander on 30.04.2016.
+ * Created by Vadim on 07.05.2016.
  */
-public class FindSeancesByDate implements Command {
+public class GetSeancesByDate implements Command {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         DaoFactory daoFactory = DaoFactory.getDaoFactory();
-
-        String dateString = request.getParameter("date");
-        Date date = Date.valueOf(dateString);
-
-        try {
+        try{
+            Date date = Date.valueOf(request.getParameter("date"));
             List<Seance> seances = daoFactory.getSeanceDao().findSeancesByDate(date);
-            request.setAttribute("seances", seances);
-
-            return null;
-            //return PageHelper.getPage(PageName.SEANCE_BY_DATE_PAGE);
-        } catch (DaoException e){
-            throw new CommandException(e);
+            request.setAttribute("seances",seances);
+            return PageHelper.getPage(PageName.SEANCES_PAGE);
+        }catch (Exception ex){
+            throw new CommandException(ex);
         }
     }
 }

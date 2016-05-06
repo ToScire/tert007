@@ -37,17 +37,6 @@ public class Controller extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<Seance> list = null;
-
-        try {
-
-            list = SeanceDatabaseDao.getInstance().getSeancesCollection(Date.valueOf("2016-03-01"), Date.valueOf("2016-06-01"));
-        } catch (Exception e){
-
-        }
-
-        list = null;
-
         CommandHelper commandHelper = new CommandHelper();
 
         String action = request.getParameter("command");

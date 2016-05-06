@@ -14,5 +14,8 @@ public enum PageName {
     FILMS_BY_TITLE_PAGE,
     FILM_BY_ID_PAGE,
     FILMS_BY_DATE_PAGE,
-    FILMS_PAGE
+    FILMS_PAGE,
+
+    SEANCES_PAGE,
+    SEANCE_BY_ID
 }
