@@ -26,13 +26,16 @@ public class SeanceDatabaseDao extends Connector implements SeanceDao {
     private static final String columnFilmId = "id_film";
     private static final String columnDate = "date";
     private static final String columnTime = "time";
+    private static final String columnPrice = "price";
+
 
     private static final String[] columnsName = {
             columnId,
             columnHallId,
             columnFilmId,
             columnDate,
-            columnTime
+            columnTime,
+            columnPrice
     };
 
     private SeanceDatabaseDao(){
@@ -52,6 +55,7 @@ public class SeanceDatabaseDao extends Connector implements SeanceDao {
                 String.valueOf(seance.getFilm().getId()),
                 String.valueOf(seance.getDate()),
                 String.valueOf(seance.getTime()),
+                String.valueOf(seance.getPrice())
         };
 
         return result;
@@ -141,6 +145,7 @@ public class SeanceDatabaseDao extends Connector implements SeanceDao {
             seance.setId(resultSet.getInt(columnId));
             seance.setDate(resultSet.getDate(columnDate));
             seance.setTime(resultSet.getDate(columnTime));
+            seance.setPrice(resultSet.getInt(columnPrice));
 
             int hallId = resultSet.getInt(columnHallId);
             Hall hall = HallDatabaseDao.getInstance().findHallById(hallId);

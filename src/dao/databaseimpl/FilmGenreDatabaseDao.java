@@ -38,7 +38,7 @@ public class FilmGenreDatabaseDao extends Connector implements FilmGenreDao {
     public FilmGenre findFilmGenreById(int id) throws DaoException {
         ResultSet resultSet = null;
         try {
-            resultSet = databaseController.select(tableName, columnGenre, columnId + "='" + id + "'");
+            resultSet = databaseController.select(tableName, columnGenre, columnId + "=" + id);
             resultSet.next();
 
             return createFilmGenreFromResultSet(resultSet);

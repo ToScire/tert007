@@ -12,9 +12,9 @@ import java.util.List;
 public interface TicketDao {
     Ticket findTicketById(int id) throws DaoException;
     List<Ticket> findTicketsBySeanceId(int seanceId) throws DaoException;
-
-
-    boolean addNewTicket(Seance seance) throws DaoException;
+    List<Ticket> findTicketsByUserId(int userId) throws DaoException;
+    
+    boolean addNewTicket(Ticket ticket) throws DaoException;
     boolean removeTicketById(int id) throws DaoException;
-    boolean updateTicket(int id, Ticket newTicket) throws DaoException;
+    boolean updateTicket(Ticket newTicket) throws DaoException;
 }

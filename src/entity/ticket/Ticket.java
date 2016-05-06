@@ -2,6 +2,8 @@ package entity.ticket;
 
 import entity.film.Film;
 import entity.hall.Hall;
+import entity.seance.Seance;
+import entity.user.User;
 
 import java.sql.Date;
 
@@ -10,11 +12,33 @@ import java.sql.Date;
  */
 public class Ticket {
     private int id;
-    private Film film;
-    private Hall hall;
-    private int price;
-    private Date date;
-    private Date time;
+    private Seance seance;
+    private User user;
+    private int place;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Seance getSeance() {
+        return seance;
+    }
+
+    public void setSeance(Seance seance) {
+        this.seance = seance;
+    }
 
     public int getPlace() {
         return place;
@@ -24,67 +48,20 @@ public class Ticket {
         this.place = place;
     }
 
-    private int place;
-
-    public Ticket(){
-
-    }
-
-    public Ticket(int id, int place, Film film, Hall hall, int price, Date date, Date time) {
-        this.id = id;
-        this.place = place;
-        this.film = film;
-        this.hall = hall;
-        this.price = price;
-        this.date = date;
-        this.time = time;
-    }
-
-    public int getId() {
-        return id;
+    public Hall getHall() {
+        return seance.getHall();
     }
 
     public Film getFilm() {
-        return film;
-    }
-
-    public Hall getHall() {
-        return hall;
-    }
-
-    public int getPrice() {
-        return price;
+        return seance.getFilm();
     }
 
     public Date getDate() {
-        return date;
+        return seance.getDate();
     }
 
     public Date getTime() {
-        return time;
+        return seance.getTime();
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setFilm(Film film) {
-        this.film = film;
-    }
-
-    public void setHall(Hall hall) {
-        this.hall = hall;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
-    }
 }

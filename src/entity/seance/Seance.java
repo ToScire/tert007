@@ -14,6 +14,7 @@ public class Seance {
     private Film film;
     private Date date;
     private Date time;
+    private int price;
 
     public int getId() {
         return id;
@@ -53,5 +54,13 @@ public class Seance {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }
