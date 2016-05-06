@@ -4,6 +4,7 @@ import entity.film.Film;
 import entity.hall.Hall;
 
 import java.sql.Date;
+import java.sql.Time;
 
 /**
  * Created by Alexander on 02.04.2016.
@@ -13,7 +14,8 @@ public class Seance {
     private Hall hall;
     private Film film;
     private Date date;
-    private Date time;
+    private Time time;
+    private int price;
 
     public int getId() {
         return id;
@@ -47,11 +49,19 @@ public class Seance {
         this.date = date;
     }
 
-    public Date getTime() {
+    public Time getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(Time time) {
         this.time = time;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

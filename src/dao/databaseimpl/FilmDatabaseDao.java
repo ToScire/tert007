@@ -123,7 +123,7 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
     @Override
     public boolean removeFilmById(int id) throws DaoException {
         try {
-            return databaseController.remove(tableName, columnId + "=" + id);
+            return databaseController.remove(tableName, columnId + "='" + id + "'");
         } catch (SQLException e) {
             throw new DaoException(e);
         }
