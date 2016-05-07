@@ -144,7 +144,7 @@ public class SeanceDatabaseDao extends Connector implements SeanceDao {
         try {
             seance.setId(resultSet.getInt(columnId));
             seance.setDate(resultSet.getDate(columnDate));
-            seance.setTime(resultSet.getDate(columnTime));
+            seance.setTime(resultSet.getTime(columnTime));
             seance.setPrice(resultSet.getInt(columnPrice));
 
             int hallId = resultSet.getInt(columnHallId);

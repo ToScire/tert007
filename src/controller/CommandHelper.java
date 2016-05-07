@@ -28,6 +28,12 @@ public class CommandHelper {
         commands.put(CommandName.GET_SEANCES_BY_DATE, new GetSeancesByDate());
         commands.put(CommandName.GET_SEANCE_BY_ID, new GetSeanceById());
         commands.put(CommandName.UPDATE_SEANCE, new UpdateSeance());
+        commands.put(CommandName.ADD_NEW_SEANCE,new AddNewSeance());
+        commands.put(CommandName.ADD_SEANCE_FORM, new AddNewSeanceForm());
+        commands.put(CommandName.REMOVE_SEANCE, new RemoveSeance());
+        commands.put(CommandName.GET_TICKETS_COLLECTION, new GetTicketsCollection());
+        commands.put(CommandName.REMOVE_TICKET, new RemoveTicket());
+        commands.put(CommandName.FIND_TICKET_BY_ID, new FindTicketById());
     }
 
     public Command getCommand(CommandName commandName){

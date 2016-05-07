@@ -1,11 +1,16 @@
 package controller;
 
+import dao.DaoException;
+import dao.DaoFactory;
+import entity.film.Film;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -29,9 +34,16 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException {
 
         CommandHelper commandHelper = new CommandHelper();
+        List<Film> films = null;
+
+        try {
+            films = DaoFactory.getDaoFactory().getFilmDao().getFilmsCollection();
+        } catch (DaoException e) {
+            e.printStackTrace();
+        }
 
         String action = request.getParameter("command");
-
+        request.setAttribute("films",films);
         CommandName commandName = CommandName.valueOf(action.toUpperCase());
         Command command = commandHelper.getCommand(commandName);
 

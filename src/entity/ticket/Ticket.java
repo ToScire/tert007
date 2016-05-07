@@ -6,6 +6,7 @@ import entity.seance.Seance;
 import entity.user.User;
 
 import java.sql.Date;
+import java.sql.Time;
 
 /**
  * Created by Alexander on 02.04.2016.
@@ -60,7 +61,7 @@ public class Ticket {
         return seance.getDate();
     }
 
-    public Date getTime() {
+    public Time getTime() {
         return seance.getTime();
     }
 

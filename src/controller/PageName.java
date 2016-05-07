@@ -17,5 +17,8 @@ public enum PageName {
     FILMS_PAGE,
 
     SEANCES_PAGE,
-    SEANCE_BY_ID
+    SEANCE_BY_ID,
+    ADD_NEW_SEANCE_FORM,
+
+    TICKETS_PAGE
 }

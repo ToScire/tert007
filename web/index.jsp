@@ -165,6 +165,34 @@
           <input type="number" name="id_seance">
           <input type="submit" name="button" value="Сеанс по id">
       </form>
+
+    <form action="Controller" method="POST">
+      <input type="hidden" name="command" value="remove_seance">
+      <input type="number" name="id">
+      <input type="submit" name="button" value="Удалить сеанс">
+    </form>
+
+     <p><a href="Controller?command=add_seance_form">Добавить сеанс</a></p>
   </div>
+<div class="operation">
+<h3>Операции с билетами</h3>
+
+<form action="Controller" method="GET">
+  <input type="hidden" name="command" value="get_tickets_collection"/>
+  <input type="submit" name="button" value="Вывести все билеты"/>
+</form>
+
+<form action="Controller" method="GET">
+  <input type="hidden" name="command" value="find_ticket_by_id"/>
+  <input type="number" name="id" value="1"/>
+  <input type="submit" name="button" value="Найти билет"/>
+</form>
+
+<form action="Controller" method="POST">
+  <input type="hidden" name="command" value="remove_ticket"/>
+  <input type="number" name="user_id" value="1"/>
+  <input type="submit" name="button" value="Удалить билет"/>
+</form>
+</div>
   </body>
 </html>

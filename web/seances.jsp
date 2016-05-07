@@ -20,6 +20,7 @@
         <td>Название фильма</td>
         <td>Дата</td>
         <td>Время</td>
+        <td>Стоимость</td>
     </tr>
 
     <c:forEach var="seance" items="${seances}">
@@ -27,6 +28,7 @@
             <td>${seance.getFilm().getTitle()}</td>
             <td>${seance.getDate()}</td>
             <td>${seance.getTime()}</td>
+            <td>${seance.getPrice()}</td>
         </tr>
     </c:forEach>
     </table>

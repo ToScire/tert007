@@ -21,7 +21,7 @@
                 <select name="film_id">
                     <c:forEach var="film" items="${films}">
                         <option
-                            <c:if test="${film.getId()} == ${seance.getFilm().getId()}">
+                            <c:if test="${film.getId().equals(seance.getFilm().getId())}">
                                 selected
                             </c:if>
                                 value="${film.getId()}">${film.getTitle()}
@@ -36,7 +36,7 @@
                 <select name="hall_id">
                     <c:forEach var="hall" items="${halls}">
                         <option
-                                <c:if test="${hall.getId()} == ${seance.getHall().getId()}">
+                                <c:if test="${hall.getId().equals(seance.getHall().getId())}">
                                     selected
                                 </c:if>
                                 value="${hall.getId()}">${hall.getId()}
@@ -56,7 +56,15 @@
                 Время:
             </td>
             <td>
-                <input type="text" value= "${seance.getTime()}">
+                <input type="text" value= "${seance.getTime()}" name="time">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Стоимость:
+            </td>
+            <td>
+                <input type="number" value= "${seance.getPrice()}" name="price">
             </td>
         </tr>
     </table>
