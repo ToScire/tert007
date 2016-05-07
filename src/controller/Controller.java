@@ -34,16 +34,9 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException {
 
         CommandHelper commandHelper = new CommandHelper();
-        List<Film> films = null;
-
-        try {
-            films = DaoFactory.getDaoFactory().getFilmDao().getFilmsCollection();
-        } catch (DaoException e) {
-            e.printStackTrace();
-        }
 
         String action = request.getParameter("command");
-        request.setAttribute("films",films);
+
         CommandName commandName = CommandName.valueOf(action.toUpperCase());
         Command command = commandHelper.getCommand(commandName);
 
