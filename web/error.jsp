@@ -15,6 +15,6 @@
 
 </head>
 <body>
-    ${error.toString()}
+    ${error.getMessage()}
 </body>
 </html>

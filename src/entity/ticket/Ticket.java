@@ -5,8 +5,7 @@ import entity.hall.Hall;
 import entity.seance.Seance;
 import entity.user.User;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.util.Date;
 
 /**
  * Created by Alexander on 02.04.2016.
@@ -37,6 +36,10 @@ public class Ticket {
         return seance;
     }
 
+    public int getPrice() {
+        return seance.getPrice();
+    }
+
     public void setSeance(Seance seance) {
         this.seance = seance;
     }
@@ -57,12 +60,12 @@ public class Ticket {
         return seance.getFilm();
     }
 
-    public Date getDate() {
-        return seance.getDate();
+    public String getDateBySting() {
+        return seance.getDateByString();
     }
 
-    public Time getTime() {
-        return seance.getTime();
+    public String getTimeByString() {
+        return seance.getTimeByString();
     }
 
 }

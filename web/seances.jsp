@@ -15,7 +15,19 @@
 </head>
 <body>
 <table>
-    <caption>Users</caption>
+
+
+    <form name="find_seances" action="Controller" method="get">
+        <input type="date" name="start_day"/>
+        </br>
+        <input type="date" name="finish_day"/>
+        </br>
+
+        <input type="hidden" name="command" value="get_seances_by_date"/>
+        <input type="submit" value="Найти"/>
+    </form>
+
+    <caption>Сеансы</caption>
     <tr>
         <td>Название фильма</td>
         <td>Дата</td>
@@ -26,8 +38,8 @@
     <c:forEach var="seance" items="${seances}">
         <tr>
             <td>${seance.getFilm().getTitle()}</td>
-            <td>${seance.getDate()}</td>
-            <td>${seance.getTime()}</td>
+            <td>${seance.getDateByString()}</td>
+            <td>${seance.getTimeByString()}</td>
             <td>${seance.getPrice()}</td>
         </tr>
     </c:forEach>

@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by Vadim on 07.05.2016.
  */
-public class GetSeanceById implements Command {
+public class FindSeanceById implements Command {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         DaoFactory daoFactory = DaoFactory.getDaoFactory();
@@ -30,8 +30,8 @@ public class GetSeanceById implements Command {
             request.setAttribute("halls",halls);
             return PageHelper.getPage(PageName.SEANCE_BY_ID);
         }
-        catch (Exception ex){
+        catch (DaoException ex){
             throw new CommandException(ex);
         }
-        }
+    }
 }

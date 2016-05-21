@@ -36,7 +36,7 @@ public class UpdateUser implements Command {
             user.setUserType(daoFactory.getUserTypeDao().findUserTypeById(user_type));
             user.setId(id);
 
-            daoFactory.getUserDao().updateUser(id,user);
+            daoFactory.getUserDao().updateUser(user);
             request.setAttribute("user",user);
             return PageHelper.getPage(PageName.SUCCESS_UPDATE_PAGE);
         } catch (DaoException e){

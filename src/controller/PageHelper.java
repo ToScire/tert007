@@ -15,6 +15,15 @@ public class PageHelper {
 
     static
     {
+        pages.put(PageName.REGISTRATION, "/registration.jsp");
+
+
+        pages.put(PageName.SEANCES_PAGE, "/seances.jsp");
+
+
+        pages.put(PageName.USER_PROFILE, "/user.jsp");
+
+
         pages.put(PageName.MAIN_PAGE, "/index.jsp");
         pages.put(PageName.USERS_PAGE, "/users.jsp");
         pages.put(PageName.USER_BY_ID_PAGE, "/user_by_id.jsp");

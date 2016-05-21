@@ -60,17 +60,29 @@ public class UserDatabaseDao extends Connector implements UserDao {
         return instance;
     }
 
-
     @Override
     public User findUserById(int id) throws DaoException {
-        ResultSet resultSet = null;
         try {
-
-            resultSet = databaseController.select(UserDatabaseDao.tableName, columnNames, UserDatabaseDao.columnId + "=" + id);
+            ResultSet resultSet = databaseController.select(UserDatabaseDao.tableName, columnNames, UserDatabaseDao.columnId + "=" + id);
             if(resultSet.next()) {
                 return createUserFromResultSet(resultSet);
+            } else {
+                return null;
             }
-            else return null;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public User findUser(String login) throws DaoException {
+        try {
+            ResultSet resultSet = databaseController.select(tableName, columnNames, columnLogin + "='" + login + "'");
+            if(resultSet.next()) {
+                return createUserFromResultSet(resultSet);
+            } else {
+                return null;
+            }
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -78,9 +90,8 @@ public class UserDatabaseDao extends Connector implements UserDao {
 
     @Override
     public List<User> getUsersCollection() throws DaoException {
-        ResultSet resultSet = null;
         try {
-            resultSet = databaseController.select(UserDatabaseDao.tableName, columnNames,null);
+            ResultSet resultSet = databaseController.select(UserDatabaseDao.tableName, columnNames,null);
             return createUsersCollectionFromResultSet(resultSet);
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -97,10 +108,9 @@ public class UserDatabaseDao extends Connector implements UserDao {
     }
 
     @Override
-    public boolean updateUser(int id, User newUser) throws DaoException {
+    public boolean updateUser(User newUser) throws DaoException {
         try {
-            return databaseController.update(UserDatabaseDao.tableName, columnNames, getValues(newUser), columnId +
-            "=" + id);
+            return databaseController.update(UserDatabaseDao.tableName, columnNames, getValues(newUser), columnId + "=" + newUser.getId());
         } catch (SQLException e) {
             throw new DaoException(e);
         }

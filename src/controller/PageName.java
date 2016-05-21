@@ -5,6 +5,11 @@ package controller;
  */
 public enum PageName {
     MAIN_PAGE,
+
+    USER_PROFILE,
+
+
+    REGISTRATION,
     USERS_PAGE,
     USER_BY_ID_PAGE,
     SUCCESS_REG_PAGE,

@@ -1,8 +1,7 @@
 package controller;
 
-import dao.DaoException;
 import dao.DaoFactory;
-import entity.film.Film;
+import dao.databaseimpl.SeanceDatabaseDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
+import java.sql.Date;
+import java.util.Calendar;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -33,12 +33,10 @@ public class Controller extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        CommandHelper commandHelper = new CommandHelper();
-
         String action = request.getParameter("command");
 
         CommandName commandName = CommandName.valueOf(action.toUpperCase());
-        Command command = commandHelper.getCommand(commandName);
+        Command command = CommandHelper.getCommand(commandName);
 
         String page = null;
 
@@ -46,7 +44,7 @@ public class Controller extends HttpServlet {
             page = command.execute(request);
         } catch (CommandException e) {
             request.setAttribute("error", e);
-            page = "/error";
+            page = "/error.jsp";
         }
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);

@@ -4,17 +4,32 @@ package controller;
  * Created by Alexander on 23.02.2016.
  */
 public enum CommandName {
+    //User
+    LOGIN_USER,
+    LOGOUT_USER,
+    REGISTRATION_USER,
+    FIND_USER_BY_ID,
+    FIND_USER_BY_LOGIN,
+
+    //Seance
+    GET_TODAY_SEANCES,
+
+
+    //Film
     FIND_FILM_BY_ID,
     FIND_FILM_BY_TITLE,
     FIND_FILM_BY_DATE,
     GET_FILMS_COLLECTION,
+
     ADD_NEW_FILM,
     UPDATE_FILM,
     REMOVE_FILM,
 
+
+
+
     GET_USERS_COLLECTION,
     GET_USER_BY_ID,
-    REG_USER,
     UPDATE_USER,
     REMOVE_USER,
 

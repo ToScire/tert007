@@ -3,8 +3,8 @@ package entity.seance;
 import entity.film.Film;
 import entity.hall.Hall;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Alexander on 02.04.2016.
@@ -14,7 +14,6 @@ public class Seance {
     private Hall hall;
     private Film film;
     private Date date;
-    private Time time;
     private int price;
 
     public int getId() {
@@ -41,27 +40,29 @@ public class Seance {
         this.film = film;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Time getTime() {
-        return time;
-    }
-
-    public void setTime(Time time) {
-        this.time = time;
-    }
-
     public int getPrice() {
         return price;
     }
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public void setDate(long unixTime) {
+        this.date = new Date(unixTime);
+    }
+
+    public String getDateByString() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        return dateFormat.format(date);
+    }
+
+    public String getTimeByString() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        return dateFormat.format(date);
+    }
+
+    public Date getDate(){
+        return date;
     }
 }

@@ -6,12 +6,11 @@ import entity.film.Film;
 import entity.hall.Hall;
 import entity.seance.Seance;
 
-import java.net.FileNameMap;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,17 +23,14 @@ public class SeanceDatabaseDao extends Connector implements SeanceDao {
     private static final String columnId = "id";
     private static final String columnHallId = "id_hall";
     private static final String columnFilmId = "id_film";
-    private static final String columnDate = "date";
-    private static final String columnTime = "time";
+    private static final String columnUnixTime = "unix_time";
     private static final String columnPrice = "price";
-
 
     private static final String[] columnsName = {
             columnId,
             columnHallId,
             columnFilmId,
-            columnDate,
-            columnTime,
+            columnUnixTime,
             columnPrice
     };
 
@@ -53,12 +49,35 @@ public class SeanceDatabaseDao extends Connector implements SeanceDao {
                 String.valueOf(seance.getId()),
                 String.valueOf(seance.getHall().getId()),
                 String.valueOf(seance.getFilm().getId()),
-                String.valueOf(seance.getDate()),
-                String.valueOf(seance.getTime()),
+                String.valueOf(seance.getDate().getTime() / 1000),
                 String.valueOf(seance.getPrice())
         };
 
         return result;
+    }
+
+    public static long removeTimeFromDate(Date date) {
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.setTime(date);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        return calendar.getTime().getTime() / 1000;
+    }
+
+    public static long roundTimeToFullDay(Date date) {
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.setTime(date);
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        return calendar.getTime().getTime() / 1000;
     }
 
     @Override
@@ -75,11 +94,10 @@ public class SeanceDatabaseDao extends Connector implements SeanceDao {
     }
 
     @Override
-    public List<Seance> findSeancesByDate(Date date) throws DaoException {
+    public List<Seance> findSeancesByDate(Date startDate, Date finishDate) throws DaoException {
         ResultSet resultSet = null;
         try {
-
-            resultSet = databaseController.select(tableName, columnsName, columnDate + "='" + date + "'");
+            resultSet = databaseController.select(tableName, columnsName, columnUnixTime + " >= " + removeTimeFromDate(startDate) + " AND " + columnUnixTime + " < " + roundTimeToFullDay(finishDate));
 
             return createSeanceCollectionFromResultSet(resultSet);
         } catch (SQLException e) {
@@ -88,15 +106,8 @@ public class SeanceDatabaseDao extends Connector implements SeanceDao {
     }
 
     @Override
-    public List<Seance> getSeancesCollection(Date startDate, Date finishDate) throws DaoException {
-        ResultSet resultSet = null;
-        try {
-            resultSet = databaseController.select(tableName, columnsName, columnDate + " BETWEEN '"+ startDate + "' AND '" + finishDate +"'");
-
-            return createSeanceCollectionFromResultSet(resultSet);
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
+    public List<Seance> getTodaySeances() throws DaoException {
+        return findSeancesByDate(Calendar.getInstance().getTime(), Calendar.getInstance().getTime());
     }
 
     @Override
@@ -143,8 +154,7 @@ public class SeanceDatabaseDao extends Connector implements SeanceDao {
 
         try {
             seance.setId(resultSet.getInt(columnId));
-            seance.setDate(resultSet.getDate(columnDate));
-            seance.setTime(resultSet.getTime(columnTime));
+            seance.setDate(resultSet.getLong(columnUnixTime) * 1000);
             seance.setPrice(resultSet.getInt(columnPrice));
 
             int hallId = resultSet.getInt(columnHallId);
