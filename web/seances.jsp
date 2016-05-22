@@ -50,7 +50,7 @@
             <c:otherwise>
                 <a href="Controller?command=find_user_by_login&login=${sessionScope.user.getLogin()}">${sessionScope.user.getLogin()}</a>
                 <br>
-                ${sessionScope.user.getUserType()}
+                ${sessionScope.user.getBonusCount()}
                 <br>
                 <a href="Controller?command=logout_user">Выйти</a>
             </c:otherwise>
@@ -131,7 +131,7 @@
                         <c:choose>
                             <c:when test="${sessionScope.user.getLogin() != null || sessionScope.user.getUserType() != null}">
                                 <a class="btn-primary btn-sm"
-                                   href="Controller?command=show_buy_ticket_page&seance_id=${seance.getId()}">Купить</a>
+                                   href="Controller?command=buy_ticket&seance_id=${seance.getId()}&place=19">Купить</a>
                             </c:when>
                             <c:otherwise>
                                 <a class="btn-primary btn-sm" href="signin.jsp">Выполните вход</a>
@@ -143,7 +143,7 @@
                             <td>
                                 <a href="Controller?command=get_seance_by_id&id_seance=${seance.getId()}"><span
                                         class="glyphicon glyphicon-edit"></span></a>
-                                <a href="Controller?command=remove_seance&id=${seance.getId()}"><span
+                                <a href="Controller?command=remove_seance&seance_id=${seance.getId()}"><span
                                         class="glyphicon glyphicon-remove"></span></a>
                             </td>
                         </c:when>

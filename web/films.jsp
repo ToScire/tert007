@@ -57,7 +57,7 @@
             <c:otherwise>
                 <a href="Controller?command=find_user_by_login&login=${sessionScope.user.getLogin()}">${sessionScope.user.getLogin()}</a>
                 <br>
-                ${sessionScope.user.getUserType()}
+                ${sessionScope.user.getBonusCount()}
                 <br>
                 <a href="Controller?command=logout_user">Выйти</a>
             </c:otherwise>
@@ -87,7 +87,7 @@
             <td>${film.getAgeLimitation()}</td>
             <td>
                 <a class="btn-primary btn-sm"
-                   href="Controller?command=show_seances_by_film&film_id=${film.getId()}">Сеансы</a>
+                   href="Controller?command=find_seances_by_film&film_id=${film.getId()}">Сеансы</a>
                 <c:choose>
                     <c:when test="${sessionScope.user.getUserType() != UserType.ADMIN}">
                         <div class="tools">

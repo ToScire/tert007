@@ -1,9 +1,6 @@
 package controller.commandimpl;
 
-import controller.Command;
-import controller.CommandException;
-import controller.PageHelper;
-import controller.PageName;
+import controller.*;
 import dao.DaoException;
 import dao.DaoFactory;
 import dao.databaseimpl.UserDatabaseDao;
@@ -24,7 +21,7 @@ public class UpdateUser implements Command {
             String password = request.getParameter("password");
             String email = request.getParameter("email");
             int bonus_count = Integer.parseInt(request.getParameter("bonus_count"));
-            int user_type = 1;
+            UserType user_type = UserType.valueOf(request.getParameter("user_type"));
             int id = Integer.parseInt(request.getParameter("id"));
 
             User user = new User();
@@ -33,12 +30,15 @@ public class UpdateUser implements Command {
             user.setEmail(email);
             user.setBonusCount(bonus_count);
 
-            user.setUserType(daoFactory.getUserTypeDao().findUserTypeById(user_type));
+            user.setUserType(user_type);
             user.setId(id);
 
             daoFactory.getUserDao().updateUser(user);
             request.setAttribute("user",user);
-            return PageHelper.getPage(PageName.SUCCESS_UPDATE_PAGE);
+            request.getSession().setAttribute("user", user);
+            Command findUser = new FindUserByLogin();
+
+            return findUser.execute(request);
         } catch (DaoException e){
             throw new CommandException(e);
         }

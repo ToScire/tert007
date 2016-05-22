@@ -1,6 +1,6 @@
 package entity.film;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * Created by Alexander on 02.04.2016.
