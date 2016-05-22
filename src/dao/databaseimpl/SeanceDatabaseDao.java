@@ -106,6 +106,18 @@ public class SeanceDatabaseDao extends Connector implements SeanceDao {
     }
 
     @Override
+    public List<Seance> findSeancesByFilm(Film film) throws DaoException {
+        ResultSet resultSet = null;
+        try {
+            resultSet = databaseController.select(tableName, columnsName, columnFilmId + " = " + film.getId());
+
+            return createSeanceCollectionFromResultSet(resultSet);
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
     public List<Seance> getTodaySeances() throws DaoException {
         return findSeancesByDate(Calendar.getInstance().getTime(), Calendar.getInstance().getTime());
     }
