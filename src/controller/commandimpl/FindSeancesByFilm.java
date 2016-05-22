@@ -14,22 +14,24 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * Created by Vadim on 07.05.2016.
+ * Created by Alexander on 22.05.2016.
  */
-public class FindSeanceById implements Command {
+public class FindSeancesByFilm implements Command {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         DaoFactory daoFactory = DaoFactory.getDaoFactory();
         try{
-            int id = Integer.parseInt(request.getParameter("id_seance"));
-            Seance seance = daoFactory.getSeanceDao().findSeanceById(id);
-            List<Film> films = daoFactory.getFilmDao().getFilmsCollection();
-            List<Hall> halls = daoFactory.getHallDao().getHallsCollection();
-            request.setAttribute("seance",seance);
-            request.setAttribute("films",films);
-            request.setAttribute("halls",halls);
-            
-            return PageHelper.getPage(PageName.SEANCE_BY_ID);
+            int filmId = Integer.parseInt(request.getParameter("id_film"));
+            Film film = daoFactory.getFilmDao().findFilmById(filmId);
+
+            if (film == null){
+                throw new CommandException("Film id not found");
+            }
+
+            List<Seance> seances = daoFactory.getSeanceDao().findSeancesByFilm(film);
+            request.setAttribute("seances",seances);
+
+            return PageHelper.getPage(PageName.SEANCES_PAGE);
         }
         catch (DaoException ex){
             throw new CommandException(ex);

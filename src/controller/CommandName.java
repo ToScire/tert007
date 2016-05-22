@@ -5,15 +5,25 @@ package controller;
  */
 public enum CommandName {
     //User
+    ADD_NEW_USER,
     LOGIN_USER,
     LOGOUT_USER,
     REGISTRATION_USER,
     FIND_USER_BY_ID,
     FIND_USER_BY_LOGIN,
 
-    //Seance
-    GET_TODAY_SEANCES,
+    GET_USERS_COLLECTION,
+    UPDATE_USER,
+    REMOVE_USER,
 
+    //Seance
+    UPDATE_SEANCE,
+    ADD_NEW_SEANCE,
+    REMOVE_SEANCE,
+    FIND_SEANCE_BY_FILM,
+    GET_TODAY_SEANCES,
+    GET_SEANCES_BY_DATE,
+    GET_SEANCE_BY_ID,
 
     //Film
     FIND_FILM_BY_ID,
@@ -26,22 +36,6 @@ public enum CommandName {
     REMOVE_FILM,
 
 
-
-
-    GET_USERS_COLLECTION,
-    GET_USER_BY_ID,
-    UPDATE_USER,
-    REMOVE_USER,
-
-    GET_SEANCES_COLLECTION,
-    GET_SEANCES_BY_DATE,
-    GET_SEANCE_BY_ID,
-    UPDATE_SEANCE,
-    ADD_NEW_SEANCE,
-    ADD_SEANCE_FORM,
-    REMOVE_SEANCE,
-
-    GET_TICKETS_COLLECTION,
-    FIND_TICKET_BY_ID,
-    REMOVE_TICKET
+    //Ticket
+    BUY_TICKET
 }

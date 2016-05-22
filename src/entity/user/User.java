@@ -1,5 +1,9 @@
 package entity.user;
 
+import entity.ticket.Ticket;
+
+import java.util.List;
+
 /**
  * Created by Alexander on 16.02.2016.
  */
@@ -11,22 +15,7 @@ public class User {
     private String email;
     private int bonusCount;
 
-    public User() {
-    }
-
-    public User(String login, String password, String email) {
-        this.login = login;
-        this.password = password;
-        this.email = email;
-    }
-
-    public User(int id, UserType userType, String login, String password, String email, int bonusCount) {
-        this.id = id;
-        this.login = login;
-        this.password = password;
-        this.email = email;
-        this.bonusCount = bonusCount;
-    }
+    private List<Ticket> tickets;
 
     public UserType getUserType() {
         return userType;
@@ -76,4 +65,11 @@ public class User {
         this.bonusCount = bonusCount;
     }
 
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
+    }
 }

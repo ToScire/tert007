@@ -1,5 +1,6 @@
 package dao;
 
+import entity.film.Film;
 import entity.seance.Seance;
 
 import java.util.Date;
@@ -12,6 +13,7 @@ public interface SeanceDao {
     Seance findSeanceById(int id) throws DaoException;
     List<Seance> getTodaySeances() throws DaoException;
     List<Seance> findSeancesByDate(Date startDate, Date finishDate) throws DaoException;
+    List<Seance> findSeancesByFilm(Film film) throws DaoException;
 
     boolean addNewSeance(Seance seance) throws DaoException;
     boolean removeSeanceById(int id) throws DaoException;

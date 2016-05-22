@@ -8,6 +8,8 @@ public enum PageName {
 
     USER_PROFILE,
 
+    CREATE_NEW_USER,
+
 
     REGISTRATION,
     USERS_PAGE,
