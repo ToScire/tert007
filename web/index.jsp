@@ -46,6 +46,11 @@
             <li role="presentation" class="active"><a href="index.jsp">Главная</a></li>
             <li role="presentation"><a href="Controller?command=get_today_seances">Сеансы</a></li>
             <li role="presentation"><a href="Controller?command=get_films_collection">Фильмы</a></li>
+            <c:choose>
+                <c:when test="${sessionScope.user.getLogin() != null || sessionScope.user.getUserType() == UserType.ADMIN}">
+                    <li role="presentation"><a href="Controller?command=get_users_collection">Пользователи</a></li>
+                </c:when>
+            </c:choose>
           </ul>
         </nav>
           <c:choose>
@@ -57,7 +62,7 @@
           <c:otherwise>
               <a href="Controller?command=find_user_by_login&login=${sessionScope.user.getLogin()}">${sessionScope.user.getLogin()}</a>
               <br>
-              ${sessionScope.user.getUserType()}
+              ${sessionScope.user.getBonusCount()}
               <br>
               <a href="Controller?command=logout_user">Выйти</a>
           </c:otherwise>

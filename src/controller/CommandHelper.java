@@ -32,10 +32,10 @@ public class CommandHelper {
 
         //Seances
         commands.put(CommandName.GET_SEANCE_BY_ID, new FindSeanceById());
-        commandsAvailableStatus.put(CommandName.GET_SEANCE_BY_ID, UserType.GUEST);
+        commandsAvailableStatus.put(CommandName.GET_SEANCE_BY_ID, UserType.ADMIN);
 
-        commands.put(CommandName.FIND_SEANCE_BY_FILM, new FindSeancesByFilm());
-        commandsAvailableStatus.put(CommandName.GET_SEANCE_BY_ID, UserType.GUEST);
+        commands.put(CommandName.FIND_SEANCES_BY_FILM, new FindSeancesByFilm());
+        commandsAvailableStatus.put(CommandName.FIND_SEANCES_BY_FILM, UserType.GUEST);
 
         commands.put(CommandName.GET_TODAY_SEANCES,new GetTodaySeances());
         commandsAvailableStatus.put(CommandName.GET_TODAY_SEANCES, UserType.GUEST);
@@ -45,7 +45,7 @@ public class CommandHelper {
 
         //Film
         commands.put(CommandName.FIND_FILM_BY_ID, new FindFilmById());
-        commandsAvailableStatus.put(CommandName.FIND_FILM_BY_ID, UserType.GUEST);
+        commandsAvailableStatus.put(CommandName.FIND_FILM_BY_ID, UserType.ADMIN);
 
         commands.put(CommandName.FIND_FILM_BY_TITLE, new FindFilmByTitle());
         commandsAvailableStatus.put(CommandName.FIND_FILM_BY_TITLE, UserType.GUEST);

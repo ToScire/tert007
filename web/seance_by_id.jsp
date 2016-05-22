@@ -49,7 +49,7 @@
             <c:otherwise>
                 <a href="Controller?command=find_user_by_login&login=${sessionScope.user.getLogin()}">${sessionScope.user.getLogin()}</a>
                 <br>
-                ${sessionScope.user.getUserType()}
+                ${sessionScope.user.getBonusCount()}
                 <br>
                 <a href="Controller?command=logout_user">Выйти</a>
             </c:otherwise>
@@ -90,7 +90,7 @@
                 </div>
             </div>
 
-            <div class="form-group" action="Controller" method="GET">
+            <div class="form-group" >
                 <label for="select_date" class="col-sm-2 control-label">Дата</label>
                 <div class="col-sm-10">
                     <div class='input-group date' id='datetimepicker1'>
@@ -110,25 +110,25 @@
                 </script>
             </div>
 
-            <div class="form-group" action="Controller" method="GET">
-                <label for="select_time" class="col-sm-2 control-label">Время</label>
-                <div class="col-sm-10">
-                    <div class='input-group date' id='datetimepicker2'>
-                        <input type='text' class="form-control" name="time" id="select_time"/>
-                            <span class="input-group-addon">
+            <div class="form-group" >
+                                <label for="select_time" class="col-sm-2 control-label">Время</label>
+                                <div class="col-sm-10">
+                                <div class='input-group date' id='datetimepicker2'>
+                                <input type='text' class="form-control" name="time" id="select_time"/>
+                                <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-time">
                                 </span>
-                            </span>
-                    </div>
-                </div>
-                <script type="text/javascript">
-                    $(function () {
-                        $('#datetimepicker2').datetimepicker({
-                                    language: 'ru',
-                                    format: 'HH:mm',
-                                    pickDate: false
-                                }
-                        );
+                                </span>
+                                </div>
+                                </div>
+                                <script type="text/javascript">
+                                $(function () {
+                                    $('#datetimepicker2').datetimepicker({
+                                                language: 'ru',
+                                                format: 'HH:mm',
+                                                pickDate: false
+                                            }
+                                    );
                     });
                 </script>
             </div>

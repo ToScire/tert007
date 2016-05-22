@@ -34,7 +34,7 @@ public class BuyTicket implements Command {
 
             daoFactory.getTicketDao().addNewTicket(ticket);
 
-            return PageHelper.getPage(PageName.SUCCESS_UPDATE_PAGE);
+            return PageHelper.getPage(PageName.USER_PROFILE);
         } catch (DaoException e){
             throw new CommandException(e);
         }

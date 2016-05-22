@@ -21,7 +21,7 @@ public class FindSeancesByFilm implements Command {
     public String execute(HttpServletRequest request) throws CommandException {
         DaoFactory daoFactory = DaoFactory.getDaoFactory();
         try{
-            int filmId = Integer.parseInt(request.getParameter("id_film"));
+            int filmId = Integer.parseInt(request.getParameter("film_id"));
             Film film = daoFactory.getFilmDao().findFilmById(filmId);
 
             if (film == null){
