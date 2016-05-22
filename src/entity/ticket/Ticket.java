@@ -67,5 +67,4 @@ public class Ticket {
     public String getTimeByString() {
         return seance.getTimeByString();
     }
-
 }

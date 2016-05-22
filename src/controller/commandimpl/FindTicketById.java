@@ -18,15 +18,15 @@ public class FindTicketById implements Command {
     public String execute(HttpServletRequest request) throws CommandException {
         DaoFactory daoFactory = DaoFactory.getDaoFactory();
 
-        int id = Integer.parseInt(request.getParameter("id"));
+        int ticketId = Integer.parseInt(request.getParameter("ticket_id"));
         Ticket ticket = null;
 
         try {
-             ticket = daoFactory.getTicketDao().findTicketById(id);
+             ticket = daoFactory.getTicketDao().findTicketById(ticketId);
         } catch (DaoException e) {
-            e.printStackTrace();
+            throw new CommandException(e);
         }
-        request.setAttribute("ticket",ticket);
+        request.setAttribute("ticket", ticket);
         return PageHelper.getPage(PageName.TICKETS_PAGE);
     }
 }
