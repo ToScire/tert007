@@ -20,9 +20,12 @@ public class GetSeancesByDate implements Command {
     public String execute(HttpServletRequest request) throws CommandException {
         DaoFactory daoFactory = DaoFactory.getDaoFactory();
         try{
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date startDay = dateFormat.parse(request.getParameter("start_day"));
-            Date finishDay = dateFormat.parse(request.getParameter("finish_day"));
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+            String startDate = request.getParameter("start_date");
+            String finishDate = request.getParameter("finish_date");
+
+            Date startDay = dateFormat.parse(startDate);
+            Date finishDay = dateFormat.parse(finishDate);
 
             List<Seance> seances = daoFactory.getSeanceDao().findSeancesByDate(startDay, finishDay);
             request.setAttribute("seances",seances);

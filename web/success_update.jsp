@@ -12,6 +12,6 @@
 </head>
 <body>
     <h1>Данные успешно обновлены в системе</h1>
-    <a href="index.jsp">На главную</a>
+    <a href="index_test.jsp">На главную</a>
 </body>
 </html>

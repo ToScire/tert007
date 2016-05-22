@@ -45,7 +45,7 @@ public class UpdateFilm implements Command {
             daoFactory.getFilmDao().updateFilm(film);
 
             request.setAttribute("film",film);
-            return PageHelper.getPage(PageName.SUCCESS_UPDATE_PAGE);
+            return PageHelper.getPage(PageName.FILMS_PAGE);
         } catch (DaoException e){
             throw new CommandException(e);
         }

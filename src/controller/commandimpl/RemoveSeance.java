@@ -24,6 +24,6 @@ public class RemoveSeance implements Command {
             e.printStackTrace();
         }
 
-        return PageHelper.getPage(PageName.SUCCESS_UPDATE_PAGE);
+        return PageHelper.getPage(PageName.SEANCES_PAGE);
     }
 }

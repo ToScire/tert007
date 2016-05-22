@@ -22,7 +22,7 @@ public class UpdateSeance implements Command{
         DaoFactory daoFactory = DaoFactory.getDaoFactory();
         try{
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:ss");
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
             Date date = dateFormat.parse(request.getParameter("date"));
             Date time = timeFormat.parse(request.getParameter("time"));
@@ -44,7 +44,7 @@ public class UpdateSeance implements Command{
             newSeance.setPrice(price);
 
             daoFactory.getSeanceDao().updateSeance(newSeance);
-            return PageHelper.getPage(PageName.SUCCESS_UPDATE_PAGE);
+            return PageHelper.getPage(PageName.SEANCES_PAGE);
         } catch (ParseException e) {
             throw new CommandException(e);
         } catch (DaoException e){

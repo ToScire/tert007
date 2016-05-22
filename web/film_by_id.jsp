@@ -75,6 +75,6 @@
     <input type="hidden" name="id" value="${film.getId()}">
     <input type="submit" name="button" value="Изменить фильм"/>
 </form>
-<a href="index.jsp">На главную</a>
+<a href="index_test.jsp">На главную</a>
 </body>
 </html>
