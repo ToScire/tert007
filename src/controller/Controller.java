@@ -1,7 +1,8 @@
 package controller;
 
-import dao.DaoFactory;
-import dao.databaseimpl.SeanceDatabaseDao;
+import controller.commandimpl.LogoutUser;
+import entity.user.User;
+import entity.user.UserType;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,8 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Date;
-import java.util.Calendar;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -34,14 +33,44 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException {
 
         String action = request.getParameter("command");
-
         CommandName commandName = CommandName.valueOf(action.toUpperCase());
-        Command command = CommandHelper.getCommand(commandName);
+        UserType userTypeCommand = CommandHelper.getUserTypeCommand(commandName);
 
-        String page = null;
+        Command command = null;
+
+        User user = (User) request.getSession().getAttribute("user");
+        UserType userType;
+
+        if (user == null){
+            userType = UserType.GUEST;
+        } else {
+            userType = user.getUserType();
+        }
+
+        if (userType == UserType.ADMIN) {
+            command = CommandHelper.getCommand(commandName);
+        }
+
+        if (userType == UserType.USER) {
+            if (userTypeCommand != UserType.ADMIN){
+                command = CommandHelper.getCommand(commandName);
+            }
+        }
+
+        if (userType == UserType.GUEST) {
+            if (userTypeCommand == UserType.GUEST){
+                command = CommandHelper.getCommand(commandName);
+            }
+        }
+
+        String page;
 
         try {
-            page = command.execute(request);
+            if (command == null){
+                page = PageHelper.getPage(PageName.MAIN_PAGE);
+            } else {
+                page = command.execute(request);
+            }
         } catch (CommandException e) {
             request.setAttribute("error", e);
             page = "/error.jsp";

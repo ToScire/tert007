@@ -50,8 +50,8 @@
                     <td>${ticket.getFilm().getTitle()}</td>
                     <td>${ticket.getPlace()}</td>
                     <td>${ticket.getHall().getId()}</td>
-                    <td>${ticket.getDate()}</td>
-                    <td>${ticket.getTime()}</td>
+                    <td>${ticket.getDateByString()}</td>
+                    <td>${ticket.getTimeByString()}</td>
                     <td>${ticket.getPrice()}</td>
                 </tr>
             </c:forEach>

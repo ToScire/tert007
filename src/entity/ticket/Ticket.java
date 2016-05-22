@@ -60,7 +60,7 @@ public class Ticket {
         return seance.getFilm();
     }
 
-    public String getDateBySting() {
+    public String getDateByString() {
         return seance.getDateByString();
     }
 

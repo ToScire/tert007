@@ -28,6 +28,7 @@ public class FindSeanceById implements Command {
             request.setAttribute("seance",seance);
             request.setAttribute("films",films);
             request.setAttribute("halls",halls);
+            
             return PageHelper.getPage(PageName.SEANCE_BY_ID);
         }
         catch (DaoException ex){
