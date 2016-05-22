@@ -36,6 +36,6 @@ ${user.getUserType()}
     <input type="hidden" name="id" value="${user.getId()}">
     <input type="submit" name="button" value="Изменить пользователя"/>
     </form>
-<a href="index.jsp">На главную</a>
+<a href="index_test.jsp">На главную</a>
 </body>
 </html>

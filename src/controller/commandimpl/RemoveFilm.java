@@ -20,7 +20,7 @@ public class RemoveFilm implements Command {
             int id = Integer.parseInt(request.getParameter("film_id"));
             daoFactory.getFilmDao().removeFilmById(id);
 
-            return PageHelper.getPage(PageName.SUCCESS_UPDATE_PAGE);
+            return PageHelper.getPage(PageName.FILMS_PAGE);
         } catch (DaoException e){
             throw new CommandException(e);
         }

@@ -33,6 +33,6 @@
     </c:forEach>
 
 </table>
-<a href="index.jsp">На главную</a>
+<a href="index_test.jsp">На главную</a>
 </body>
 </html>
