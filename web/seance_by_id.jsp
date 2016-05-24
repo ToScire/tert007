@@ -3,30 +3,9 @@
 <%@ page session="true" %>
 
 <html>
-
-<!-- Mirrored from getbootstrap.com/examples/jumbotron-narrow/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 May 2016 20:34:47 GMT -->
-<!-- Added by HTTrack -->
-<meta http-equiv="content-type" content="text/html;charset=utf-8"/><!-- /Added by HTTrack -->
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
-
-    <title>Narrow Jumbotron Template for Bootstrap</title>
-
-    <link href="css/jumbotron-narrow.css" rel="stylesheet">
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-
-    <script src="js/jquery-2.2.4.js" type="text/javascript"></script>
-    <script src="js/moment-with-locales.js" type="text/javascript"></script>
-    <script src="js/bootstrap.js" type="text/javascript"></script>
-    <script src="js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
-
+    <title>Сеанс ${seance.getDate()}</title>
+    <jsp:include page="include_head.jsp"/>
 </head>
 
 <body>
@@ -38,7 +17,8 @@
                 <c:when test="${sessionScope.user.getUserType() eq 'ADMIN'}">
                     <ul class="nav nav-pills pull-right">
                         <li role="presentation"><a href="index.jsp">Главная</a></li>
-                        <li role="presentation" class="active"><a href="Controller?command=get_today_seances">Сеансы</a></li>
+                        <li role="presentation" class="active"><a href="Controller?command=get_today_seances">Сеансы</a>
+                        </li>
                         <li role="presentation"><a href="Controller?command=get_films_collection">Фильмы</a></li>
                         <li role="presentation"><a href="Controller?command=get_users_collection">Пользователи</a></li>
                     </ul>
@@ -46,7 +26,8 @@
                 <c:otherwise>
                     <ul class="nav nav-pills pull-right">
                         <li role="presentation"><a href="index.jsp">Главная</a></li>
-                        <li role="presentation" class="active"><a href="Controller?command=get_today_seances">Сеансы</a></li>
+                        <li role="presentation" class="active"><a href="Controller?command=get_today_seances">Сеансы</a>
+                        </li>
                         <li role="presentation"><a href="Controller?command=get_films_collection">Фильмы</a></li>
                     </ul>
                 </c:otherwise>
@@ -57,20 +38,26 @@
 
     <div class="jumbotron">
 
-
-
-        <c:forEach var="i" begin="1" end="${seance.getHall().getCapacity()}" step="1">
-                <c:choose>
-                    <c:when test="${busyPlaces.contains(i)}">
-                        <p>${i}</p>
-                    </c:when>
-                    <c:otherwise>
-                        <a href="Controller?command=buy_ticket&place=${i}&seance_id=${seance.getId()}">
-                            ${i}
-                        </a>
-                    </c:otherwise>
-                </c:choose>
+        <table class="table">
+        <c:forEach var="i" begin="1" end="${seance.getHall().getCapacity()}" step="10">
+            <tr>
+            <c:forEach var="j" begin="${i}" end="${i+10}" step="1">
+            <c:choose>
+                <c:when test="${busyPlaces.contains(j)}">
+                    <td> <button type="button" class=" btn-default btn-xs" disabled>${j}</button> </td>
+                </c:when>
+                <c:otherwise>
+                    <td>
+                    <a href="Controller?command=buy_ticket&place=${j}&seance_id=${seance.getId()}">
+                        <button type="button" class=" btn-primary btn-xs">${j}</button>
+                    </a>
+                    </td>
+                </c:otherwise>
+            </c:choose>
+            </c:forEach>
+            </tr>
         </c:forEach>
+        </table>
     </div>
 
     <footer class="footer">
