@@ -34,7 +34,7 @@ public class UpdateUser implements Command {
             user.setId(id);
 
             daoFactory.getUserDao().updateUser(user);
-            request.setAttribute("user",user);
+            request.setAttribute("user", user);
             request.getSession().setAttribute("user", user);
             Command findUser = new FindUserByLogin();
             request.setAttribute("status","Данные успешно обновлены");

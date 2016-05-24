@@ -33,4 +33,6 @@ public enum PageName {
     FILM_BY_ID_PAGE,
     FILMS_BY_DATE_PAGE,
     FILMS_PAGE,
+
+    FIND_TICKET_BY_ID
 }
