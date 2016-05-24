@@ -21,7 +21,7 @@ public enum PageName {
     USERS_PAGE,
 
 
-    SUCCESS_REG_PAGE,
+    SUCCESS_REGISTRATION_PAGE,
 
 
     ERROR_REG_PAGE,

@@ -42,26 +42,25 @@
 <div class="container">
     <div class="header clearfix">
         <nav>
-            <ul class="nav nav-pills pull-right">
-                <li role="presentation" ><a href="index.jsp">Главная</a></li>
-                <li role="presentation"><a href="Controller?command=get_today_seances">Сеансы</a></li>
-                <li role="presentation" class="active"><a href="Controller?command=get_films_collection">Фильмы</a></li>
-            </ul>
+            <c:choose>
+                <c:when test="${sessionScope.user.getUserType() eq 'ADMIN'}">
+                    <ul class="nav nav-pills pull-right">
+                        <li role="presentation"><a href="index.jsp">Главная</a></li>
+                        <li role="presentation"><a href="Controller?command=get_today_seances">Сеансы</a></li>
+                        <li role="presentation"  class="active"><a href="Controller?command=get_films_collection">Фильмы</a></li>
+                        <li role="presentation"><a href="Controller?command=get_users_collection">Пользователи</a></li>
+                    </ul>
+                </c:when>
+                <c:otherwise>
+                    <ul class="nav nav-pills pull-right">
+                        <li role="presentation"><a href="index.jsp">Главная</a></li>
+                        <li role="presentation"><a href="Controller?command=get_today_seances">Сеансы</a></li>
+                        <li role="presentation" class="active"><a href="Controller?command=get_films_collection">Фильмы</a></li>
+                    </ul>
+                </c:otherwise>
+            </c:choose>
         </nav>
-        <c:choose>
-            <c:when test="${sessionScope.user.getLogin() == null || sessionScope.user.getUserType() == null}">
-                <p class="sign_in">Выполните <a href="signin.jsp">Вход</a></p>
-                <c:out value="${errorMessage}"/>
-                <br/>
-            </c:when>
-            <c:otherwise>
-                <a href="Controller?command=find_user_by_login&login=${sessionScope.user.getLogin()}">${sessionScope.user.getLogin()}</a>
-                <br>
-                ${sessionScope.user.getBonusCount()}
-                <br>
-                <a href="Controller?command=logout_user">Выйти</a>
-            </c:otherwise>
-        </c:choose>
+        <jsp:include page="included_user_profile.jsp"/>
     </div>
 
     <div class="jumbotron">

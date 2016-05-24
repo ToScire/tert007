@@ -24,7 +24,7 @@ public class PageHelper {
 
         pages.put(PageName.USERS_PAGE, "/users.jsp");
 
-        pages.put(PageName.SUCCESS_REG_PAGE, "/success_registration.jsp");
+        pages.put(PageName.SUCCESS_REGISTRATION_PAGE, "/success_registration.jsp");
         pages.put(PageName.ERROR_REG_PAGE, "/error_reg.jsp");
         pages.put(PageName.SUCCESS_UPDATE_PAGE, "/success_update.jsp");
         pages.put(PageName.FILM_BY_ID_PAGE,"/film_by_id.jsp");

@@ -41,7 +41,7 @@ public class AddNewUser implements Command {
 
                 daoFactory.getUserDao().addUser(user);
 
-                return PageHelper.getPage(PageName.SUCCESS_REG_PAGE);
+                return PageHelper.getPage(PageName.SUCCESS_REGISTRATION_PAGE);
             } else {
                 String errorMessage = "Данный логин уже занят";
 

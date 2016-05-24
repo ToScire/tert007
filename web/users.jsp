@@ -37,8 +37,9 @@
         <nav>
             <ul class="nav nav-pills pull-right">
                 <li role="presentation"><a href="index.jsp">Главная</a></li>
-                <li role="presentation" class="active"><a href="Controller?command=get_today_seances">Сеансы</a></li>
+                <li role="presentation"><a href="Controller?command=get_today_seances">Сеансы</a></li>
                 <li role="presentation"><a href="Controller?command=get_films_collection">Фильмы</a></li>
+                <li role="presentation" class="active"><a href="Controller?command=get_users_collection">Пользователи</a></li>
             </ul>
         </nav>
         <jsp:include page="included_user_profile.jsp"/>

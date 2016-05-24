@@ -9,7 +9,6 @@ import dao.DaoFactory;
 import entity.user.User;
 import entity.user.UserType;
 
-import javax.print.attribute.IntegerSyntax;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -45,7 +44,7 @@ public class RegistrationUser implements Command {
                 request.getSession().setAttribute("login", login);
                 request.getSession().setAttribute("userType", UserType.USER);
 
-                return PageHelper.getPage(PageName.SUCCESS_REG_PAGE);
+                return PageHelper.getPage(PageName.SUCCESS_REGISTRATION_PAGE);
             } else {
                 String errorMessage = "Данный логин уже занят";
 

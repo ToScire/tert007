@@ -43,7 +43,7 @@
     <div class="header clearfix">
         <nav>
             <ul class="nav nav-pills pull-right">
-                <li role="presentation" class="active"><a href="index.jsp">Главная</a></li>
+                <li role="presentation"><a href="index.jsp">Главная</a></li>
                 <li role="presentation"><a href="Controller?command=get_today_seances">Сеансы</a></li>
                 <li role="presentation"><a href="Controller?command=get_films_collection">Фильмы</a></li>
             </ul>
@@ -52,28 +52,27 @@
     </div>
 
     <div class="jumbotron">
-<form action="Controller" method="GET">
-    <input type="hidden" name="command" value="registration_user"/>
-    <table>
-        <tr>
-            <td> Введите логин: </td>
-            <td><input type="text" required name="login"></td>
-        </tr>
-        <tr>
-            <td> Введите пароль: </td>
-            <td><input type="password" required name="password"></td>
-        </tr>
-        <tr>
-            <td> Введите email: </td>
-            <td><input type="email" required name="email"></td>
-        </tr>
-        <tr>
-            <td><input type="submit" name="button" value="Зарегестрироваться"/></td>
-        </tr>
-        <c:out value="${errorMessage}"/>
-    </table>
-</form>
-
+        <form action="Controller" method="post">
+            <input type="hidden" name="command" value="registration_user"/>
+            <table>
+                <tr>
+                    <td> Введите логин: </td>
+                    <td><input type="text" required name="login"></td>
+                </tr>
+                <tr>
+                    <td> Введите пароль: </td>
+                    <td><input type="password" required name="password"></td>
+                </tr>
+                <tr>
+                    <td> Введите email: </td>
+                    <td><input type="email" required name="email"></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" name="button" value="Зарегестрироваться"/></td>
+                </tr>
+                <c:out value="${errorMessage}"/>
+            </table>
+        </form>
     </div>
 
     <footer class="footer">
