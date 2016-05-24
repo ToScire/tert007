@@ -34,20 +34,24 @@
 
     <div class="container">
 
-      <form class="form-signin" action="Controller">
+      <form class="form-signin" action="Controller" method="post">
+        <input type="hidden" name="command" value="login_user">
+
         <h2 class="form-signin-heading">Выполните вход</h2>
         <label for="inputEmail" class="sr-only">Логин</label>
-        <input type="hidden" value="login_user" name="command">
         <input type="text" id="inputEmail" name="login" class="form-control" placeholder="Логин" required autofocus>
+
         <label for="inputPassword" class="sr-only">Пароль</label>
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
+        <p><c:out value="${errorMessage}"/>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Запомнить меня
           </label>
         </div>
+
         <button class="btn btn-lg btn-primary btn-block" type="submit">Вход</button>
-		<a class="btn btn-lg btn-primary btn-block" href="registration.jsp">Регистрация </a>
+        <a class="btn btn-lg btn-primary btn-block" href="registration.jsp">Регистрация</a>
       </form>
 		
 

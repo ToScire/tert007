@@ -11,6 +11,7 @@ import entity.ticket.Ticket;
 import entity.user.User;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by Alexander on 22.05.2016.
@@ -34,7 +35,7 @@ public class BuyTicket implements Command {
 
             daoFactory.getTicketDao().addNewTicket(ticket);
 
-            return PageHelper.getPage(PageName.USER_PROFILE);
+            return new FindSeanceById().execute(request);
         } catch (DaoException e){
             throw new CommandException(e);
         }

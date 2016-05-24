@@ -41,20 +41,7 @@
                 <li role="presentation"><a href="Controller?command=get_films_collection">Фильмы</a></li>
             </ul>
         </nav>
-        <c:choose>
-            <c:when test="${sessionScope.user.getLogin() == null || sessionScope.user.getUserType() == null}">
-                <p class="sign_in">Выполните <a href="signin.jsp">Вход</a></p>
-                <c:out value="${errorMessage}"/>
-                <br/>
-            </c:when>
-            <c:otherwise>
-                <a href="Controller?command=find_user_by_login&login=${sessionScope.user.getLogin()}">${sessionScope.user.getLogin()}</a>
-                <br>
-                ${sessionScope.user.getBonusCount()}
-                <br>
-                <a href="Controller?command=logout_user">Выйти</a>
-            </c:otherwise>
-        </c:choose>
+        <jsp:include page="included_user_profile.jsp"/>
     </div>
 
 
@@ -128,26 +115,17 @@
                     <td>${seance.getTimeByString()}</td>
                     <td>${seance.getPrice()}</td>
                     <td>
-                        <c:choose>
-                            <c:when test="${sessionScope.user.getLogin() != null || sessionScope.user.getUserType() != null}">
-                                <a class="btn-primary btn-sm"
-                                   href="Controller?command=buy_ticket&seance_id=${seance.getId()}&place=19">Купить</a>
-                            </c:when>
-                            <c:otherwise>
-                                <a class="btn-primary btn-sm" href="signin.jsp">Выполните вход</a>
-                            </c:otherwise>
-                        </c:choose>
+                        <a class="btn-primary btn-sm" href="Controller?command=find_seance_by_id&seance_id=${seance.getId()}">Купить</a>
                     </td>
-                    <c:choose>
-                        <c:when test="${sessionScope.user.getUserType() != UserType.ADMIN}">
-                            <td>
-                                <a href="Controller?command=get_seance_by_id&id_seance=${seance.getId()}"><span
-                                        class="glyphicon glyphicon-edit"></span></a>
-                                <a href="Controller?command=remove_seance&seance_id=${seance.getId()}"><span
-                                        class="glyphicon glyphicon-remove"></span></a>
-                            </td>
-                        </c:when>
-                    </c:choose>
+
+                    <c:if test="${sessionScope.user.getUserType().toString() eq 'ADMIN'}">
+                        <td>
+                            <a href="Controller?command=get_seance_by_id&id_seance=${seance.getId()}"><span
+                                    class="glyphicon glyphicon-edit"></span></a>
+                            <a href="Controller?command=remove_seance&seance_id=${seance.getId()}"><span
+                                    class="glyphicon glyphicon-remove"></span></a>
+                        </td>
+                    </c:if>
                 </tr>
             </c:forEach>
         </table>

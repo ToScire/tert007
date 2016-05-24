@@ -27,6 +27,6 @@ public class FindTicketById implements Command {
             throw new CommandException(e);
         }
         request.setAttribute("ticket", ticket);
-        return PageHelper.getPage(PageName.TICKETS_PAGE);
+        return PageHelper.getPage(PageName.SUCCESS_UPDATE_PAGE);
     }
 }

@@ -40,119 +40,25 @@
                 <li role="presentation"><a href="Controller?command=get_films_collection">Фильмы</a></li>
             </ul>
         </nav>
-        <c:choose>
-            <c:when test="${sessionScope.user.getLogin() == null || sessionScope.user.getUserType() == null}">
-                <p class="sign_in">Выполните <a href="signin.jsp">Вход</a></p>
-                <c:out value="${errorMessage}"/>
-                <br/>
-            </c:when>
-            <c:otherwise>
-                <a href="Controller?command=find_user_by_login&login=${sessionScope.user.getLogin()}">${sessionScope.user.getLogin()}</a>
-                <br>
-                ${sessionScope.user.getBonusCount()}
-                <br>
-                <a href="Controller?command=logout_user">Выйти</a>
-            </c:otherwise>
-        </c:choose>
+        <jsp:include page="included_user_profile.jsp"/>
     </div>
 
     <div class="jumbotron">
 
-        <form class="form-horizontal" role="form">
-            <div class="form-group">
-                <label for="select_name" class="col-sm-2 control-label">Фильм</label>
-                <div class="col-sm-10">
-                    <select name="film_id" id="select_name" class="form-control">
-                        <c:forEach var="film" items="${films}">
-                            <option
-                                    <c:if test="${film.getId().equals(seance.getFilm().getId())}">
-                                        selected
-                                    </c:if>
-                                    value="${film.getId()}">${film.getTitle()}
-                            </option>
-                        </c:forEach>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="select_hall" class="col-sm-2 control-label">Зал</label>
-                <div class="col-sm-10">
-                    <select name="hall_id" class="form-control" id="select_hall">
-                        <c:forEach var="hall" items="${halls}">
-                            <option
-                                    <c:if test="${hall.getId().equals(seance.getHall().getId())}">
-                                        selected
-                                    </c:if>
-                                    value="${hall.getId()}">${hall.getId()}
-                            </option>
-                        </c:forEach>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group" >
-                <label for="select_date" class="col-sm-2 control-label">Дата</label>
-                <div class="col-sm-10">
-                    <div class='input-group date' id='datetimepicker1'>
-                        <input type='text' class="form-control" name="date" id="select_date"/>
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar">
-                                </span>
-                            </span>
-                    </div>
-                </div>
-                <script type="text/javascript">
-                    $(function () {
-                        $('#datetimepicker1').datetimepicker(
-                                {pickTime: false, language: 'ru'}
-                        );
-                    });
-                </script>
-            </div>
-
-            <div class="form-group" >
-                                <label for="select_time" class="col-sm-2 control-label">Время</label>
-                                <div class="col-sm-10">
-                                <div class='input-group date' id='datetimepicker2'>
-                                <input type='text' class="form-control" name="time" id="select_time"/>
-                                <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-time">
-                                </span>
-                                </span>
-                                </div>
-                                </div>
-                                <script type="text/javascript">
-                                $(function () {
-                                    $('#datetimepicker2').datetimepicker({
-                                                language: 'ru',
-                                                format: 'HH:mm',
-                                                pickDate: false
-                                            }
-                                    );
-                    });
-                </script>
-            </div>
-
-            <div class="form-group">
-                <label for="select_number" class="col-sm-2 control-label">Стоимость билета</label>
-                <div class="col-sm-10">
-                    <input type="number" id="select_number" class="form-control" value="${seance.getPrice()}"
-                           name="price">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default" name="button">Изменить</button>
-                </div>
-            </div>
 
 
-
-            <input type="hidden" name="command" value="update_seance"/>
-            <input type="hidden" name="id" value="${seance.getId()}">
-        </form>
-
+        <c:forEach var="i" begin="1" end="${seance.getHall().getCapacity()}" step="1">
+                <c:choose>
+                    <c:when test="${busyPlaces.contains(i)}">
+                        <p>${i}</p>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="Controller?command=buy_ticket&place=${i}&seance_id=${seance.getId()}">
+                            ${i}
+                        </a>
+                    </c:otherwise>
+                </c:choose>
+        </c:forEach>
     </div>
 
     <footer class="footer">

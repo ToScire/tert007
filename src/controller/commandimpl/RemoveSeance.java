@@ -16,12 +16,12 @@ public class RemoveSeance implements Command {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         DaoFactory daoFactory = DaoFactory.getDaoFactory();
-        int id = Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("seance_id"));
 
         try {
             daoFactory.getSeanceDao().removeSeanceById(id);
         } catch (DaoException e) {
-            e.printStackTrace();
+            throw new CommandException(e);
         }
 
         return PageHelper.getPage(PageName.SEANCES_PAGE);

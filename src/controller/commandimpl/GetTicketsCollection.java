@@ -25,6 +25,6 @@ public class GetTicketsCollection implements Command {
         }
 
 
-        return PageHelper.getPage(PageName.TICKETS_PAGE);
+        return PageHelper.getPage(PageName.MAIN_PAGE);
     }
 }

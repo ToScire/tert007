@@ -5,6 +5,7 @@ import dao.SeanceDao;
 import entity.film.Film;
 import entity.hall.Hall;
 import entity.seance.Seance;
+import entity.ticket.Ticket;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -118,9 +119,22 @@ public class SeanceDatabaseDao extends Connector implements SeanceDao {
     }
 
     @Override
+    public List<Integer> getBusyPlaces(int seanceId) throws DaoException {
+        List<Ticket> tickets = TicketDatabaseDao.getInstance().findTicketsBySeanceId(seanceId);
+        List<Integer> busyPlaces = new ArrayList<>();
+
+        for (Ticket ticket : tickets) {
+            busyPlaces.add(ticket.getPlace());
+        }
+
+        return busyPlaces;
+    }
+
+    @Override
     public List<Seance> getTodaySeances() throws DaoException {
         return findSeancesByDate(Calendar.getInstance().getTime(), Calendar.getInstance().getTime());
     }
+
 
     @Override
     public boolean addNewSeance(Seance seance) throws DaoException {

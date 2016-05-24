@@ -25,7 +25,7 @@ public class LoginUser implements Command {
                 String errorMessage = "Введены некорректные данные";
 
                 request.setAttribute("errorMessage", errorMessage);
-                return PageHelper.getPage(PageName.MAIN_PAGE);
+                return PageHelper.getPage(PageName.SIGN_IN);
             }
 
             // Шифрование пароля
@@ -39,7 +39,7 @@ public class LoginUser implements Command {
                 String errorMessage = "Неверный логин или пароль";
 
                 request.setAttribute("errorMessage", errorMessage);
-                return PageHelper.getPage(PageName.MAIN_PAGE);
+                return PageHelper.getPage(PageName.SIGN_IN);
             }
         } catch (DaoException ex){
             throw new CommandException(ex);

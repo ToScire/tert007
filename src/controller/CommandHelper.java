@@ -31,8 +31,8 @@ public class CommandHelper {
         commandsAvailableStatus.put(CommandName.FIND_USER_BY_LOGIN, UserType.GUEST);
 
         //Seances
-        commands.put(CommandName.GET_SEANCE_BY_ID, new FindSeanceById());
-        commandsAvailableStatus.put(CommandName.GET_SEANCE_BY_ID, UserType.ADMIN);
+        commands.put(CommandName.FIND_SEANCE_BY_ID, new FindSeanceById());
+        commandsAvailableStatus.put(CommandName.FIND_SEANCE_BY_ID, UserType.GUEST);
 
         commands.put(CommandName.FIND_SEANCES_BY_FILM, new FindSeancesByFilm());
         commandsAvailableStatus.put(CommandName.FIND_SEANCES_BY_FILM, UserType.GUEST);
