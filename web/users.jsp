@@ -29,20 +29,29 @@
         <table class="table">
             <caption>Все пользователи</caption>
             <tr>
-                <td>id</td>
                 <td>login</td>
                 <td>Email</td>
                 <td>Количество бонусов</td>
                 <td>Тип пользователя</td>
+                <td></td>
 
             </tr>
             <c:forEach var="user" items="${users}">
                 <tr>
-                    <td>${user.getId()}</td>
                     <td>${user.getLogin()}</td>
                     <td>${user.getEmail()}</td>
                     <td>${user.getBonusCount()}</td>
-                    <td>${user.getUserType()}</td>
+                    <td>${user.getUserType()} </td>
+                    <td>
+                        <c:if test="${sessionScope.user.getUserType().toString() eq 'ADMIN'}">
+                            <a href="Controller?command=find_user_by_id&user_id=${user.getId()}" style="float: left"><span
+                                    class="glyphicon glyphicon-edit"></span></a>
+                            <a href="Controller?command=remove_user&user_id=${user.getId()}"><span
+                                    class="glyphicon glyphicon-remove"></span></a>
+                        </c:if>
+                    </td>
+
+
                 </tr>
             </c:forEach>
 

@@ -3,30 +3,9 @@
 <%@ page session="true" %>
 
 <html>
-
-<!-- Mirrored from getbootstrap.com/examples/jumbotron-narrow/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 May 2016 20:34:47 GMT -->
-<!-- Added by HTTrack -->
-<meta http-equiv="content-type" content="text/html;charset=utf-8"/><!-- /Added by HTTrack -->
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
-
-    <title>Narrow Jumbotron Template for Bootstrap</title>
-
-    <link href="css/jumbotron-narrow.css" rel="stylesheet">
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-
-    <script src="js/jquery-2.2.4.js" type="text/javascript"></script>
-    <script src="js/moment-with-locales.js" type="text/javascript"></script>
-    <script src="js/bootstrap.js" type="text/javascript"></script>
-    <script src="js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
-
+    <title>Билет</title>
+    <jsp:include page="include_head.jsp"/>
 </head>
 
 <body>
@@ -50,7 +29,7 @@
             <div class="form-group">
                 <label for="name" class="col-sm-2 control-label">Название фильма</label>
                 <div class="col-sm-10">
-                    <input type="text" value="${ticket.getFilm()}" id="name" class="form-control"></td>
+                    <input type="text" value="${ticket.getFilm().getTitle()}" id="name" class="form-control"></td>
                 </div>
             </div>
 
@@ -58,14 +37,14 @@
                 <label for="place" class="col-sm-2 control-label">Место</label>
                 <div class="col-sm-10">
                     <select name="place" id="place" class="form-control">
-                        <c:forEach var="i" begin="1" end="${seance.getHall().getCapacity()}" step="1">
+                        <c:forEach var="i" begin="1" end="${ticket.getSeance().getHall().getCapacity()}" step="1">
 
                             <c:if test="${!busyPlaces.contains(i)}">
-                                <option> value="${i}">${i}</option>
+                                <option value="${i}">${i}</option>
                             </c:if>
 
                             <c:if test="${ticket.getPlace() eq i}">
-                                <option selected> value="${i}">${i}</option>
+                                <option selected value="${i}">${i}</option>
                             </c:if>
 
                         </c:forEach>

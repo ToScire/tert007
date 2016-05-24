@@ -110,15 +110,14 @@
                         <a class="btn-primary btn-sm"
                            href="Controller?command=find_seance_by_id&seance_id=${seance.getId()}">Купить</a>
                     </td>
-
+                    <td>
                     <c:if test="${sessionScope.user.getUserType().toString() eq 'ADMIN'}">
-                        <td>
-                            <a href="Controller?command=get_seance_by_id&id_seance=${seance.getId()}"><span
+                            <a href="Controller?command=get_seance_by_id&id_seance=${seance.getId()}" ><span
                                     class="glyphicon glyphicon-edit"></span></a>
                             <a href="Controller?command=remove_seance&seance_id=${seance.getId()}"><span
                                     class="glyphicon glyphicon-remove"></span></a>
-                        </td>
                     </c:if>
+                    </td>
                 </tr>
             </c:forEach>
         </table>

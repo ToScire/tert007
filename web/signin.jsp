@@ -25,7 +25,7 @@
         <c:out value="${errorMessage}"/>
         <div class="checkbox">
             <label>
-                <input type="checkbox" value="remember-me"> Запомнить меня
+                <input type="checkbox" value="remember-me" name="remember"> Запомнить меня
             </label>
         </div>
 

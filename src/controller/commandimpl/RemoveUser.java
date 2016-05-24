@@ -21,8 +21,8 @@ public class RemoveUser implements Command {
             int id = Integer.valueOf(request.getParameter("user_id"));
             daoFactory.getUserDao().removeUser(id);
 
-            String page = PageHelper.getPage(PageName.SUCCESS_UPDATE_PAGE);
-            return page;
+            Command getUsers = new GetUsersCollection();
+            return getUsers.execute(request);
         } catch (DaoException e){
             throw new CommandException(e);
         }
