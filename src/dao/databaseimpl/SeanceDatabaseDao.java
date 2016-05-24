@@ -135,7 +135,6 @@ public class SeanceDatabaseDao extends Connector implements SeanceDao {
         return findSeancesByDate(Calendar.getInstance().getTime(), Calendar.getInstance().getTime());
     }
 
-
     @Override
     public boolean addNewSeance(Seance seance) throws DaoException {
         try {

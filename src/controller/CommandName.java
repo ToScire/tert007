@@ -34,5 +34,6 @@ public enum CommandName {
     GET_FILMS_COLLECTION,
 
     //Ticket
+    FIND_TICKET_BY_ID,
     BUY_TICKET
 }

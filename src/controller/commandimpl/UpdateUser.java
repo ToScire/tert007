@@ -22,7 +22,7 @@ public class UpdateUser implements Command {
             String email = request.getParameter("email");
             int bonus_count = Integer.parseInt(request.getParameter("bonus_count"));
             UserType user_type = UserType.valueOf(request.getParameter("user_type"));
-            int id = Integer.parseInt(request.getParameter("id"));
+            int id = Integer.parseInt(request.getParameter("user_id"));
 
             User user = new User();
             user.setLogin(login);
@@ -34,7 +34,7 @@ public class UpdateUser implements Command {
             user.setId(id);
 
             daoFactory.getUserDao().updateUser(user);
-            request.setAttribute("user",user);
+            request.setAttribute("user", user);
             request.getSession().setAttribute("user", user);
             Command findUser = new FindUserByLogin();
 

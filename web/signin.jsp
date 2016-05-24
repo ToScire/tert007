@@ -43,7 +43,7 @@
 
         <label for="inputPassword" class="sr-only">Пароль</label>
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
-        <p><c:out value="${errorMessage}"/>
+        <c:out value="${errorMessage}"/>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Запомнить меня

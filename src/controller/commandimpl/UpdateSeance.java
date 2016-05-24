@@ -29,7 +29,7 @@ public class UpdateSeance implements Command{
 
             long unixTime = date.getTime()+ time.getTime();
 
-            int id = Integer.parseInt(request.getParameter("id"));
+            int id = Integer.parseInt(request.getParameter("seance_id"));
             int id_film = Integer.parseInt(request.getParameter("film_id"));
             int id_hall = Integer.parseInt(request.getParameter("hall_id"));
 

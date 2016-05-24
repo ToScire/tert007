@@ -16,6 +16,8 @@ public class PageHelper {
 
 
         pages.put(PageName.REGISTRATION, "/registration.jsp");
+        pages.put(PageName.SUCCESS_REGISTRATION_PAGE, "/success_registration.jsp");
+
         pages.put(PageName.SEANCES_PAGE, "/seances.jsp");
         pages.put(PageName.SEANCE_BY_ID,"/seance_by_id.jsp");
 
@@ -24,14 +26,16 @@ public class PageHelper {
 
         pages.put(PageName.USERS_PAGE, "/users.jsp");
 
-        pages.put(PageName.SUCCESS_REGISTRATION_PAGE, "/success_registration.jsp");
+
         pages.put(PageName.ERROR_REG_PAGE, "/error_reg.jsp");
         pages.put(PageName.SUCCESS_UPDATE_PAGE, "/success_update.jsp");
+
         pages.put(PageName.FILM_BY_ID_PAGE,"/film_by_id.jsp");
         pages.put(PageName.FILMS_BY_DATE_PAGE,"/films.jsp");
         pages.put(PageName.FILMS_BY_TITLE_PAGE,"/films.jsp");
         pages.put(PageName.FILMS_PAGE,"/films.jsp");
 
+        pages.put(PageName.FIND_TICKET_BY_ID, "/ticket_by_id.jsp");
     }
 
     public static String getPage(PageName pageName){

@@ -26,7 +26,6 @@ public class DatabaseDaoFactory extends DaoFactory {
         return FilmDatabaseDao.getInstance();
     }
 
-
     @Override
     public SeanceDao getSeanceDao() throws DaoException {
         return SeanceDatabaseDao.getInstance();

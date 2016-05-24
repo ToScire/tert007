@@ -57,92 +57,92 @@
 
     <div class="jumbotron">
 
-    <form action="Controller" method="post" class="form-horizontal" role="form">
-        <div class="form-group">
-            <label for="name" class="col-sm-2 control-label">Название</label>
-            <div class="col-sm-10">
-                <input type="text" value="${film.getTitle()}" id="name" name="title" class="form-control"></td>
+        <form action="Controller" method="post" class="form-horizontal" role="form">
+            <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">Название</label>
+                <div class="col-sm-10">
+                    <input type="text" value="${film.getTitle()}" id="name" name="title" class="form-control"></td>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="description" class="col-sm-2 control-label">Описание</label>
-            <div class="col-sm-10">
-                <input type="text" value="${film.getDescription()}" id="description" name="description" class="form-control"></td>
+            <div class="form-group">
+                <label for="description" class="col-sm-2 control-label">Описание</label>
+                <div class="col-sm-10">
+                    <input type="text" value="${film.getDescription()}" id="description" name="description" class="form-control"></td>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label for="genre" class="col-sm-2 control-label">Жанр</label>
-            <div class="col-sm-10">
-                <select name="genre" id="genre" class="form-control">
-                    <option
-                            <c:if test="${film.getGenre() == 'DRAMA'}">
-                                selected
-                            </c:if>
-                            value="DRAMA">DRAMA
-                    </option>
-                    <option
-                            <c:if test="${film.getGenre() == 'COMEDY'}">
-                                selected
-                            </c:if>
-                            value="COMEDY">COMEDY
-                    </option>
-                </select>
+            <div class="form-group">
+                <label for="genre" class="col-sm-2 control-label">Жанр</label>
+                <div class="col-sm-10">
+                    <select name="genre" id="genre" class="form-control">
+                        <option
+                                <c:if test="${film.getGenre() == 'DRAMA'}">
+                                    selected
+                                </c:if>
+                                value="DRAMA">DRAMA
+                        </option>
+                        <option
+                                <c:if test="${film.getGenre() == 'COMEDY'}">
+                                    selected
+                                </c:if>
+                                value="COMEDY">COMEDY
+                        </option>
+                    </select>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group" >
-            <label for="select_date" class="col-sm-2 control-label">Дата</label>
-            <div class="col-sm-10">
-                <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" name="date" id="select_date"/>
+            <div class="form-group" >
+                <label for="select_date" class="col-sm-2 control-label">Дата</label>
+                <div class="col-sm-10">
+                    <div class='input-group date' id='datetimepicker1'>
+                        <input type='text' class="form-control" name="date" id="select_date"/>
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar">
                                 </span>
                             </span>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        $('#datetimepicker1').datetimepicker({
+                            pickTime: false,
+                            language: 'ru'
+                        });
+                    });
+                </script>
+            </div>
+
+
+            <div class="form-group">
+                <label for="director" class="col-sm-2 control-label">Режиссер</label>
+                <div class="col-sm-10">
+                    <input type="text" value="${film.getDirector()}" id="director" name="director" class="form-control"></td>
                 </div>
             </div>
-            <script type="text/javascript">
-                $(function () {
-                    $('#datetimepicker1').datetimepicker({
-                                pickTime: false,
-                                language: 'ru'
-                    });
-                });
-            </script>
-        </div>
 
-
-        <div class="form-group">
-            <label for="director" class="col-sm-2 control-label">Режиссер</label>
-            <div class="col-sm-10">
-                <input type="text" value="${film.getDirector()}" id="director" name="director" class="form-control"></td>
+            <div class="form-group">
+                <label for="age_limitation" class="col-sm-2 control-label">Жанр</label>
+                <div class="col-sm-10">
+                    <select name="age_limitation" id="age_limitation" class="form-control">
+                        <option
+                                <c:if test="${film.getAgeLimitation() == 'PG13'}">
+                                    selected
+                                </c:if>
+                                value="PG13">PG13
+                        </option>
+                        <option
+                                <c:if test="${film.getAgeLimitation() == 'PG18'}">
+                                    selected
+                                </c:if>
+                                value="PG18">PG18
+                        </option>
+                    </select>
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            <label for="age_limitation" class="col-sm-2 control-label">Жанр</label>
-            <div class="col-sm-10">
-                <select name="age_limitation" id="age_limitation" class="form-control">
-                    <option
-                            <c:if test="${film.getAgeLimitation() == 'PG13'}">
-                                selected
-                            </c:if>
-                            value="PG13">PG13
-                    </option>
-                    <option
-                            <c:if test="${film.getAgeLimitation() == 'PG18'}">
-                                selected
-                            </c:if>
-                            value="PG18">PG18
-                    </option>
-                </select>
-            </div>
-         </div>
-    <input type="hidden" name="command" value="update_film"/>
-    <input type="hidden" name="id" value="${film.getId()}">
-    <input type="submit" name="button" value="Изменить фильм"/>
-</form>
+            <input type="hidden" name="command" value="update_film"/>
+            <input type="hidden" name="id" value="${film.getId()}">
+            <input type="submit" name="button" value="Изменить фильм"/>
+        </form>
     </div>
 
     <footer class="footer">

@@ -61,6 +61,8 @@ public class CommandHelper {
         commands.put(CommandName.BUY_TICKET, new BuyTicket());
         commandsAvailableStatus.put(CommandName.BUY_TICKET, UserType.USER);
 
+        commands.put(CommandName.FIND_TICKET_BY_ID, new FindTicketById());
+        commandsAvailableStatus.put(CommandName.FIND_TICKET_BY_ID, UserType.ADMIN);
 
         //Admin
         commands.put(CommandName.ADD_NEW_SEANCE,new AddNewSeance());
