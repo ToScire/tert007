@@ -6,6 +6,7 @@
 <head>
     <title>Фильмы</title>
     <jsp:include page="included_head.jsp"/>
+    <script src="js/included_confirm_script.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -36,12 +37,11 @@
         <jsp:include page="included_user_profile.jsp"/>
     </div>
 
-    <div class="jumbotron">
+    <div class="jumbotron" id="main">
         <table class="table">
             <caption>Фильмы</caption>
             <tr>
                 <td>Название</td>
-                <td>Описание</td>
                 <td>Жанр</td>
                 <td>Дата выпуска</td>
                 <td>Режиссер</td>
@@ -52,7 +52,6 @@
             <c:forEach var="film" items="${films}">
                 <tr>
                     <td>${film.getTitle()}</td>
-                    <td>${film.getDescription()}</td>
                     <td>${film.getGenre()}</td>
                     <td>${film.getDateByString()}</td>
                     <td>${film.getDirector()}</td>
@@ -66,7 +65,7 @@
                                     <a href="Controller?command=find_film_by_id&film_id=${film.getId()}"><span
                                             class="glyphicon glyphicon-edit"></span></a>
 
-                                    <a href="Controller?command=remove_film&film_id=${film.getId()}"><span
+                                    <a href="javascript: confirmMessage('Controller?command=remove_film&film_id=${film.getId()}')"><span
                                             class="glyphicon glyphicon-remove"></span></a>
                                 </div>
                             </c:when>
@@ -77,7 +76,7 @@
         </table>
 
         <c:if test="${sessionScope.user.getUserType() eq 'ADMIN'}">
-            <a href="add_new_film.jsp">Добавить фильм</a>
+            <a href="add_new_film.jsp" class="btn btn-primary">Добавить фильм</a>
         </c:if>
 
     </div>

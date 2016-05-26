@@ -1,11 +1,11 @@
-package controller.commandimpl;
+package main.controller.commandimpl;
 
-import controller.*;
-import dao.DaoException;
-import dao.DaoFactory;
-import dao.databaseimpl.UserDatabaseDao;
-import entity.user.User;
-import entity.user.UserType;
+import main.controller.*;
+import main.dao.DaoException;
+import main.dao.DaoFactory;
+import main.dao.databaseimpl.UserDatabaseDao;
+import main.entity.user.User;
+import main.entity.user.UserType;
 
 import javax.servlet.http.HttpServletRequest;
 

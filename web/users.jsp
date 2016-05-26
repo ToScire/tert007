@@ -6,6 +6,7 @@
 <head>
     <title>Профиль пользователя</title>
     <jsp:include page="included_head.jsp"/>
+    <script src="js/included_confirm_script.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -46,8 +47,7 @@
                         <c:if test="${sessionScope.user.getUserType().toString() eq 'ADMIN'}">
                             <a href="Controller?command=find_user_by_id&user_id=${user.getId()}" style="float: left"><span
                                     class="glyphicon glyphicon-edit"></span></a>
-                            <a href="Controller?command=remove_user&user_id=${user.getId()}"><span
-                                    class="glyphicon glyphicon-remove"></span></a>
+                            <a href="javascript: confirmMessage('Controller?command=remove_user&user_id=${user.getId()}')" class="glyphicon glyphicon-remove remove_btn"></a>
                         </c:if>
                     </td>
                 </tr>
@@ -58,6 +58,8 @@
             <a href="add_user.jsp" class="btn btn-primary">Добавить пользователя</a>
         </c:if>
     </div>
+
+
 
     <footer class="footer">
         <p>&copy; 2016 Cinemator, Inc.</p>

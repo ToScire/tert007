@@ -6,6 +6,7 @@
 <head>
     <title>Профиль пользователя</title>
     <jsp:include page="included_head.jsp"/>
+    <script src="js/included_confirm_script.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -107,7 +108,7 @@
                                 <c:if test="${sessionScope.user.getUserType().toString() eq 'ADMIN'}">
                                 <a href="Controller?command=find_ticket_by_id&ticket_id=${ticket.getId()}"><span
                                         class="glyphicon glyphicon-edit"></span></a>
-                                <a href="Controller?command=remove_ticket&ticket_id=${ticket.getId()}"><span
+                                <a href="javascript: confirmMessage('Controller?command=remove_ticket&ticket_id=${ticket.getId()}')"><span
                                         class="glyphicon glyphicon-remove"></span></a>
                                 </c:if>
                             </td>
