@@ -112,10 +112,20 @@
                     </td>
                     <td>
                     <c:if test="${sessionScope.user.getUserType().toString() eq 'ADMIN'}">
-                            <a href="Controller?command=get_seance_by_id&id_seance=${seance.getId()}" ><span
+                            <a href="Controller?command=find_seance_by_id&seance_id=${seance.getId()}" ><span
                                     class="glyphicon glyphicon-edit"></span></a>
+
+                        <script type="text/javascript">
+                            $(function () {
+                                $(function())
+                            });
+                        </script>
+
                             <a href="Controller?command=remove_seance&seance_id=${seance.getId()}"><span
-                                    class="glyphicon glyphicon-remove"></span></a>
+                                        class="glyphicon glyphicon-remove"></span></a>
+
+                            <a href="Controller?command=add_new_seance"><span
+                                    class="glyphicon glyphicon-add"></span></a>
                     </c:if>
                     </td>
                 </tr>
