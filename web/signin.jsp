@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Вход на сайт</title>
-    <jsp:include page="include_head.jsp"/>
+    <jsp:include page="included_head.jsp"/>
     <link href="css/signin.css" rel="stylesheet" type="text/css">
 </head>
 

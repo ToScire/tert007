@@ -4,7 +4,7 @@
 
 <html>
 <head>
-    <title>Главная страница</title>
+    <title>Сеанс ${seance.getDate()}</title>
     <jsp:include page="included_head.jsp"/>
 </head>
 
@@ -16,16 +16,18 @@
             <c:choose>
                 <c:when test="${sessionScope.user.getUserType() eq 'ADMIN'}">
                     <ul class="nav nav-pills pull-right">
-                        <li role="presentation" class="active"><a href="index.jsp">Главная</a></li>
-                        <li role="presentation"><a href="Controller?command=get_today_seances">Сеансы</a></li>
+                        <li role="presentation"><a href="index.jsp">Главная</a></li>
+                        <li role="presentation" class="active"><a href="Controller?command=get_today_seances">Сеансы</a>
+                        </li>
                         <li role="presentation"><a href="Controller?command=get_films_collection">Фильмы</a></li>
                         <li role="presentation"><a href="Controller?command=get_users_collection">Пользователи</a></li>
                     </ul>
                 </c:when>
                 <c:otherwise>
                     <ul class="nav nav-pills pull-right">
-                        <li role="presentation" class="active"><a href="index.jsp">Главная</a></li>
-                        <li role="presentation"><a href="Controller?command=get_today_seances">Сеансы</a></li>
+                        <li role="presentation"><a href="index.jsp">Главная</a></li>
+                        <li role="presentation" class="active"><a href="Controller?command=get_today_seances">Сеансы</a>
+                        </li>
                         <li role="presentation"><a href="Controller?command=get_films_collection">Фильмы</a></li>
                     </ul>
                 </c:otherwise>
@@ -35,13 +37,27 @@
     </div>
 
     <div class="jumbotron">
-        <h1>Комфорт обеспечен</h1>
-        <p class="lead">Несколько залов, современное оборудование, отзывчивый и дружелюбный персонал. Все это и многое
-            другое вы найдете в нашем кинотеатре. Не упустите возможность по максимому насладиться фильмом</p>
-        <p>
-            <a class="btn btn-lg btn-success" href="Controller?command=get_today_seances" role="button">Приобрести
-                билет</a>
-        </p>
+
+        <table class="table">
+        <c:forEach var="i" begin="1" end="${seance.getHall().getCapacity()}" step="10">
+            <tr>
+            <c:forEach var="j" begin="${i}" end="${i+10}" step="1">
+            <c:choose>
+                <c:when test="${busyPlaces.contains(j)}">
+                    <td> <button type="button" class=" btn-default btn-xs" disabled>${j}</button> </td>
+                </c:when>
+                <c:otherwise>
+                    <td>
+                    <a href="Controller?command=buy_ticket&place=${j}&seance_id=${seance.getId()}">
+                        <button type="button" class=" btn-primary btn-xs">${j}</button>
+                    </a>
+                    </td>
+                </c:otherwise>
+            </c:choose>
+            </c:forEach>
+            </tr>
+        </c:forEach>
+        </table>
     </div>
 
     <footer class="footer">
