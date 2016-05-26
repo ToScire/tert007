@@ -6,6 +6,7 @@ import main.controller.PageHelper;
 import main.controller.PageName;
 import main.dao.DaoException;
 import main.dao.DaoFactory;
+import main.entity.seance.Seance;
 import main.entity.ticket.Ticket;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,24 +15,25 @@ import java.util.List;
 /**
  * Created by Vadim on 07.05.2016.
  */
-public class FindTicketById implements Command {
+public class ShowSeanceSits implements Command {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         DaoFactory daoFactory = DaoFactory.getDaoFactory();
 
-        int ticketId = Integer.parseInt(request.getParameter("ticket_id"));
-
         try {
-            Ticket ticket = daoFactory.getTicketDao().findTicketById(ticketId);
-            int seanceId = ticket.getSeance().getId();
+            int seanceId = Integer.parseInt(request.getParameter("seance_id"));
+            Seance seance = daoFactory.getSeanceDao().findSeanceById(seanceId);
 
+            if (seance == null){
+                return PageHelper.getPage(PageName.MAIN_PAGE);
+            }
 
             List<Integer> busyPlaces = daoFactory.getSeanceDao().getBusyPlaces(seanceId);
 
-            request.setAttribute("ticket", ticket);
+            request.setAttribute("seance", seance);
             request.setAttribute("busyPlaces", busyPlaces);
 
-            return PageHelper.getPage(PageName.TICKET_BY_ID);
+            return PageHelper.getPage(PageName.SHOW_SEANCE_SITS_PAGE);
         } catch (DaoException e) {
             throw new CommandException(e);
         }

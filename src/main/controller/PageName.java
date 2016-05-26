@@ -5,15 +5,17 @@ package main.controller;
  */
 public enum PageName {
     MAIN_PAGE,
-    REGISTRATION,
-    SIGN_IN,
+    REGISTRATION_PAGE,
+    SIGN_IN_PAGE,
+
+    FIND_SEANCE_BY_ID,
 
     SEANCES_PAGE,
-    SEANCE_BY_ID,
+    SHOW_SEANCE_SITS_PAGE,
 
     USER_PROFILE,
 
-
+    ADD_NEW_SEANCE,
 
     CREATE_NEW_USER,
 
@@ -35,5 +37,7 @@ public enum PageName {
     FILMS_BY_DATE_PAGE,
     FILMS_PAGE,
 
-    TICKET_BY_ID
+    TICKET_BY_ID,
+
+    ERROR_PAGE
 }

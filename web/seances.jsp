@@ -108,7 +108,7 @@
                     <td>${seance.getPrice()}</td>
                     <td>
                         <a class="btn-primary btn-sm"
-                           href="Controller?command=find_seance_by_id&seance_id=${seance.getId()}">Купить</a>
+                           href="Controller?command=show_seance_sits&seance_id=${seance.getId()}">Купить</a>
                     </td>
                     <td>
                     <c:if test="${sessionScope.user.getUserType().toString() eq 'ADMIN'}">
@@ -124,13 +124,19 @@
                             <a href="Controller?command=remove_seance&seance_id=${seance.getId()}"><span
                                         class="glyphicon glyphicon-remove"></span></a>
 
-                            <a href="Controller?command=add_new_seance"><span
+                            <a href="Controller?command=find_seance_by_id&seance_id=${seance.getId()}"><span
                                     class="glyphicon glyphicon-add"></span></a>
                     </c:if>
                     </td>
                 </tr>
             </c:forEach>
         </table>
+
+        <c:if test="${sessionScope.user.getUserType() eq 'ADMIN'}">
+            <a href="Controller?command=show_add_new_seance">Добавить сеанс</a>
+        </c:if>
+
+
     </div>
 
     <footer class="footer">

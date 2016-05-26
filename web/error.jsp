@@ -15,6 +15,6 @@
 
 </head>
 <body>
-    ${error.getMessage()}
+    <c:out value="${statusMessage}"/>
 </body>
 </html>
