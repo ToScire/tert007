@@ -27,7 +27,7 @@ public class RegistrationUser implements Command {
                 String errorMessage = "Введены некорректные данные";
 
                 request.setAttribute("errorMessage", errorMessage);
-                return PageHelper.getPage(PageName.REGISTRATION);
+                return PageHelper.getPage(PageName.REGISTRATION_PAGE);
             }
 
             if (daoFactory.getUserDao().findUser(login) == null) {
@@ -44,12 +44,12 @@ public class RegistrationUser implements Command {
                 request.getSession().setAttribute("login", login);
                 request.getSession().setAttribute("userType", UserType.USER);
 
-                return PageHelper.getPage(PageName.SIGN_IN);
+                return PageHelper.getPage(PageName.SIGN_IN_PAGE);
             } else {
                 String errorMessage = "Данный логин уже занят";
 
                 request.setAttribute("errorMessage", errorMessage);
-                return PageHelper.getPage(PageName.REGISTRATION);
+                return PageHelper.getPage(PageName.REGISTRATION_PAGE);
             }
         } catch (DaoException e){
             throw new CommandException(e);

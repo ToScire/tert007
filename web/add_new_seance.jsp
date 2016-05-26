@@ -17,16 +17,18 @@
                 <c:when test="${sessionScope.user.getUserType() eq 'ADMIN'}">
                     <ul class="nav nav-pills pull-right">
                         <li role="presentation"><a href="index.jsp">Главная</a></li>
-                        <li role="presentation" class="active"><a href="Controller?command=get_today_seances">Сеансы</a></li>
-                        <li role="presentation"><a href="Controller?command=get_films_collection">Фильмы</a></li>
+                        <li role="presentation"><a href="Controller?command=get_today_seances">Сеансы</a></li>
+                        <li role="presentation" class="active"><a
+                                href="Controller?command=get_films_collection">Фильмы</a></li>
                         <li role="presentation"><a href="Controller?command=get_users_collection">Пользователи</a></li>
                     </ul>
                 </c:when>
                 <c:otherwise>
                     <ul class="nav nav-pills pull-right">
                         <li role="presentation"><a href="index.jsp">Главная</a></li>
-                        <li role="presentation" class="active"><a href="Controller?command=get_today_seances">Сеансы</a></li>
-                        <li role="presentation"><a href="Controller?command=get_films_collection">Фильмы</a></li>
+                        <li role="presentation"><a href="Controller?command=get_today_seances">Сеансы</a></li>
+                        <li role="presentation" class="active"><a
+                                href="Controller?command=get_films_collection">Фильмы</a></li>
                     </ul>
                 </c:otherwise>
             </c:choose>
@@ -67,7 +69,7 @@
                         <label for="select_date" class="col-sm-2 control-label">Дата</label>
                         <div class="col-sm-10">
                             <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' class="form-control" name="date" value="${seance.getDateByString()}" id="select_date"/>
+                                <input type='text' class="form-control" name="date" id="select_date"/>
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar">
                                 </span>
@@ -86,17 +88,16 @@
                 </tr>
                 <tr>
                     <td>Выбирите время</td>
-                    <td><input type="text" name="time" value="${seance.getTimeByString()}"></td>
+                    <td><input type="text" name="time"></td>
                 </tr>
                 <tr>
                     <td>Выбирите стоимость</td>
-                    <td><input type="number" name="price" value="${seance.getPrice()}"></td>
+                    <td><input type="number" name="price"></td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="hidden" name="seance_id" value="${seance.getId()}">
-                        <input type="hidden" name="command" value="update_seance">
-                        <input type="submit" value="Извменить">
+                        <input type="hidden" name="command" value="add_new_seance">
+                        <input type="submit" value="Добавить">
                     </td>
                 </tr>
             </table>

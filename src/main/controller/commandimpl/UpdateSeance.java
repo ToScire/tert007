@@ -35,15 +35,15 @@ public class UpdateSeance implements Command{
 
             int price = Integer.parseInt(request.getParameter("price"));
 
-            Seance newSeance = new Seance();
+            Seance seance = new Seance();
 
-            newSeance.setFilm(daoFactory.getFilmDao().findFilmById(id_film));
-            newSeance.setHall(daoFactory.getHallDao().findHallById(id_hall));
-            newSeance.setId(id);
-            newSeance.setDate(unixTime);
-            newSeance.setPrice(price);
+            seance.setFilm(daoFactory.getFilmDao().findFilmById(id_film));
+            seance.setHall(daoFactory.getHallDao().findHallById(id_hall));
+            seance.setId(id);
+            seance.setDate(unixTime);
+            seance.setPrice(price);
 
-            daoFactory.getSeanceDao().updateSeance(newSeance);
+            daoFactory.getSeanceDao().updateSeance(seance);
             return PageHelper.getPage(PageName.SEANCES_PAGE);
         } catch (ParseException e) {
             throw new CommandException(e);
