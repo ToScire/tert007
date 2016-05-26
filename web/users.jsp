@@ -50,12 +50,13 @@
                                     class="glyphicon glyphicon-remove"></span></a>
                         </c:if>
                     </td>
-
-
                 </tr>
             </c:forEach>
 
         </table>
+        <c:if test="${sessionScope.user.getUserType().toString() eq 'ADMIN'}">
+            <a href="add_user.jsp" class="btn btn-primary">Добавить пользователя</a>
+        </c:if>
     </div>
 
     <footer class="footer">

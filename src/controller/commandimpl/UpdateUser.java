@@ -24,23 +24,30 @@ public class UpdateUser implements Command {
             UserType user_type = UserType.valueOf(request.getParameter("user_type"));
             int id = Integer.parseInt(request.getParameter("user_id"));
 
-            User user = new User();
-            user.setLogin(login);
-            user.setPassword(password);
-            user.setEmail(email);
-            user.setBonusCount(bonus_count);
+            User buff = daoFactory.getUserDao().findUser(login);
+            if (buff == null || buff.getId() == id) {
+                User user = new User();
+                user.setLogin(login);
+                user.setPassword(password);
+                user.setEmail(email);
+                user.setBonusCount(bonus_count);
 
-            user.setUserType(user_type);
-            user.setId(id);
+                user.setUserType(user_type);
+                user.setId(id);
 
-            daoFactory.getUserDao().updateUser(user);
-            request.setAttribute("user", user);
-            request.getSession().setAttribute("user", user);
-            Command findUser = new FindUserByLogin();
-            request.setAttribute("status","Данные успешно обновлены");
-            return findUser.execute(request);
-        } catch (DaoException e){
-            throw new CommandException(e);
+                daoFactory.getUserDao().updateUser(user);
+                request.setAttribute("user", user);
+                Command getUsersCollection = new GetUsersCollection();
+                return getUsersCollection.execute(request);
+            }
+            else{
+                request.setAttribute("errorMessage", "Данный логин уже существует");
+                Command findUser = new FindUserById();
+                return findUser.execute(request);
+            }
+
+            }catch (DaoException e){
+                throw new CommandException(e);
         }
     }
 }

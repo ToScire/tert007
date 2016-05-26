@@ -23,6 +23,7 @@ public class AddNewUser implements Command {
             String password = request.getParameter("password");
             UserType userType = UserType.valueOf(request.getParameter("user_type"));
             String email = request.getParameter("email");
+            int bonus = Integer.parseInt(request.getParameter("bonus_count"));
 
             if (!validateParams(login, password, email)){
                 String errorMessage = "Введены некорректные данные";
@@ -38,14 +39,15 @@ public class AddNewUser implements Command {
                 user.setPassword(password); // Доработать шифрование
                 user.setEmail(email);
                 user.setUserType(userType);
-
+                user.setBonusCount(bonus);
                 daoFactory.getUserDao().addUser(user);
-
-                return PageHelper.getPage(PageName.SUCCESS_REGISTRATION_PAGE);
+                Command users = new GetUsersCollection();
+                return users.execute(request);
             } else {
                 String errorMessage = "Данный логин уже занят";
 
                 request.setAttribute("errorMessage", errorMessage);
+
                 return PageHelper.getPage(PageName.CREATE_NEW_USER);
             }
         } catch (DaoException e){

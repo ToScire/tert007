@@ -44,7 +44,7 @@
             <c:otherwise>
                 <c:choose>
                     <c:when test="${sessionScope.user.getUserType() eq 'ADMIN'}">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" action="/Controller">
                             <div class="form-group">
                                 <input type="text" class="form-control" name="login" value="${user.getLogin()}">
                             </div>
@@ -57,7 +57,7 @@
                             <div class="form-group">
                                 <select name="user_type" class="form-control">
                                     <c:choose>
-                                        <c:when test="${sessionScope.user.getUserType() eq 'USER'}">
+                                        <c:when test="${user.getUserType() eq 'USER'}">
                                             <option value="USER" selected>USER</option>
                                             <option value="ADMIN">ADMIN</option>
                                         </c:when>
@@ -72,7 +72,7 @@
                                 <input type="hidden" name="command" value="update_user">
                                 <input type="hidden" name="password" value="${user.getPassword()}">
                                 <input type="hidden" name="user_id" value="${user.getId()}">
-                                <c:out value="${status}"/>
+                                <c:out value="${errorMessage}"/>
                                 <input type="submit" class="form-control" name="submit" value="Изменить данные">
                             </div>
                         </form>

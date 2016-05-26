@@ -23,11 +23,6 @@
         <label for="inputPassword" class="sr-only">Пароль</label>
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
         <c:out value="${errorMessage}"/>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" value="remember-me" name="remember"> Запомнить меня
-            </label>
-        </div>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Вход</button>
         <a class="btn btn-lg btn-primary btn-block" href="registration.jsp">Регистрация</a>

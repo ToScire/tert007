@@ -10,6 +10,7 @@ import entity.user.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Cookie;
 
 /**
  * Created by Alexander on 07.05.2016.
@@ -36,9 +37,6 @@ public class LoginUser implements Command {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
                 String remember = request.getParameter("remember");
-                if( remember == "remember-me"){
-                    session.setMaxInactiveInterval(1000*60);
-                }
 
                 return PageHelper.getPage(PageName.MAIN_PAGE);
             } else {
