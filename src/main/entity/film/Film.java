@@ -1,6 +1,7 @@
 package main.entity.film;
 
-import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Alexander on 02.04.2016.
@@ -51,6 +52,12 @@ public class Film {
 
     public Date getDate() {
         return date;
+    }
+
+    public String getDateByString() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+
+        return simpleDateFormat.format(date);
     }
 
     public void setDate(Date date) {

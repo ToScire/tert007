@@ -52,12 +52,12 @@ public class DatabaseController {
         query += "'" +  values[values.length - 1] + "'";
         query += ")";
 
-        statement.executeUpdate(query);
+        statement.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
 
         ResultSet resultSet = statement.getGeneratedKeys();
         resultSet.next();
 
-        return resultSet.getInt(columns[0]);
+        return resultSet.getInt(1);
     }
 
 

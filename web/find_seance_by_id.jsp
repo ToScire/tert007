@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Сеанс ${seance.getDate()}</title>
-    <jsp:include page="include_head.jsp"/>
+    <jsp:include page="included_head.jsp"/>
 </head>
 
 <body>

@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Фильм ${film.getTitle()}</title>
-    <jsp:include page="include_head.jsp"/>
+    <jsp:include page="included_head.jsp"/>
 </head>
 
 <body>
@@ -37,7 +37,7 @@
     </div>
 
     <div class="jumbotron">
-
+        <c:out value="${statusMessage}"/>
         <form action="Controller" method="post" class="form-horizontal" role="form">
             <div class="form-group">
                 <label for="name" class="col-sm-2 control-label">Название</label>
@@ -77,7 +77,7 @@
                 <label for="select_date" class="col-sm-2 control-label">Дата</label>
                 <div class="col-sm-10">
                     <div class='input-group date' id='datetimepicker1'>
-                        <input type='text' class="form-control" name="date" id="select_date"/>
+                        <input type='text' class="form-control" value="${film.getDateByString()}" name="date" id="select_date"/>
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar">
                                 </span>
@@ -123,7 +123,7 @@
                 </div>
             </div>
             <input type="hidden" name="command" value="update_film"/>
-            <input type="hidden" name="id" value="${film.getId()}">
+            <input type="hidden" name="film_id" value="${film.getId()}">
             <input type="submit" name="button" value="Изменить фильм"/>
         </form>
     </div>

@@ -6,9 +6,13 @@ import main.entity.film.AgeLimitation;
 import main.entity.film.Film;
 import main.entity.film.FilmGenre;
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
 
 /**
  * Created by Alexander on 02.04.2016.
@@ -20,10 +24,10 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
     private static final String columnId = "id";
     private static final String columnLimitationId = "age_limitation_id";
     private static final String columnTitle = "title";
-    private static final String columnDescription = "description";
     private static final String columnDirector = "director";
     private static final String columnGenreId = "film_genre_id";
-    private static final String columnDate = "date";
+    private static final String columnUnixTime = "unix_time";
+    private static final String columnDescription = "description";
 
     private static final String[] columnsName = {
             columnId,
@@ -31,7 +35,7 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
             columnTitle,
             columnGenreId,
             columnDirector,
-            columnDate,
+            columnUnixTime,
             columnDescription
     };
 
@@ -46,7 +50,7 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
             film.getTitle(),
             String.valueOf(filmGenreId),
             film.getDirector(),
-            film.getDate().toString(),
+            String.valueOf(film.getDate().getTime() / 1000),
             film.getDescription()
         };
 
@@ -92,7 +96,7 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
     public List<Film> findFilmsByDate(Date date) throws DaoException {
         ResultSet resultSet = null;
         try {
-            resultSet = databaseController.select(tableName, columnsName, columnDate + "='" + date + "'");
+            resultSet = databaseController.select(tableName, columnsName, columnUnixTime + "='" + date.getTime() + "'");
             return createFilmsCollectionFromResultSet(resultSet);
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -158,7 +162,9 @@ public class FilmDatabaseDao extends Connector implements FilmDao {
             film.setTitle(resultSet.getString(columnTitle));
             film.setDescription(resultSet.getString(columnDescription));
             film.setDirector(resultSet.getString(columnDirector));
-            film.setDate(resultSet.getDate(columnDate));
+
+            Date date = new Date(resultSet.getLong(columnUnixTime) * 1000);
+            film.setDate(date);
 
             int ageLimitationId = resultSet.getInt(columnLimitationId);
             AgeLimitation ageLimitation = AgeLimitationDatabaseDao.getInstance().findAgeLimitationById(ageLimitationId);

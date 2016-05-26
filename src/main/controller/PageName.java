@@ -29,6 +29,7 @@ public enum PageName {
 
     SUCCESS_UPDATE_PAGE,
 
+    NEW_FILM_PAGE,
     FILMS_BY_TITLE_PAGE,
     FILM_BY_ID_PAGE,
     FILMS_BY_DATE_PAGE,

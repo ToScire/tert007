@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Фильмы</title>
-    <jsp:include page="include_head.jsp"/>
+    <jsp:include page="included_head.jsp"/>
 </head>
 
 <body>
@@ -54,28 +54,32 @@
                     <td>${film.getTitle()}</td>
                     <td>${film.getDescription()}</td>
                     <td>${film.getGenre()}</td>
-                    <td>${film.getDate()}</td>
+                    <td>${film.getDateByString()}</td>
                     <td>${film.getDirector()}</td>
                     <td>${film.getAgeLimitation()}</td>
                     <td>
                         <a class="btn-primary btn-sm"
                            href="Controller?command=find_seances_by_film&film_id=${film.getId()}">Сеансы</a>
                         <c:choose>
-                            <c:when test="${sessionScope.user.getUserType() != UserType.ADMIN}">
+                            <c:when test="${sessionScope.user.getUserType() eq 'ADMIN'}">
                                 <div class="tools">
                                     <a href="Controller?command=find_film_by_id&film_id=${film.getId()}"><span
                                             class="glyphicon glyphicon-edit"></span></a>
+
                                     <a href="Controller?command=remove_film&film_id=${film.getId()}"><span
                                             class="glyphicon glyphicon-remove"></span></a>
                                 </div>
                             </c:when>
                         </c:choose>
                     </td>
-
                 </tr>
             </c:forEach>
-
         </table>
+
+        <c:if test="${sessionScope.user.getUserType() eq 'ADMIN'}">
+            <a href="add_new_film.jsp">Добавить фильм</a>
+        </c:if>
+
     </div>
 
     <footer class="footer">

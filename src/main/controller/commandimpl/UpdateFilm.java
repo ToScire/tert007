@@ -2,6 +2,8 @@ package main.controller.commandimpl;
 
 import main.controller.Command;
 import main.controller.CommandException;
+import main.controller.PageHelper;
+import main.controller.PageName;
 import main.dao.DaoException;
 import main.dao.DaoFactory;
 import main.entity.film.AgeLimitation;
@@ -11,7 +13,7 @@ import main.entity.film.FilmGenre;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Created by Vadim on 01.05.2016.
@@ -20,43 +22,46 @@ public class UpdateFilm implements Command {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         DaoFactory daoFactory = DaoFactory.getDaoFactory();
+        String statusMessage;
         try {
-
-            int id = Integer.parseInt(request.getParameter("id"));
+            int filmId = Integer.parseInt(request.getParameter("film_id"));
 
             String title = request.getParameter("title");
             String description = request.getParameter("description");
             String director = request.getParameter("director");
 
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+            Date date = simpleDateFormat.parse(request.getParameter("date"));
 
-            long buf_date = 0;
-            String date = request.getParameter("date");
-            try {
-                buf_date = simpleDateFormat.parse(date).getTime();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
             AgeLimitation ageLimitation = AgeLimitation.valueOf(request.getParameter("age_limitation"));
             FilmGenre filmGenre = FilmGenre.valueOf(request.getParameter("genre"));
 
             Film film = new Film();
 
-            film.setId(id);
+            film.setId(filmId);
             film.setTitle(title);
             film.setDescription(description);
             film.setGenre(filmGenre);
-            film.setDate(new Date(buf_date));
+            film.setDate(date);
 
             film.setDirector(director);
             film.setAgeLimitation(ageLimitation);
 
             daoFactory.getFilmDao().updateFilm(film);
+            request.setAttribute("film", film);
 
-            request.setAttribute("film",film);
-            Command getFilmsCollectionms = new GetFilmsCollection();
+            statusMessage = "Данные успешно обновлены";
+            request.setAttribute("statusMessage", statusMessage);
 
-            return getFilmsCollectionms.execute(request);
+            return PageHelper.getPage(PageName.FILM_BY_ID_PAGE);
+        } catch (IllegalArgumentException  e) {
+            statusMessage = "Ошибка в типах-перечислителях";
+            request.setAttribute("statusMessage", statusMessage);
+            return PageHelper.getPage(PageName.FILM_BY_ID_PAGE);
+        } catch (ParseException  e){
+            statusMessage = "Ошибка в дате";
+            request.setAttribute("statusMessage", statusMessage);
+            return PageHelper.getPage(PageName.FILM_BY_ID_PAGE);
         } catch (DaoException e){
             throw new CommandException(e);
         }

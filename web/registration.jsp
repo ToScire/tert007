@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Регистрация</title>
-    <jsp:include page="include_head.jsp"/>
+    <jsp:include page="included_head.jsp"/>
 </head>
 
 <body>

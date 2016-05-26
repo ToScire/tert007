@@ -16,14 +16,19 @@ import javax.servlet.http.HttpServletRequest;
 public class FindFilmById implements Command {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
-
-        int filmId = Integer.valueOf(request.getParameter("film_id"));
-
         DaoFactory daoFactory = DaoFactory.getDaoFactory();
+        String statusMessage;
         try {
-            Film film = daoFactory.getFilmDao().findFilmById(filmId);
-            request.setAttribute("film", film);
+            int filmId = Integer.parseInt(request.getParameter("film_id"));
 
+            Film film = daoFactory.getFilmDao().findFilmById(filmId);
+            if (film == null){
+                statusMessage = "Фильма с данным id нет";
+                request.setAttribute("statusMessage", statusMessage);
+                return PageHelper.getPage(PageName.FILM_BY_ID_PAGE);
+            }
+
+            request.setAttribute("film", film);
             return PageHelper.getPage(PageName.FILM_BY_ID_PAGE);
         } catch (DaoException e){
             throw new CommandException(e);
