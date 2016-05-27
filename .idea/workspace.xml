@@ -97,8 +97,8 @@
       <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="23.475346">
-              <caret line="541" column="79" selection-start-line="541" selection-start-column="79" selection-end-line="541" selection-end-column="79" />
+            <state vertical-scroll-proportion="23.431953">
+              <caret line="540" column="79" selection-start-line="540" selection-start-column="79" selection-end-line="540" selection-end-column="79" />
               <folding />
             </state>
           </provider>
@@ -1252,7 +1252,7 @@
       <workItem from="1464116260526" duration="10000" />
       <workItem from="1464125118241" duration="10739000" />
       <workItem from="1464278128025" duration="2587000" />
-      <workItem from="1464285151538" duration="18887000" />
+      <workItem from="1464285151538" duration="19036000" />
     </task>
     <task id="LOCAL-00001" summary="added tests">
       <created>1464284578247</created>
@@ -1272,7 +1272,13 @@
       <option name="project" value="LOCAL" />
       <updated>1464305029453</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="workspace">
+      <created>1464307353210</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1464307353210</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1290,7 +1296,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32319000" />
+    <option name="totallyTimeSpent" value="32468000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1380,7 +1386,8 @@
     <MESSAGE value="added tests" />
     <MESSAGE value="films_methods" />
     <MESSAGE value="seances" />
-    <option name="LAST_COMMIT_MESSAGE" value="seances" />
+    <MESSAGE value="workspace" />
+    <option name="LAST_COMMIT_MESSAGE" value="workspace" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1827,8 +1834,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="23.475346">
-          <caret line="541" column="79" selection-start-line="541" selection-start-column="79" selection-end-line="541" selection-end-column="79" />
+        <state vertical-scroll-proportion="23.431953">
+          <caret line="540" column="79" selection-start-line="540" selection-start-column="79" selection-end-line="540" selection-end-column="79" />
           <folding />
         </state>
       </provider>
